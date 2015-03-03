@@ -40,6 +40,6 @@ class roles::thredds {
   }
 
   @@roles::proxy::connection {'/thredds':
-    url => "http://${::hostname}/thredds",
+    target_url => "http://${::hostname}/thredds",
   }
 }
