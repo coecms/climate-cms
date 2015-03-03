@@ -18,7 +18,7 @@
 class site::ldap (
   $protocol     = 'ldaps://',
   $domain       = 'example.com',
-  $port         = '389',
+  $port         = '636',
   $base_dn      = 'dc=example,dc=com',
   $user_rdn     = 'ou=People',
   $group_rdn    = 'ou=Group',
