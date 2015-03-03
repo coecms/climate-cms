@@ -9,6 +9,7 @@ mod 'puppetlabs/puppetdb'
 mod 'puppetlabs/inifile'
 mod 'puppetlabs/postgresql'
 mod 'puppetlabs/java'
+mod 'puppetlabs/tomcat'
 
 mod 'saz/sudo'
 mod 'saz/ssh'
