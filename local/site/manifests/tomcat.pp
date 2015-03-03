@@ -37,6 +37,10 @@ class site::tomcat {
     require      => Tomcat::Instance['default'],
   }
 
+  package {'tomcat-native':
+    notify => Tomcat::Service['default'],
+  }
+
   augeas {'tomcat LDAP authentication':
     incl    => "${catalina_home}/conf/server.xml",
     lens    => 'Xml.lns',
