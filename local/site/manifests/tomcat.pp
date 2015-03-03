@@ -50,6 +50,7 @@ class site::tomcat {
       "set roleName      '${site::ldap::group_id}'",
       "set roleSearch    '(${site::ldap::group_member}={0})'",
     ],
+    notify => Tomcat::Service['default'],
   }
 
 }
