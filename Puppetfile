@@ -15,6 +15,7 @@ mod 'saz/sudo'
 mod 'saz/ssh'
 mod 'stahnma/epel'
 mod 'treydock/yum_cron'
+mod 'nanliu/staging'
 
 mod 'elasticsearch/logstash'
 mod 'elasticsearch/elasticsearch'
