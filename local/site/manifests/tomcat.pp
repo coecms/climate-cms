@@ -23,4 +23,15 @@ class site::tomcat {
     install_from_source => false,
   }
 
+  tomcat::instance {'default':
+    package_name => 'tomcat',
+    require      => Class['epel'],
+  }
+
+  tomcat::service {'default':
+    use_init     => true,
+    service_name => 'tomcat',
+    require      => Tomcat::Instance['default'],
+  }
+
 }
