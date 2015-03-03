@@ -20,7 +20,7 @@ class roles::proxy (
 ) {
   include site::firewall::http
   include ::apache::mod::proxy
-  include ::apache::mod::proxy_html
+  include ::apache::mod::proxy_http
 
   class { 'apache':
   }
