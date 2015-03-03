@@ -22,7 +22,7 @@ define roles::proxy::connection (
   concat::fragment {"proxy-${path}":
     target  => "25-${roles::proxy::vhost}.conf",
     order   => '21',
-    content => "ProxyPass ${path}/ ${target_url}",
+    content => "ProxyPass ${path}/ ${target_url}\n",
   }
 
   apacheplus::location {$name:
