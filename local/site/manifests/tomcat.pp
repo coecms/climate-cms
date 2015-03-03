@@ -68,6 +68,7 @@ class site::tomcat {
     unless  => "keytool -list   -alias '${alias}' -keystore '${keystore}' -storepass '${pass}'",
     path    => "${java_home}/bin",
     require => File[$ldap::ca_file],
+    notify  => Tomcat::Service['default'],
   }
 
 }
