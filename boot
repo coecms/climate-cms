@@ -17,7 +17,7 @@
 #  limitations under the License.
 
 hostname=${1:-'puppet'}
-environment='puppetmaster'
+environment='production'
 
 image='centos-6.6-20150129'
 flavor='m1.small'
@@ -34,7 +34,7 @@ cat > /etc/r10k.yaml << EOF
 :cachedir: '/var/cache/r10k'
 :sources:
     :coecms:
-        remote:  'https://github.com/ScottWales/climate-cms'
+        remote:  'https://github.com/coecms/climate-cms'
         basedir: '/etc/puppet/environments'
 EOF
 
