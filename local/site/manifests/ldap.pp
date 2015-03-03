@@ -25,6 +25,7 @@ class site::ldap (
   $user_id      = 'uid',
   $group_id     = 'cn',
   $group_member = 'memberUid',
+  $cert         = '',
 ) {
   $url          = "${protocol}${domain}:${port}"
 
@@ -33,4 +34,22 @@ class site::ldap (
 
   $group_dn      = "${group_rdn},${base_dn}"
   $group_pattern = "${group_id}={0},${group_dn}"
+
+  $ca_path       = '/etc/openldap/CA'
+  $ca_file       = "${ca_path}/${domain}"
+
+  file {$ca_path:
+    ensure => directory,
+  }
+  file {$ca_file:
+    ensure  => file,
+    content => $cert,
+    notify  => Exec['ldap rehash'],
+  }
+  exec {'ldap rehash':
+    command     => "cacertdir_rehash '${ca_path}'",
+    path        => '/usr/sbin',
+    refreshonly => true,
+  }
+
 }

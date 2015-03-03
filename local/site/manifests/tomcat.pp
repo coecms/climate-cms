@@ -21,6 +21,7 @@ class site::tomcat {
   include site::ldap
 
   $catalina_home = '/usr/share/tomcat'
+  $java_home     = '/usr/lib/jvm/jre'
 
   class {'::tomcat':
     install_from_source => false,
@@ -55,6 +56,18 @@ class site::tomcat {
       "set roleSearch    '(${site::ldap::group_member}={0})'",
     ],
     notify => Tomcat::Service['default'],
+  }
+
+  # Install LDAP cert
+  # http://docs.oracle.com/cd/E19509-01/820-3399/ggfrj/index.html
+  $keystore  = "${java_home}/lib/security/cacerts"
+  $alias     = 'ldap'
+  $pass      = 'changeit'
+  exec {'tomcat LDAP cert':
+    command => "keytool -import -alias '${alias}' -keystore '${keystore}' -storepass '${pass}' -file '${ldap::ca_file}' -trustcacerts",
+    unless  => "keytool -list   -alias '${alias}' -keystore '${keystore}' -storepass '${pass}'",
+    path    => "${java_home}/bin",
+    require => File[$ldap::ca_file],
   }
 
 }
