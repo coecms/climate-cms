@@ -19,6 +19,7 @@ class roles::proxy (
   $vhost = $::fqdn,
 ) {
   include site::firewall::http
+  include ::apache::mod::proxy
   include ::apache::mod::proxy_html
 
   class { 'apache':
