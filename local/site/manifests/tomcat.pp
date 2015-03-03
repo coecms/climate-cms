@@ -19,6 +19,8 @@ class site::tomcat {
   include ::epel
   include site::java
 
+  $catalina_home = '/usr/share/tomcat'
+
   class {'::tomcat':
     install_from_source => false,
   }
@@ -32,6 +34,16 @@ class site::tomcat {
     use_init     => true,
     service_name => 'tomcat',
     require      => Tomcat::Instance['default'],
+  }
+
+  augeas {'tomcat LDAP authentication':
+    incl    => "${catalina_home}/conf/server.xml",
+    lens    => 'Xml.lns',
+    context => "/files/${catalina_home}/conf/server.xml/Server/Service/Engine/Realm",
+    changes => [
+      'set Realm/#empty',
+      'set Realm/#attribute/className "org.apache.catalina.realm.JNDIRealm"',
+    ],
   }
 
 }
