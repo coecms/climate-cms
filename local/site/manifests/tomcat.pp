@@ -41,7 +41,6 @@ class site::tomcat {
     lens    => 'Xml.lns',
     context => "/files/${catalina_home}/conf/server.xml/Server/Service/Engine/Realm",
     changes => [
-      'set Realm/#empty',
       'set Realm/#attribute/className "org.apache.catalina.realm.JNDIRealm"',
     ],
   }
