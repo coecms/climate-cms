@@ -44,7 +44,7 @@ class site::tomcat {
     changes => [
       'set className "org.apache.catalina.realm.JNDIRealm"',
       'rm resourceName',
-      "set connectionUrl '${site::ldap::url}'",
+      "set connectionURL '${site::ldap::url}'",
       "set userPattern   '${site::ldap::user_pattern}'",
       "set roleBase      '${site::ldap::group_dn}'",
       "set roleName      '${site::ldap::group_id}'",
