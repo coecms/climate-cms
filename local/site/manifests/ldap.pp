@@ -28,9 +28,9 @@ class site::ldap (
 ) {
   $url          = "${protocol}${domain}:${port}"
 
-  $user_dn      = "${user_dn},${base_dn}"
+  $user_dn      = "${user_rdn},${base_dn}"
   $user_pattern = "${user_id}={0},${user_dn}"
 
-  $group_dn      = "${group_dn},${base_dn}"
+  $group_dn      = "${group_rdn},${base_dn}"
   $group_pattern = "${group_id}={0},${group_dn}"
 }
