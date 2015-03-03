@@ -18,6 +18,7 @@ class site::tomcat {
 
   include ::epel
   include site::java
+  include site::ldap
 
   $catalina_home = '/usr/share/tomcat'
 
@@ -39,9 +40,15 @@ class site::tomcat {
   augeas {'tomcat LDAP authentication':
     incl    => "${catalina_home}/conf/server.xml",
     lens    => 'Xml.lns',
-    context => "/files/${catalina_home}/conf/server.xml/Server/Service/Engine/Realm",
+    context => "/files/${catalina_home}/conf/server.xml/Server/Service/Engine/Realm/Realm/#attribute",
     changes => [
-      'set Realm/#attribute/className "org.apache.catalina.realm.JNDIRealm"',
+      'set className "org.apache.catalina.realm.JNDIRealm"',
+      'rm resourceName',
+      "set connectionUrl '${site::ldap::url}'",
+      "set userPattern   '${site::ldap::user_pattern}'",
+      "set roleBase      '${site::ldap::group_dn}'",
+      "set roleName      '${site::ldap::group_id}'",
+      "set roleSearch    '(${site::ldap::group_member}={0})'",
     ],
   }
 
