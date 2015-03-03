@@ -64,7 +64,7 @@ class site::tomcat {
   $alias     = 'ldap'
   $pass      = 'changeit'
   exec {'tomcat LDAP cert':
-    command => "keytool -import -alias '${alias}' -keystore '${keystore}' -storepass '${pass}' -file '${ldap::ca_file}' -trustcacerts",
+    command => "keytool -import -alias '${alias}' -keystore '${keystore}' -storepass '${pass}' -file '${ldap::ca_file}' -trustcacerts -noprompt",
     unless  => "keytool -list   -alias '${alias}' -keystore '${keystore}' -storepass '${pass}'",
     path    => "${java_home}/bin",
     require => File[$ldap::ca_file],
