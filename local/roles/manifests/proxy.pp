@@ -37,4 +37,7 @@ class roles::proxy (
     docroot => '/var/www/html',
     ssl     => true,
   }
+
+  # Collect all external proxy sites
+  Roles::Proxy::Connection<<||>>
 }

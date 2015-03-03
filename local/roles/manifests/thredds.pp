@@ -38,4 +38,8 @@ class roles::thredds {
     notify        => Tomcat::Service['default'],
     require       => File[$content_path],
   }
+
+  @@roles::proxy::connection {'/thredds':
+    url => "http://${::hostname}/thredds",
+  }
 }
