@@ -23,6 +23,9 @@ define site::gdata (
 
   $mountpoint = "/g/${cluster}/${project}"
 
+  # Group will be defined by LDAP
+  group {$project: }
+
   file {$mountpoint:
     ensure => directory,
   }
