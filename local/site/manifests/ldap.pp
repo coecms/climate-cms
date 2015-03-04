@@ -57,7 +57,7 @@ class site::ldap (
     "--ldapbasedn=${base_dn}",
     '--enableldaptls',
     "--ldaploadcacert=file://${ca_file}",
-    "--update",
+    "--updateall",
   ]
   $auth_optlist = join($auth_opts, ' ')
 
