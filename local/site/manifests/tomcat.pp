@@ -25,6 +25,7 @@ class site::tomcat {
 
   class {'::tomcat':
     install_from_source => false,
+    manage_user         => false,
   }
 
   tomcat::instance {'default':
@@ -35,8 +36,9 @@ class site::tomcat {
   # Connect tomcat user to groups
   $projects = keys($site::gdata)
   user {'tomcat':
-    groups  => $projects,
-    require => Tomcat::Instance['default'],
+    gid    => 'tomcat',
+    groups => $projects,
+    system => true,
   }
 
   tomcat::service {'default':
