@@ -64,7 +64,7 @@ class site::ldap (
 
   augeas {'nsswitch':
     incl    => '/etc/nsswitch.conf',
-    lens    => 'Nsswtich.lns',
+    lens    => 'Nsswitch.lns',
     context => '/files/etc/nsswitch.conf',
     changes => [
       'set database[. = "passwd"]/service[2] "ldap"',
