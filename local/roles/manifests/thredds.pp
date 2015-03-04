@@ -64,7 +64,7 @@ class roles::thredds (
       'defnode gen security-constraint[web-resource-collection/url-pattern/#text="/cataloggen/admin/*"] ""',
       "set   \$gen/auth-constraint/role-name/#text '${admin_group}'",
       'defnode auth security-constraint[web-resource-collection/url-pattern/#text="/restrictedAccess/*"] ""',
-      "set   \$gen/auth-constraint/role-name/#text '*'",
+      "set   \$auth/auth-constraint/role-name/#text '*'",
     ],
     notify  => Tomcat::Service['default'],
   }
