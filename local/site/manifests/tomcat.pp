@@ -77,7 +77,6 @@ class site::tomcat {
     port    => '8080',
     source  => 'proxy',
     action  => 'accept',
-    require => Host['proxy'],
   }
 
 }
