@@ -62,4 +62,15 @@ class site::ldap (
       ",
   }
 
+  augeas {'nsswitch':
+    incl    => '/etc/nsswitch.conf',
+    lens    => 'Nsswtich.lns',
+    context => '/files/etc/nsswitch.conf',
+    changes => [
+      'set /files/etc/nsswitch.conf/database[. = "passwd"]/service "files ldap"',
+      'set /files/etc/nsswitch.conf/database[. = "shadow"]/service "files ldap"',
+      'set /files/etc/nsswitch.conf/database[. = "group"]/service  "files ldap"',
+    ],
+  }
+
 }
