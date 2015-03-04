@@ -26,7 +26,7 @@ class site::security {
   }
   firewallchain {'INPUT:filter:IPv6':
     purge  => true,
-    policy => 'drop',
+    policy => 'accept',
     ignore => '-j fail2ban-.*',
   }
   firewallchain {'FORWARD:filter:IPv4':
