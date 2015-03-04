@@ -23,9 +23,6 @@ class roles::proxy (
   include ::apache::mod::proxy
   include ::apache::mod::proxy_http
 
-  class { 'apache':
-  }
-
   # Ensure HTTPS is used
   apache::vhost { "${vhost}_redirect":
     port            => '80',
