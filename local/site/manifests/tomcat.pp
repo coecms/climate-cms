@@ -32,6 +32,13 @@ class site::tomcat {
     require      => Class['epel'],
   }
 
+  # Connect tomcat user to groups
+  $projects = keys($site::gdata)
+  user {'tomcat':
+    groups  => $projects,
+    require => Tomcat::Instance['default'],
+  }
+
   tomcat::service {'default':
     use_init     => true,
     service_name => 'tomcat',
