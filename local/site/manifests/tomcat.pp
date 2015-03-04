@@ -71,4 +71,13 @@ class site::tomcat {
     notify  => Tomcat::Service['default'],
   }
 
+  # Firewall port
+  firewall {'808 proxy to tomcat':
+    proto   => 'tcp',
+    port    => '8080',
+    source  => 'proxy',
+    action  => 'accept',
+    require => Host['proxy'],
+  }
+
 }
