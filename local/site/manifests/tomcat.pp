@@ -75,7 +75,7 @@ class site::tomcat {
   firewall {'808 proxy to tomcat':
     proto   => 'tcp',
     port    => '8080',
-    source  => 'proxy',
+    source  => $::site::proxy_ip,
     action  => 'accept',
   }
 

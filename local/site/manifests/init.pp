@@ -17,11 +17,13 @@
 
 # Generic configuration stuff
 class site (
-  $hostname = $::hostname,
-  $domain   = $::domain,
-  $secure   = false,
-  $gdata    = {},
-  $admins   = {},
+  $hostname  = $::hostname,
+  $domain    = $::domain,
+  $secure    = false,
+  $gdata     = {},
+  $admins    = {},
+  $puppet_ip = '10.0.0.4',
+  $proxy_ip  = '10.0.0.4',
 ) {
   if ! $secure {
     warning('Not using secure passwords or certificates')
