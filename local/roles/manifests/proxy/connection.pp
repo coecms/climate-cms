@@ -16,7 +16,10 @@
 
 define roles::proxy::connection (
   $target_url,
-  $path = $name,
+  $path  = $name,
+  $order = undef,
+  $allow = undef,
+  $deny  = undef,
 ) {
 
   concat::fragment {"proxy-${path}":
@@ -27,6 +30,9 @@ define roles::proxy::connection (
 
   apacheplus::location {$name:
     vhost           => $roles::proxy::vhost,
+    order           => $order,
+    allow           => $allow,
+    deny            => $deny,
     custom_fragment => "ProxyPassReverse ${target_url}",
   }
 
