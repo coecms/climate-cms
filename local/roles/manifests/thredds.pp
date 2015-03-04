@@ -48,7 +48,7 @@ class roles::thredds (
 
   $web_xml = "${site::tomcat::catalina_home}/webapps/thredds/WEB-INF/web.xml"
   # Extract the war so we can change configs
-  staging::deploy {'thredds':
+  staging::deploy {'thredds.war':
     target  => "${site::tomcat::catalina_home}/webapps/thredds",
     source  => "${site::tomcat::catalina_home}/webapps/thredds.war",
     creates => $web_xml
