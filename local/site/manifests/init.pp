@@ -20,6 +20,7 @@ class site (
   $hostname = $::hostname,
   $domain   = $::domain,
   $secure   = false,
+  $gdata    = {},
   $admins   = {},
 ) {
   if ! $secure {
@@ -57,4 +58,9 @@ class site (
     check_only => 'no',
   }
 
+  package {'nfs-utils':}
+  file {['/g','/g/data1','/g/data2']:
+    ensure => directory,
+  }
+  create_resources('site::gdata',$gdata)
 }
