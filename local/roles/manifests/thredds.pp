@@ -41,6 +41,6 @@ class roles::thredds {
 
   @@roles::proxy::connection {'/thredds':
     allow      => 'from all',
-    target_url => "http://${::hostname}/thredds",
+    target_url => "http://${::hostname}:8080/thredds",
   }
 }
