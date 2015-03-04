@@ -54,7 +54,8 @@ class roles::thredds (
   staging::extract {'thredds.war':
     target  => "${site::tomcat::catalina_home}/webapps/thredds",
     source  => "${site::tomcat::catalina_home}/webapps/thredds.war",
-    creates => $web_xml
+    creates => $web_xml,
+    require => Tomcat::War['thredds.war'],
   }
 
   augeas {'thredds security':
