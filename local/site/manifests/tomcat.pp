@@ -38,7 +38,7 @@ class site::tomcat {
     require      => Tomcat::Instance['default'],
   }
 
-  package {'tomcat-native':
+  package {['log4j','tomcat-native']:
     notify => Tomcat::Service['default'],
   }
 
@@ -53,7 +53,7 @@ class site::tomcat {
       "set userPattern   '${site::ldap::user_pattern}'",
       "set roleBase      '${site::ldap::group_dn}'",
       "set roleName      '${site::ldap::group_id}'",
-      "set roleSearch    '(${site::ldap::group_member}={0})'",
+      "set roleSearch    '(${site::ldap::group_member}={1})'",
     ],
     notify => Tomcat::Service['default'],
   }
