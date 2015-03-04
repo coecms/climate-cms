@@ -14,7 +14,9 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-class roles::thredds {
+class roles::thredds (
+  $admin_group = 'fe2_2' # LDAP group for admins
+) {
   include site::tomcat
 
   $content_path = '/var/lib/tomcat/content'
@@ -44,15 +46,25 @@ class roles::thredds {
     target_url => "http://${::hostname}:8080/thredds",
   }
 
-  $web_xml = "${tomcat::catalina_home}/webapps/tomcat/WEB-INF/web.xml"
+  $web_xml = "${site::tomcat::catalina_home}/webapps/thredds/WEB-INF/web.xml"
   augeas {'thredds security':
     incl    => $web_xml,
     lens    => 'Xml.lns',
     context => "/files/${web_xml}/web-app",
     changes => [
-      'defnode authrole security-role[role-name/#text="*"]',
+      'defnode authrole security-role[role-name/#text="*"] ""',
       'set    $authrole/role-name/#text   "*"',
       'set    $authrole/description/#text "Authenticated User"',
+      'defnode admin security-constraint[web-resource-collection/url-pattern/#text="/admin/*"] ""',
+      "set   \$admin/auth-constraint/role-name/#text '${admin_group}'",
+      'defnode trig security-constraint[web-resource-collection/url-pattern/#text="/admin/collection/trigger"] ""',
+      "set   \$trig/auth-constraint/role-name/#text '${admin_group}'",
+      'defnode log security-constraint[web-resource-collection/url-pattern/#text="/admin/log/*"] ""',
+      "set   \$log/auth-constraint/role-name/#text '${admin_group}'",
+      'defnode gen security-constraint[web-resource-collection/url-pattern/#text="/cataloggen/admin/*"] ""',
+      "set   \$gen/auth-constraint/role-name/#text '${admin_group}'",
+      'defnode auth security-constraint[web-resource-collection/url-pattern/#text="/restrictedAccess/*"] ""',
+      "set   \$gen/auth-constraint/role-name/#text '*'",
     ],
     notify  => Tomcat::Service['default'],
   }
