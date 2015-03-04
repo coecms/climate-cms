@@ -67,6 +67,7 @@ class roles::thredds (
       "set   \$auth/auth-constraint/role-name/#text '*'",
       'rm      security-constraint/user-data-constraint',
     ],
+    require => Tomcat::War['thredds.war'],
     notify  => Tomcat::Service['default'],
   }
 
