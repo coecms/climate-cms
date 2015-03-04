@@ -1,0 +1,16 @@
+{
+  "name": "saw-las",
+  "version": "0.1.0",
+  "author": "saw",
+  "summary": "The Live Access Server (LAS) is a highly configurable web server designed to provide flexible access to geo-referenced scientific data. It can present distributed data sets as a unified virtual data base through the use of DODS networking.",
+  "license": "Apache 2.0",
+  "source": "https://github.com/ScottWales/puppet-las",
+  "project_page": "https://github.com/ScottWales/puppet-las",
+  "issues_url": "https://github.com/ScottWales/puppet-las/issues",
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">= 1.0.0"
+    }
+  ]
+}
