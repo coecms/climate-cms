@@ -74,7 +74,7 @@ class roles::thredds (
       "set   \$auth/auth-constraint/role-name/#text '*'",
       'rm      security-constraint/user-data-constraint',
     ],
-    require => Staging::Extract['thredds'],
+    require => Staging::Extract['thredds.war'],
     notify  => Tomcat::Service['default'],
   }
 
