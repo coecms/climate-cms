@@ -48,7 +48,7 @@ class roles::thredds (
 
   $web_xml = "${site::tomcat::catalina_home}/webapps/thredds/WEB-INF/web.xml"
   # Extract the war so we can change configs
-  staging::deploy {'thredds.war':
+  staging::extract {'thredds.war':
     target  => "${site::tomcat::catalina_home}/webapps/thredds",
     source  => "${site::tomcat::catalina_home}/webapps/thredds.war",
     creates => $web_xml
@@ -74,7 +74,7 @@ class roles::thredds (
       "set   \$auth/auth-constraint/role-name/#text '*'",
       'rm      security-constraint/user-data-constraint',
     ],
-    require => Staging::Deploy['thredds'],
+    require => Staging::Extract['thredds'],
     notify  => Tomcat::Service['default'],
   }
 
