@@ -43,4 +43,18 @@ class roles::thredds {
     allow      => 'from all',
     target_url => "http://${::hostname}:8080/thredds",
   }
+
+  $web_xml = "${tomcat::catalina_home}/webapps/tomcat/WEB-INF/web.xml"
+  augeas {'thredds security':
+    incl    => $web_xml,
+    lens    => 'Xml.lns',
+    context => "/files/${web_xml}/web-app",
+    changes => [
+      'defnode authrole security-role[role-name/#text="*"]',
+      'set    $authrole/role-name/#text   "*"',
+      'set    $authrole/description/#text "Authenticated User"',
+    ],
+    notify  => Tomcat::Service['default'],
+  }
+
 }
