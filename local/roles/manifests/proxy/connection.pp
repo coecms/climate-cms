@@ -27,7 +27,7 @@ define roles::proxy::connection (
 
   apacheplus::location {$name:
     vhost           => $roles::proxy::vhost,
-    custom_fragment => "ProxyPassReverse ${path} ${target_url}",
+    custom_fragment => "ProxyPassReverse ${target_url}",
   }
 
 }
