@@ -27,4 +27,10 @@ class roles::las (
   class {'::las':
     require => [Class['ferret','roles::thredds'],Package['ant']],
   }
+
+  @@roles::proxy::connection {'/las':
+    allow      => 'from all',
+    target_url => "http://${::hostname}:8080/las",
+  }
+
 }
