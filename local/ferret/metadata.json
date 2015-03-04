@@ -1,0 +1,19 @@
+{
+  "name": "saw-ferret",
+  "version": "0.1.0",
+  "author": "saw",
+  "summary": "Ferret is an interactive computer visualization and analysis environment designed to meet the needs of oceanographers and meteorologists analyzing large and complex gridded data sets.",
+  "license": "Apache 2.0",
+  "source": "https://github.com/ScottWales/puppet-ferret",
+  "project_page": "https://github.com/ScottWales/puppet-ferret",
+  "issues_url": "https://github.com/ScottWales/puppet-ferret/issues",
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">= 1.0.0"
+    },
+    {
+      "name": "nanliu-staging"
+    }
+  ]
+}
