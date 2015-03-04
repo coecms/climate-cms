@@ -21,7 +21,7 @@ class las (
   $tomcat_fqdn         = $::fqdn,
   $tomcat_port         = '8080',
   $tomcat_user         = 'tomcat',
-  $catalina_home       = '/usr/share/tomcat6',
+  $catalina_home       = '/usr/share/tomcat',
   $manage_dependencies = false,
 ) {
 

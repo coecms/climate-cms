@@ -53,7 +53,9 @@ class las::install {
     environment => "FER_DIR=${ferret_dir}",
     require     => [
       Staging::Extract['las.tar.gz'],
-      Class['ferret']],
+      Class['ferret'],
+      Package['ant'],
+    ],
     creates     => "${catalina_home}/webapps/las.war",
   }
 
