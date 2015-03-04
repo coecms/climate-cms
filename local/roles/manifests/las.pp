@@ -21,10 +21,10 @@ class roles::las (
 
   package {'ant': }
   package {'libX11': }
-  class {'ferret':
+  class {'::ferret':
     require => Package['libX11'],
   }
-  class {'las':
+  class {'::las':
     require => [Class['ferret','roles::thredds'],Package['ant']],
   }
 }
