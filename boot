@@ -81,6 +81,9 @@ EOF
 
 ${setup_master}
 
+# Flush rules so we don't drop
+iptables  -F
+ip6tables -F
 service puppet restart
 "
 

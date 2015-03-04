@@ -10,6 +10,7 @@ Boot the master server (required before any others)
 
 Boot an agent server and register it with Puppet
 
+    ssh admin@puppet sudo puppet cert clean svn # If re-creating
     ./boot svn
     ssh admin@puppet sudo puppet cert sign svn
 
