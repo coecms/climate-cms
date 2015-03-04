@@ -1,7 +1,0 @@
----
-classes:
-  - roles::thredds
-
-nci::mounts:
-  - ua8
-  - v45

@@ -1,6 +1,7 @@
 ---
 classes:
   - roles::proxy
+  - roles::thredds
 
 roles::proxy::vhost:   'climate-cms.nci.org.au'
 roles::proxy::default: '/repository'
