@@ -67,9 +67,9 @@ class site::ldap (
     lens    => 'Nsswtich.lns',
     context => '/files/etc/nsswitch.conf',
     changes => [
-      'set /files/etc/nsswitch.conf/database[. = "passwd"]/service "files ldap"',
-      'set /files/etc/nsswitch.conf/database[. = "shadow"]/service "files ldap"',
-      'set /files/etc/nsswitch.conf/database[. = "group"]/service  "files ldap"',
+      'set database[. = "passwd"]/service "files ldap"',
+      'set database[. = "shadow"]/service "files ldap"',
+      'set database[. = "group"]/service  "files ldap"',
     ],
   }
 
