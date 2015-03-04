@@ -46,31 +46,25 @@ class site::ldap (
     content => $cert,
     notify  => Exec['ldap rehash'],
   }
-  exec {'ldap rehash':
-    command     => "cacertdir_rehash '${ca_path}'",
-    path        => '/usr/sbin',
-    refreshonly => true,
+
+  package {'sssd':
+    ensure => present,
   }
 
-  file {'/etc/openldap/ldap.conf':
-    ensure  => file,
-    content => "
-      URI  ${protocol}${domain}:${port}
-      BASE ${base_dn}
+  $auth_opts = [
+    '--enableldap',
+    '--enableldapauth',
+    "--ldapserver=${protocol}${domain}:${port}",
+    "--ldapbasedn=${base_dn}",
+    '--enableldaptls',
+    "--ldaploadcacert=file://${ca_file}",
+  ]
+  $auth_optlist = join($auth_opts, ' ')
 
-      TLS_CACERTDIR ${ca_path}
-      ",
-  }
-
-  augeas {'nsswitch':
-    incl    => '/etc/nsswitch.conf',
-    lens    => 'Nsswitch.lns',
-    context => '/files/etc/nsswitch.conf',
-    changes => [
-      'set database[. = "passwd"]/service[2] "ldap"',
-      'set database[. = "shadow"]/service[2] "ldap"',
-      'set database[. = "group"]/service[2]  "ldap"',
-    ],
+  exec {'authconfig':
+    command => "authconfig ${auth_optlist}",
+    path    => ['/usr/sbin','/usr/bin'],
+    unless  => 'getent group access',
   }
 
 }
