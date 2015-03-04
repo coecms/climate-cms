@@ -25,6 +25,6 @@ class roles::las (
     require => Package['libX11'],
   }
   class {'las':
-    require => [Class['ferret'],Package['ant']],
+    require => [Class['ferret','roles::thredds'],Package['ant']],
   }
 }
