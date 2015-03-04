@@ -52,4 +52,14 @@ class site::ldap (
     refreshonly => true,
   }
 
+  file {'/etc/openldap/ldap.conf':
+    ensure  => file,
+    content => "
+      URI  ${protocol}${domain}:${port}
+      BASE ${base_dn}
+
+      TLS_CACERTDIR ${ca_path}
+      ",
+  }
+
 }
