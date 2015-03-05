@@ -24,10 +24,11 @@ define site::gdata (
 
   $mountpoint = "/g/${cluster}/${project}"
 
-  # Group needs to match LDAP
+  # Group needs to match LDAP's GID
   group {$project:
-    ensure => present,
-    gid    => $gid,
+    ensure     => present,
+    forcelocal => true,
+    gid        => $gid,
   }
 
   file {$mountpoint:
