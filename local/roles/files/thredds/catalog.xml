@@ -13,27 +13,8 @@
     <service name="iso" serviceType="ISO" base="/thredds/iso/" />
     <service name="ncss" serviceType="NetcdfSubset" base="/thredds/ncss/grid/" />
   </service>
-
-  <datasetRoot path="test" location="content/testdata/" />
-
-  <dataset name="Test Single Dataset" ID="testDataset" serviceName="odap"  urlPath="test/testData.nc" dataType="Grid"/>
-
-  <dataset name="Test Single Dataset 2" ID="testDataset2" serviceName="odap" urlPath="test/testData2.grib2" dataType="Grid"/>
-
-  <datasetScan name="Test all files in a directory" ID="testDatasetScan" path="testAll" location="content/testdata">
-
-    <metadata inherited="true">
-      <serviceName>all</serviceName>
-      <dataType>Grid</dataType>
-    </metadata>
-
-    <filter>
-      <include wildcard="*eta_211.nc"/>
-    </filter>
-
-  </datasetScan>
   
- <datasetScan name="arccss-data" ID="arccssdata" path="ARCCSS_Data" location="/g/data1/ua8/ARCCSS_Data/">
+ <datasetScan name="arccss-data" ID="arccssdata" path="ARCCSS_Data" location="/g/data1/ua8/ARCCSS_Data/" restrictAccess="ua8">
      <metadata inherited="true">
         <serviceName>all</serviceName>
         <authority>ARCCSS</authority>
