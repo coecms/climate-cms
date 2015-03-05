@@ -43,7 +43,7 @@ class roles::thredds (
 
   @@roles::proxy::connection {'/thredds':
     allow      => 'from all',
-    target_url => "ajp//${::hostname}:8009/thredds",
+    target_url => "ajp://${::hostname}:8009/thredds",
   }
 
   $web_xml = "${site::tomcat::catalina_home}/webapps/thredds/WEB-INF/web.xml"
