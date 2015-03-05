@@ -207,5 +207,11 @@
    <datasetSource>my.package.DatsetSourceImpl</datasetSource>
    -->
 
+    <datasetSource>gov.noaa.pmel.tmap.iosp.FerretDataSource</datasetSource>
+
+    <nj22Config>
+        <ioServiceProvider class="gov.noaa.pmel.tmap.iosp.FerretIOServiceProvider"/>
+    </nj22Config>
+
 
 </threddsConfig>
