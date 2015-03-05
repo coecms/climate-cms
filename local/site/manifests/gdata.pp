@@ -19,12 +19,16 @@ define site::gdata (
   $project  = $name,
   $server   = 'nnfs2.nci.org.au',
   $cluster  = 'data1',
+  $gid      = undef,
 ) {
 
   $mountpoint = "/g/${cluster}/${project}"
 
-  # Group will be defined by LDAP
-  group {$project: }
+  # Group needs to match LDAP
+  group {$project:
+    ensure => present,
+    gid    => $gid,
+  }
 
   file {$mountpoint:
     ensure => directory,
