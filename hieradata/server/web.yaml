@@ -4,8 +4,6 @@ classes:
   - roles::thredds
   - roles::las
 
-roles::proxy::vhost:   'climate-cms.nci.org.au'
-
 # NCI project mounts
 site::gdata:
     v45: {}
