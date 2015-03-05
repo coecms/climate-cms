@@ -23,6 +23,7 @@ class roles::proxy (
   include ::apache
   include ::apache::mod::proxy
   include ::apache::mod::proxy_http
+  include ::apache::mod::proxy_ajp
 
   # Ensure HTTPS is used
   apache::vhost { "${vhost}_redirect":
