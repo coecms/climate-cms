@@ -25,7 +25,8 @@ class roles::las (
     require => Package['libX11'],
   }
   class {'::las':
-    require => [Class['ferret','roles::thredds'],Package['ant']],
+    proxy_fqdn => $site::proxy_fqdn,
+    require    => [Class['ferret','roles::thredds'],Package['ant']],
   }
 
   @@roles::proxy::connection {'/las':

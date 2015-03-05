@@ -16,7 +16,7 @@
 #  limitations under the License.
 
 class roles::proxy (
-  $vhost = $::fqdn,
+  $vhost = $site::proxy_fqdn,
 ) {
   include site::firewall::http
   include ::apache
