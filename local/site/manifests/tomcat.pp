@@ -71,13 +71,20 @@ class site::tomcat {
   # Install LDAP cert
   # http://docs.oracle.com/cd/E19509-01/820-3399/ggfrj/index.html
   $keystore  = "${java_home}/lib/security/cacerts"
-  $alias     = 'ldap'
   $pass      = 'changeit'
-  exec {'tomcat LDAP cert':
-    command => "keytool -import -alias '${alias}' -keystore '${keystore}' -storepass '${pass}' -file '${ldap::ca_file}' -trustcacerts -noprompt",
-    unless  => "keytool -list   -alias '${alias}' -keystore '${keystore}' -storepass '${pass}'",
+  exec {'install LDAP cert for Java':
+    command => "keytool -import -alias 'ldap' -keystore '${keystore}' -storepass '${pass}' -file '${ldap::ca_file}' -trustcacerts -noprompt",
+    unless  => "keytool -list   -alias 'ldap' -keystore '${keystore}' -storepass '${pass}'",
     path    => "${java_home}/bin",
     require => File[$ldap::ca_file],
+    notify  => Tomcat::Service['default'],
+  }
+
+  exec {'install Apache cert for Java':
+    command => "keytool -import -alias 'apache' -keystore '${keystore}' -storepass '${pass}' -file '${apache::default::ssl::cert}' -trustcacerts -noprompt",
+    unless  => "keytool -list   -alias 'apache' -keystore '${keystore}' -storepass '${pass}'",
+    path    => "${java_home}/bin",
+    require => Class['apache'],
     notify  => Tomcat::Service['default'],
   }
 
