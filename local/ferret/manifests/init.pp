@@ -17,10 +17,12 @@
 
 class ferret (
   $install_path        = '/usr/local/ferret',
+  $install_data        = false,
   $manage_dependencies = false,
 ) {
 
   validate_absolute_path($install_path)
+  validate_bool($install_data)
   validate_bool($manage_dependencies)
 
   file {$install_path:

@@ -16,12 +16,7 @@
 #  limitations under the License.
 
 class ferret::install (
-
-  $install_samples = false,
-  $data_path       = undef,
 ) {
-  validate_bool($install_samples)
-
   $install_path = $ferret::install_path
 
   $os = 'rhel6_64'
@@ -44,12 +39,12 @@ class ferret::install (
     require => File[$install_path],
   }
 
-  if $install_samples {
+  if $ferret::install_data {
     staging::deploy {'fer_dsets.tar.gz':
       source  => $datasets,
-      target  => $data_path,
-      creates => "${data_path}/data",
-      require => File[$data_path],
+      target  => $install_path,
+      creates => "${install_path}/data",
+      require => File[$install_path],
     }
   }
 

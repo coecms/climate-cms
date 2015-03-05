@@ -22,7 +22,8 @@ class roles::las (
   package {'ant': }
   package {'libX11': }
   class {'::ferret':
-    require => Package['libX11'],
+    install_data => true,
+    require      => Package['libX11'],
   }
   class {'::las':
     proxy_fqdn => $site::proxy_fqdn,
