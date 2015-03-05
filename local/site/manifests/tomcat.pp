@@ -17,6 +17,7 @@
 class site::tomcat {
 
   include ::epel
+  include ::apache
   include site::java
   include site::ldap
 
