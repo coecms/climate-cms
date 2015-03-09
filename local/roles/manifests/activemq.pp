@@ -17,18 +17,28 @@
 # Middleware server for mcollective
 class roles::activemq {
 
-    class {'::activemq':
-      # See https://github.com/puppetlabs/puppetlabs-activemq/pull/31
-      version => '5.9.1-2.el6',
-      before  => Class['mcollective'],
-    }
+  class {'::activemq':
+    # See https://github.com/puppetlabs/puppetlabs-activemq/pull/31
+    version => '5.9.1-2.el6',
+    before  => Class['mcollective'],
+  }
 
-    # Create a link to the correct datapath
-    file {'/usr/share/activemq/activemq-data':
-      ensure  => link,
-      target  => '/usr/share/activemq/data',
-      require => Package['activemq'],
-      notify  => Service['activemq'],
-    }
+  # Create a link to the correct datapath
+  file {'/usr/share/activemq/activemq-data':
+    ensure  => link,
+    target  => '/usr/share/activemq/data',
+    require => Package['activemq'],
+    notify  => Service['activemq'],
+  }
+
+  $clients = query_nodes('Class[site::mcollective]',
+                          ipaddress_eth0)
+
+  firewall { '300 activemq stomp':
+    proto  => 'tcp',
+    port   => '61613',
+    source => $clients,
+    action => 'accept',
+  }
 
 }
