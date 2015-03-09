@@ -5,5 +5,5 @@ classes:
   - site::mcollective
 
 # Puppetmaster is also the mcollective middleware server
-mcollective::middleware: true
+site::mcollective::middleware: true
 mcollective::client: true

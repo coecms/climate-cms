@@ -16,25 +16,29 @@
 
 # Site defaults for mcollective
 class site::mcollective (
+  $middleware = false,
 ) {
   # Get middleware host from puppetdb
   $middleware_hosts = query_nodes('Class[mcollective]{middleware=true}',
                                   hostname)
 
-  class {'::activemq':
-    # See https://github.com/puppetlabs/puppetlabs-activemq/pull/31
-    version => '5.9.1-2.el6',
-  }
+  if $middleware {
+    class {'::activemq':
+      # See https://github.com/puppetlabs/puppetlabs-activemq/pull/31
+      version => '5.9.1-2.el6',
+    }
 
-  # Create a link to the correct datapath
-  file {'/usr/share/activemq/activemq-data':
-    ensure  => link,
-    target  => '/usr/share/activemq/data',
-    require => Package['activemq'],
-    notify  => Service['activemq'],
+    # Create a link to the correct datapath
+    file {'/usr/share/activemq/activemq-data':
+      ensure  => link,
+      target  => '/usr/share/activemq/data',
+      require => Package['activemq'],
+      notify  => Service['activemq'],
+    }
   }
 
   class {'::mcollective':
+    middleware       => $middleware,
     middleware_hosts => $middleware_hosts,
     require          => Class['::activemq'],
   }
