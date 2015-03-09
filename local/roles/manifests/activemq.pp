@@ -14,15 +14,21 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# Site defaults for mcollective
-class site::mcollective {
+# Middleware server for mcollective
+class roles::activemq {
 
-  # Get middleware hosts from puppetdb
-  $middleware_hosts = query_nodes('Class[roles::activemq]',
-                                  hostname)
+    class {'::activemq':
+      # See https://github.com/puppetlabs/puppetlabs-activemq/pull/31
+      version => '5.9.1-2.el6',
+      before  => Class['mcollective'],
+    }
 
-  class {'::mcollective':
-    middleware_hosts => $middleware_hosts,
-  }
+    # Create a link to the correct datapath
+    file {'/usr/share/activemq/activemq-data':
+      ensure  => link,
+      target  => '/usr/share/activemq/data',
+      require => Package['activemq'],
+      notify  => Service['activemq'],
+    }
 
 }

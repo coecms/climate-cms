@@ -2,8 +2,5 @@
 classes:
   - roles::puppetmaster
   - roles::puppetdb
-  - site::mcollective
+  - roles::activemq
 
-# Puppetmaster is also the mcollective middleware server
-site::mcollective::middleware: true
-mcollective::client: true
