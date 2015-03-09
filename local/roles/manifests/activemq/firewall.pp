@@ -14,27 +14,14 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# Middleware server for mcollective
-class roles::activemq {
+# Workaround to support firewalls from multiple sources
+define roles::activemq::firewall {
 
-  class {'::activemq':
-    # See https://github.com/puppetlabs/puppetlabs-activemq/pull/31
-    version => '5.9.1-2.el6',
-    before  => Class['mcollective'],
+  firewall { "300 activemq stomp from ${name}":
+    proto  => 'tcp',
+    port   => '61613',
+    source => $name,
+    action => 'accept',
   }
 
-  # Create a link to the correct datapath
-  file {'/usr/share/activemq/activemq-data':
-    ensure  => link,
-    target  => '/usr/share/activemq/data',
-    require => Package['activemq'],
-    notify  => Service['activemq'],
-  }
-
-  $clients = query_nodes('Class[site::mcollective]',
-                          ipaddress_eth0)
-
-  # Puppetlabs-firewall doesn't support using a list as the source, so do a
-  # workaround
-  roles::activemq::firewall {$clients:}
 }
