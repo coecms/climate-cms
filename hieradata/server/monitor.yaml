@@ -1,4 +1,2 @@
 ---
-classes:
-  - roles::elasticsearch
-  - site::logstash
+classes: []
