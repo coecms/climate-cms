@@ -22,6 +22,7 @@ mod 'saz/sudo'
 mod 'saz/ssh'
 mod 'stahnma/epel'
 mod 'treydock/yum_cron'
+mod 'richardc/datacat'
 
 mod 'elasticsearch/logstash'
 mod 'elasticsearch/elasticsearch'
