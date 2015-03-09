@@ -19,7 +19,7 @@ class site::mcollective (
   $middleware = false,
 ) {
   # Get middleware host from puppetdb
-  $middleware_hosts = query_nodes('Class[mcollective]{middleware=true}',
+  $middleware_hosts = query_nodes('Class[site::mcollective]{middleware=true}',
                                   hostname)
 
   if $middleware {
@@ -38,7 +38,6 @@ class site::mcollective (
   }
 
   class {'::mcollective':
-    middleware       => $middleware,
     middleware_hosts => $middleware_hosts,
     require          => Class['::activemq'],
   }
