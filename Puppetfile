@@ -10,12 +10,18 @@ mod 'puppetlabs/inifile'
 mod 'puppetlabs/postgresql'
 mod 'puppetlabs/java'
 mod 'puppetlabs/tomcat'
+mod 'puppetlabs/mcollective'
+
+# Provides functions to query puppetdb
+mod 'dalen/puppetdbquery'
+
+# Helps with downloading & unzipping files
+mod 'nanliu/staging'
 
 mod 'saz/sudo'
 mod 'saz/ssh'
 mod 'stahnma/epel'
 mod 'treydock/yum_cron'
-mod 'nanliu/staging'
 
 mod 'elasticsearch/logstash'
 mod 'elasticsearch/elasticsearch'
