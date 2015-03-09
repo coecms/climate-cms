@@ -10,9 +10,12 @@ Boot the master server (required before any others)
 
 Boot an agent server and register it with Puppet
 
-    ssh admin@puppet sudo puppet cert clean svn # If re-creating
-    ./boot svn
-    ssh admin@puppet sudo puppet cert sign svn
+    ./boot $NODE
+    ssh admin@puppet sudo puppet cert sign $NODE
+
+Retire a server
+
+    ssh admin@puppet sudo puppet node clean $NODE
 
 Servers will be configured with the puppet classes listed in
 `hieradata/server/HOSTNAME.yaml`. Generally this will be a list of role
