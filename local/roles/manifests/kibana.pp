@@ -55,7 +55,7 @@ class roles::kibana {
 
   # Restart on config change
   file {'kibana.yml':
-    path    => 'v/opt/kibana/config/kibana.yml',
+    path    => '/opt/kibana/config/kibana.yml',
     notify  => Supervisord::Supervisorctl['restart_kibana'],
   }
   supervisord::supervisorctl {'restart_kibana':
