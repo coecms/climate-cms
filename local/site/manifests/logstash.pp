@@ -49,11 +49,11 @@ class site::logstash (
   }
 
   logstash::configfile {'input collectd':
-    content => 'input {collectd{}}',
+    content => "input {collectd{}}\n",
     order   => '10',
   }
   logstash::configfile {'output elasticsearch':
-    content => "output {elasticsearch{host => ${elasticsearch}}}",
+    content => "output {elasticsearch{host => '${elasticsearch}'}}\n",
     order   => '90',
   }
 
