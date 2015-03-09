@@ -16,11 +16,30 @@
 
 class roles::kibana {
 
-  $source_url = 'https://download.elasticsearch.org/kibana/kibana/kibana-4.0.1-linux-x64.tar.gz'
+  $package    = 'kibana-4.0.1-linux-x64'
+  $source_url = "https://download.elasticsearch.org/kibana/kibana/${package}.tar.gz"
 
-  staging::deploy {'kibana.tar.gz':
+  $elasticsearch = query_nodes('Class[roles::elasticsearch]',
+                                ipaddress_eth0)
+
+  file {'/opt/kibana':
+    ensure => directory,
+  }
+
+  staging::file {"${package}.tar.gz":
     source => $source_url,
-    target => '/opt',
+  }
+  staging::extract {"${package}.tar.gz":
+    target  => '/opt/kibana',
+    creates => '/opt/kibana/bin/kibana',
+    strip   => 1,
+  }
+
+  augeas {'set kibana elasticsearch host':
+    incl    => '/opt/kibana/config/kibana.yml',
+    lens    => 'Cobblersettings.lns',
+    context => '/files/opt/kibana/config/kibana.yml',
+    changes => "set elasticsearch_url 'http://${elasticsearch}:9200'",
   }
 
 }
