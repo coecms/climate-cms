@@ -21,8 +21,11 @@ class site::mcollective (
   $middleware_hosts = query_nodes('Class[mcollective]{middleware=true}',
                                   hostname)
 
+  class {'::activemq':
+  }
   class {'::mcollective':
     middleware_hosts => $middleware_hosts,
+    require          => Class['::activemq'],
   }
 
 }
