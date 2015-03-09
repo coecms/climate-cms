@@ -20,10 +20,41 @@ class site::logstash (
 ) {
   include site::java
 
+  $elasticsearch = query_nodes('Class[roles::elasticsearch]',
+                                ipaddress_eth0)
+
   class {'::logstash':
     install_contrib => true,
     manage_repo     => true,
     repo_version    => '1.4',
+  }
+
+  # Collect generic system resource usage
+  class {'::collectd':
+    purge        => true,
+    recurse      => true,
+    purge_config => true,
+  }
+
+  include ::collectd::plugin::cpu
+  include ::collectd::plugin::df
+  include ::collectd::plugin::disk
+  include ::collectd::plugin::interface
+  include ::collectd::plugin::load
+  include ::collectd::plugin::memory
+
+  # Send stats to logstash
+  collectd::plugin::network::server {$::hostname:
+    port => 25826,
+  }
+
+  logstash::configfile {'input collectd':
+    content => 'input {collectd{}}',
+    order   => '10',
+  }
+  logstash::configfile {'output elasticsearch':
+    content => "output {elasticsearch{host => ${elasticsearch}}}",
+    order   => '90',
   }
 
 }
