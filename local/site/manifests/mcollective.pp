@@ -25,6 +25,15 @@ class site::mcollective (
     # See https://github.com/puppetlabs/puppetlabs-activemq/pull/31
     version => '5.9.1-2.el6',
   }
+
+  # Create a link to the correct datapath
+  file {'/usr/share/activemq/activemq-data':
+    ensure  => link,
+    target  => '/usr/share/activemq/data',
+    require => Package['activemq'],
+    notify  => Service['activemq'],
+  }
+
   class {'::mcollective':
     middleware_hosts => $middleware_hosts,
     require          => Class['::activemq'],
