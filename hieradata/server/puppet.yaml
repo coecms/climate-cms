@@ -6,3 +6,4 @@ classes:
 
 # Puppetmaster is also the mcollective middleware server
 mcollective::middleware: true
+mcollective::client: true
