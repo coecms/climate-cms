@@ -22,6 +22,8 @@ class roles::kibana {
   $elasticsearch = query_nodes('Class[roles::elasticsearch]',
                                 ipaddress_eth0)
 
+  class {'supervisord': }
+
   file {'/opt/kibana':
     ensure => directory,
   }
