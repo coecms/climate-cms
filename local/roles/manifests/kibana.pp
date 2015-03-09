@@ -26,6 +26,12 @@ class roles::kibana {
     ensure => directory,
   }
 
+  user {'kibana':
+    shell  => '/sbin/nologin',
+    home   => '/opt/kibana',
+    system => true,
+  }
+
   staging::file {"${package}.tar.gz":
     source => $source_url,
   } ->
@@ -33,6 +39,7 @@ class roles::kibana {
     target  => '/opt/kibana',
     creates => '/opt/kibana/bin/kibana',
     strip   => 1,
+    notify  => File['kibana.yml'],
   }
 
   augeas {'set kibana elasticsearch host':
@@ -41,6 +48,25 @@ class roles::kibana {
     context => '/files/opt/kibana/config/kibana.yml',
     changes => "set elasticsearch_url '\"http://${elasticsearch}:9200\"'",
     require => Staging::Extract["${package}.tar.gz"],
+    notify  => File['kibana.yml'],
+  }
+
+  # Restart on config change
+  file {'kibana.yml':
+    path    => 'v/opt/kibana/config/kibana.yml',
+    notify  => Supervisord::Supervisorctl['restart_kibana'],
+  }
+  supervisord::supervisorctl {'restart_kibana':
+    command     => 'restart',
+    process     => 'kibana',
+    refreshonly => true,
+    require     => Supervisord::Program['kibana'],
+  }
+
+  supervisord::program {'kibana':
+    command => '/opt/kibana/bin/kibana',
+    user    => 'kibana',
+    require => [User['kibana'],File['kibana.yml']],
   }
 
 }

@@ -31,3 +31,5 @@ mod 'file_concat',
     :git    => 'https://github.com/cprice404/puppet-lib-file_concat.git',
     :branch => 'maint/master/remove-unnnecessary-require'
 mod 'pdxcat/collectd'
+
+mod 'ajcrowe/supervisord'
