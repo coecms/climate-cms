@@ -3,6 +3,7 @@ classes:
   - roles::proxy
   - roles::thredds
   - roles::las
+  - roles::kibana
 
 # NCI project mounts
 site::gdata:
