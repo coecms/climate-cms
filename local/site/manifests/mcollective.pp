@@ -22,6 +22,8 @@ class site::mcollective (
                                   hostname)
 
   class {'::activemq':
+    # See https://github.com/puppetlabs/puppetlabs-activemq/pull/31
+    version => '5.9.1-2.el6',
   }
   class {'::mcollective':
     middleware_hosts => $middleware_hosts,
