@@ -25,4 +25,8 @@ class site::mcollective {
     middleware_hosts => $middleware_hosts,
   }
 
+  ::mcollective::plugin {['puppet','service']:
+    package => true,
+  }
+
 }
