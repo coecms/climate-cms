@@ -28,7 +28,7 @@ class roles::kibana {
 
   staging::file {"${package}.tar.gz":
     source => $source_url,
-  }
+  } ->
   staging::extract {"${package}.tar.gz":
     target  => '/opt/kibana',
     creates => '/opt/kibana/bin/kibana',
@@ -40,6 +40,7 @@ class roles::kibana {
     lens    => 'Cobblersettings.lns',
     context => '/files/opt/kibana/config/kibana.yml',
     changes => "set elasticsearch_url 'http://${elasticsearch}:9200'",
+    require => Staging::Extract["${package}.tar.gz"],
   }
 
 }
