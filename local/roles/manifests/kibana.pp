@@ -39,7 +39,7 @@ class roles::kibana {
     incl    => '/opt/kibana/config/kibana.yml',
     lens    => 'Cobblersettings.lns',
     context => '/files/opt/kibana/config/kibana.yml',
-    changes => "set elasticsearch_url 'http://${elasticsearch}:9200'",
+    changes => "set elasticsearch_url '\"http://${elasticsearch}:9200\"'",
     require => Staging::Extract["${package}.tar.gz"],
   }
 
