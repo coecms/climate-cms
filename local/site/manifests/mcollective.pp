@@ -22,7 +22,7 @@ class site::mcollective {
                                   hostname)
 
   class {'::mcollective':
-    agent            => true,
+    client           => true,
     middleware_hosts => $middleware_hosts,
   }
 
