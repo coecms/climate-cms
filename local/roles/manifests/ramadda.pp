@@ -87,7 +87,7 @@ class roles::ramadda (
   "
   file {"${ramadda_home}/ldap.properties":
     ensure  => file,
-    content => $db_config,
+    content => $ldap_config,
     notify  => Tomcat::Service['default'],
   }
 }
