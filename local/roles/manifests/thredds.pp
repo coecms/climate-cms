@@ -19,12 +19,11 @@ class roles::thredds (
 ) {
   include site::tomcat
 
-
   tomcat::war {'thredds.war':
     catalina_base => $site::tomcat::catalina_home,
     war_source    => 'ftp://ftp.unidata.ucar.edu/pub/thredds/4.3/current/thredds.war',
     notify        => Tomcat::Service['default'],
-    require       => File[$content_path],
+    require       => File["${site::tomcat::catalina_home}/content"],
   }
 
   @@roles::proxy::connection {'/thredds':
