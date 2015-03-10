@@ -23,12 +23,12 @@ class roles::ramadda (
     warning('Using insecure DB password')
   }
 
-  $source_url = 'http://downloads.sourceforge.net/project/ramadda/ramadda1.7/repository.war'
+  $source_url = 'http://downloads.sourceforge.net/project/ramadda/ramadda1.7'
   $ramadda_home = "${site::tomcat::content_path}/ramadda"
 
   tomcat::war {'repository.war':
     catalina_base => $site::tomcat::catalina_home,
-    war_source    => $source_url,
+    war_source    => "${source_url}/repository.war",
     notify        => Tomcat::Service['default'],
   }
 
@@ -62,8 +62,30 @@ class roles::ramadda (
     ramadda.db.postgres.user=ramadda
     ramadda.db.postgres.password=${db_password}
   "
-
   file {"${ramadda_home}/db.properties":
+    ensure  => file,
+    content => $db_config,
+    notify  => Tomcat::Service['default'],
+  }
+
+  file {"${ramadda_home}/plugins":
+    ensure  => directory,
+  }
+  staging::file {'ldapplugin.jar':
+    source  => "${source_url}/plugins/ldapplugin.jar",
+    target  => "${ramadda_home}/plugins",
+    require => File["${ramadda_home}/plugins"],
+    notify  => Tomcat::Service['default'],
+  }
+
+  $ldap_config = "
+    ldap.url=${site::ldap::url}
+    ldap.user.directory=${site::ldap::user_id}=\${id},${site::ldap::user_dn}
+    ldap.group.directory=${site::ldap::group_dn}
+    ldap.group.attribute=${site::ldap::group_member}
+    ldap.group.admin=${site::admin_group}
+  "
+  file {"${ramadda_home}/ldap.properties":
     ensure  => file,
     content => $db_config,
     notify  => Tomcat::Service['default'],

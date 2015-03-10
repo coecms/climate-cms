@@ -25,6 +25,7 @@ class site (
   $puppet_ip = '10.0.0.4',
   $proxy_ip  = '10.0.0.4',
   $proxy_fqdn = 'test.climate-cms.org',
+  $admin_group = 'fe2_2',
 ) {
   if ! $secure {
     warning('Not using secure passwords or certificates')

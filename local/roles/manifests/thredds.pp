@@ -14,10 +14,10 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-class roles::thredds (
-  $admin_group = 'fe2_2' # LDAP group for admins
-) {
+class roles::thredds {
   include site::tomcat
+
+  $admin_group = $site::admin_group
 
   tomcat::war {'thredds.war':
     catalina_base => $site::tomcat::catalina_home,
