@@ -73,7 +73,7 @@ class roles::ramadda (
   }
   staging::file {'ldapplugin.jar':
     source  => "${source_url}/plugins/ldapplugin.jar",
-    target  => "${ramadda_home}/plugins",
+    target  => "${ramadda_home}/plugins/ldapplugin.jar",
     require => File["${ramadda_home}/plugins"],
     notify  => Tomcat::Service['default'],
   }
