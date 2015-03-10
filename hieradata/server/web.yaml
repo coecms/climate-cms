@@ -4,6 +4,7 @@ classes:
   - roles::thredds
   - roles::las
   - roles::kibana
+  - roles::ramadda
 
 # NCI project mounts
 site::gdata:

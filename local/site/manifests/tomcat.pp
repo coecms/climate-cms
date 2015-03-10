@@ -97,4 +97,19 @@ class site::tomcat {
     action  => 'accept',
   }
 
+  $content_path = '/var/lib/tomcat/content'
+
+  file {$content_path:
+    ensure  => directory,
+    owner   => 'tomcat',
+    group   => 'tomcat',
+    require => Tomcat::Instance['default'],
+  }
+
+  file {"${catalina_home}/content":
+    ensure => link,
+    target => $content_path,
+    require => Tomcat::Instance['default'],
+  }
+
 }

@@ -19,20 +19,6 @@ class roles::thredds (
 ) {
   include site::tomcat
 
-  $content_path = '/var/lib/tomcat/content'
-
-  file {$content_path:
-    ensure  => directory,
-    owner   => 'tomcat',
-    group   => 'tomcat',
-    require => Tomcat::Instance['default'],
-  }
-
-  file {"${site::tomcat::catalina_home}/content":
-    ensure => link,
-    target => $content_path,
-    require => Tomcat::Instance['default'],
-  }
 
   tomcat::war {'thredds.war':
     catalina_base => $site::tomcat::catalina_home,
@@ -83,7 +69,7 @@ class roles::thredds (
   }
 
   # Config files
-  file { "${content_path}/thredds":
+  file { "${site::tomcat::content_path}/thredds":
     ensure  => directory,
     source  => 'puppet:///modules/roles/thredds',
     recurse => true,
