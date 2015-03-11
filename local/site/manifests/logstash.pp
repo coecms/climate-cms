@@ -38,10 +38,13 @@ class site::logstash (
 
   include ::collectd::plugin::cpu
   include ::collectd::plugin::df
-  include ::collectd::plugin::disk
   include ::collectd::plugin::interface
   include ::collectd::plugin::load
   include ::collectd::plugin::memory
+
+  class {'::collectd::plugin::disk':
+    mountpoints => ['/'],
+  }
 
   # Send stats to logstash
   collectd::plugin::network::server {$::hostname:
