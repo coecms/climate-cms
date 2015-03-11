@@ -71,4 +71,8 @@ class roles::kibana {
     require => [User['kibana'],File['kibana.yml']],
   }
 
+  @@roles::proxy::connection {'/admin/kibana':
+    allow      => 'from all',
+    target_url => "http://${::hostname}:5601",
+  }
 }
