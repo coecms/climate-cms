@@ -20,7 +20,7 @@ class site::logstash (
 ) {
   include site::java
 
-  $elasticsearch = query_nodes('Class[roles::elasticsearch]',
+  $elasticsearch_ip = query_nodes('Class[roles::elasticsearch]',
                                 ipaddress_eth0)
 
   class {'::logstash':
@@ -53,8 +53,16 @@ class site::logstash (
     order   => '10',
   }
   logstash::configfile {'output elasticsearch':
-    content => "output {elasticsearch{host => '${elasticsearch}'}}\n",
+    content => "output {elasticsearch{host => '${elasticsearch_ip}'}}\n",
     order   => '90',
+  }
+
+  # Bidirectional comms required for logstash
+  firewall {"931 elasticsearch to ${elasticsearch_ip}":
+    proto  => 'tcp',
+    port   => '9300-9305',
+    source => $elasticsearch_ip,
+    action => 'accept',
   }
 
 }

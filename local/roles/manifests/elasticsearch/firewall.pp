@@ -1,7 +1,6 @@
-## \file    local/roles/manifests/elasticsearch.pp
-#  \author  Scott Wales <scott.wales@unimelb.edu.au>
+## Copyright 2015 ARC Centre of Excellence for Climate Systems Science
 #
-#  Copyright 2015 ARC Centre of Excellence for Climate Systems Science
+#  \author  Scott Wales <scott.wales@unimelb.edu.au>
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -15,20 +14,13 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-class roles::elasticsearch (
-) {
-  include site::java
+define roles::elasticsearch::firewall {
 
-  class {'::elasticsearch':
-    manage_repo  => true,
-    repo_version => '1.4',
+  firewall {"930 elasticsearch from ${name}":
+    proto  => 'tcp',
+    port   => '9300-9305',
+    source => $name,
+    action => 'accept',
   }
 
-  ::elasticsearch::instance { 'logstash':
-  }
-
-  $logstash_ip = query_nodes('Class[site::logstash]',
-                                ipaddress_eth0)
-
-  elasticsearch::firewall {$logstash_ip: }
 }

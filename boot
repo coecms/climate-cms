@@ -21,10 +21,12 @@ environment='production'
 
 image='centos-6.6-20150129'
 flavor='m1.small'
+secgroups='ssh,elasticsearch'
 
 if [ "$hostname" == 'puppet' ]; then
     # This is the Puppetmaster, we'll need to set that up
     master_ip=127.0.0.1
+    secgroups='ssh,elasticsearch,puppet'
     setup_master="
 yum install -y -q puppetserver rubygems git
 
@@ -92,5 +94,5 @@ nova boot "$hostname" \
     --flavor "$flavor" \
     --user-data <(echo "$userdata") \
     --key-name walesnix \
-    --security-groups ssh \
+    --security-groups "$secgroups" \
     --poll
