@@ -31,4 +31,13 @@ class roles::elasticsearch (
                                 ipaddress_eth0)
 
   elasticsearch::firewall {$logstash_ip: }
+
+  $kibana_ip = query_nodes('Class[roles::kibana]',
+                                ipaddress_eth0)
+  firewall {'920 kibana -> elasticsearch':
+    proto  => 'tcp',
+    port   => '9200',
+    source => $kibana_ip,
+    action => 'accept',
+  }
 }
