@@ -36,6 +36,7 @@ class site (
   include site::puppet
   include site::security
   include site::mcollective
+  include site::logstash
 
   # Don't require a tty for sudoers
   sudo::conf {'requiretty':
