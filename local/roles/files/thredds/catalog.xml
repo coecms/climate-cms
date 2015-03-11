@@ -37,6 +37,30 @@
         </filter>
     </datasetScan>
 
+    <datasetScan name="Public Ocean Datasets" ID="v45-public" path="v45-public" location="/g/data1/v45/thredds/public/">
+        <metadata inherited="true">
+            <serviceName>all</serviceName>
+            <authority>ARCCSS-ocean</authority>
+            <dataType>GRID</dataType>
+        </metadata>
+        <filter>
+            <include wildcard="*.nc" />
+            <exclude wildcard="restart*" atomic="false" collection="true"/>
+        </filter>
+    </datasetScan>
+
+    <datasetScan name="Internal Ocean Datasets" ID="v45-private" path="v45-private" location="/g/data1/v45/thredds/private/" restrictAccess="v45">
+        <metadata inherited="true">
+            <serviceName>all</serviceName>
+            <authority>ARCCSS-ocean</authority>
+            <dataType>GRID</dataType>
+        </metadata>
+        <filter>
+            <include wildcard="*.nc" />
+            <exclude wildcard="restart*" atomic="false" collection="true"/>
+        </filter>
+    </datasetScan>
+
     <datasetScan name="LAS" path="las" location="/usr/local/tomcat/content/las/conf/server/data" serviceName="all">
         <filter>
             <include wildcard="*.nc"/>
