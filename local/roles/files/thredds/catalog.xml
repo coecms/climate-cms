@@ -61,7 +61,7 @@
         </filter>
     </datasetScan>
 
-    <datasetScan name="LAS" path="las" location="/usr/local/tomcat/content/las/conf/server/data" serviceName="all">
+    <datasetScan name="LAS" path="las" location="/usr/share/tomcat/content/las/conf/server/data" serviceName="all">
         <filter>
             <include wildcard="*.nc"/>
             <include wildcard="*.fds"/>
