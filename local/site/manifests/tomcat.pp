@@ -56,15 +56,15 @@ class site::tomcat {
   augeas {'tomcat LDAP authentication':
     incl    => "${catalina_home}/conf/server.xml",
     lens    => 'Xml.lns',
-    context => "/files/${catalina_home}/conf/server.xml/Server/Service/Engine/Realm/Realm/#attribute",
+    context => "/files/${catalina_home}/conf/server.xml/Server/Service/Engine/Realm",
     changes => [
-      'set className "org.apache.catalina.realm.JNDIRealm"',
-      'rm resourceName',
-      "set connectionURL '${site::ldap::url}'",
-      "set userPattern   '${site::ldap::user_pattern}'",
-      "set roleBase      '${site::ldap::group_dn}'",
-      "set roleName      '${site::ldap::group_id}'",
-      "set roleSearch    '(${site::ldap::group_member}={1})'",
+      'defnode ldap Realm[#attribute/className="org.apache.catalina.realm.JNDIRealm"] ""',
+      'set ldap/#attribute/className     "org.apache.catalina.realm.JNDIRealm"',
+      "set ldap/#attribute/connectionURL '${site::ldap::url}'",
+      "set ldap/#attribute/userPattern   '${site::ldap::user_pattern}'",
+      "set ldap/#attribute/roleBase      '${site::ldap::group_dn}'",
+      "set ldap/#attribute/roleName      '${site::ldap::group_id}'",
+      "set ldap/#attribute/roleSearch    '(${site::ldap::group_member}={1})'",
     ],
     notify => Tomcat::Service['default'],
   }
