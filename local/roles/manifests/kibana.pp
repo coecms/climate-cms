@@ -72,7 +72,6 @@ class roles::kibana {
   }
 
   @@roles::proxy::connection {'/admin/kibana':
-    allow      => 'from all',
     target_url => "http://${::hostname}:5601",
   }
 }
