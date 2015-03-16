@@ -67,14 +67,4 @@ class roles::thredds {
     notify  => Tomcat::Service['default'],
   }
 
-  # Config files
-  file { "${site::tomcat::content_path}/thredds":
-    ensure  => directory,
-    source  => 'puppet:///modules/roles/thredds',
-    recurse => true,
-    owner   => 'tomcat',
-    group   => 'tomcat',
-    notify  => Tomcat::Service['default'],
-  }
-
 }
