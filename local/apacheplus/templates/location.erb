@@ -1,7 +1,19 @@
 <Location "<%= @location %>" >
-    Order <%= @order %>
-    Deny  <%= @deny %>
-    Allow <%= @allow %>
+    Order      <%= @order %>
+    Deny       <%= @deny %>
+    Allow      <%= @allow %>
+    AuthName   "<%= @auth_name %>"
+
+    <% if @ldap_require %>
+    Satisfy                     Any
+    AuthType                    Basic
+    AuthBasicProvider           ldap
+    AuthLDAPURL                 "<%= @ldap_url %>"
+    AuthLDAPGroupAttribute      "<%= @ldap_group_member %>"
+    AuthLDAPGroupAttributeIsDN  off
+
+    Require     <%= @ldap_require %>
+    <% end %>
 
     <%= @custom_fragment %>
 </Location>

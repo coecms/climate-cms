@@ -17,18 +17,29 @@
 
 define apacheplus::location (
   $vhost,
-  $priority        = '25',
-  $location        = $name,
-  $order           = 'Deny,Allow',
-  $allow           = 'from none',
-  $deny            = 'from all',
-  $custom_fragment = '',
-  $template        = 'apacheplus/location.erb',
+  $vhost_priority    = '25',
+  $location_priority = '25',
+  $location          = $name,
+  $order             = 'Deny,Allow',
+  $allow             = 'from none',
+  $deny              = 'from all',
+  $auth_name         = $site::hostname,
+  $ldap_require      = undef,
+  $custom_fragment   = '',
+  $template          = 'apacheplus/location.erb',
 ) {
 
+  if $ldap_require {
+    include ::site::ldap
+    include ::apache::mod::authnz_ldap
+
+    $ldap_url = "${site::ldap::url}/${site::ldap::user_dn}?${site::ldap::user_id}"
+    $ldap_group_member = $site::ldap::group_member
+  }
+
   concat::fragment { $name:
-    target  => "${priority}-${vhost}.conf",
-    order   => 25,
+    target  => "${vhost_priority}-${vhost}.conf",
+    order   => $location_priority,
     content => template($template),
   }
 
