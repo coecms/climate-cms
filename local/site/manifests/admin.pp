@@ -38,6 +38,12 @@ define site::admin (
     purge_ssh_keys => true,
   }
 
+  file {$home:
+    ensure  => directory,
+    owner   => $name,
+    require => User[$name],
+  }
+
   site::admin::pubkey {$pubkeys:
     user => $name,
   }
