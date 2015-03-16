@@ -59,12 +59,12 @@ class site::tomcat {
     context => "/files/${catalina_home}/conf/server.xml/Server/Service/Engine/Realm",
     changes => [
       'defnode ldap Realm[#attribute/className="org.apache.catalina.realm.JNDIRealm"] ""',
-      'set ldap/#attribute/className     "org.apache.catalina.realm.JNDIRealm"',
-      "set ldap/#attribute/connectionURL '${site::ldap::url}'",
-      "set ldap/#attribute/userPattern   '${site::ldap::user_pattern}'",
-      "set ldap/#attribute/roleBase      '${site::ldap::group_dn}'",
-      "set ldap/#attribute/roleName      '${site::ldap::group_id}'",
-      "set ldap/#attribute/roleSearch    '(${site::ldap::group_member}={1})'",
+      'set $ldap/#attribute/className     "org.apache.catalina.realm.JNDIRealm"',
+      "set \$ldap/#attribute/connectionURL '${site::ldap::url}'",
+      "set \$ldap/#attribute/userPattern   '${site::ldap::user_pattern}'",
+      "set \$ldap/#attribute/roleBase      '${site::ldap::group_dn}'",
+      "set \$ldap/#attribute/roleName      '${site::ldap::group_id}'",
+      "set \$ldap/#attribute/roleSearch    '(${site::ldap::group_member}={1})'",
     ],
     notify => Tomcat::Service['default'],
   }
