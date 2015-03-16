@@ -46,7 +46,7 @@ class site::security {
 
   class {'::ssh':
     server_options             => {
-      'PermitRootLogin'        => 'no',
+      'PermitRootLogin'        => 'yes',
       'PasswordAuthentication' => 'no',
       'X11Forwarding'          => 'no',
       'GSSAPIAuthentication'   => 'no',
