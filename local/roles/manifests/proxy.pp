@@ -41,8 +41,9 @@ class roles::proxy (
   }
 
   apacheplus::location {'/admin':
-    order        => '24',
-    ldap_require => "ldap-group ${site::ldap::group_id}=${site::admin_group},${site::ldap::group_dn}"
+    vhost             => $vhost,
+    location_priority => '24',
+    ldap_require      => "ldap-group ${site::ldap::group_id}=${site::admin_group},${site::ldap::group_dn}"
   }
 
   # Collect all external proxy sites
