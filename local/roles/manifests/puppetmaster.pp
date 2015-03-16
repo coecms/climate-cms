@@ -48,9 +48,8 @@ class roles::puppetmaster (
       'set master/reporturl "monitor:9200/puppet/report"',
     ],
     require => File['/etc/puppet/puppet.conf'],
-    notify  => Service['puppet'],
+    notify  => Service['puppetserver'],
   }
-
 
   firewall {'140 puppetmaster':
     proto  => 'tcp',
