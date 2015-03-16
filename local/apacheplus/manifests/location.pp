@@ -31,6 +31,7 @@ define apacheplus::location (
 
   if $ldap_require {
     include ::site::ldap
+    include ::apache::mod::auth_basic
     include ::apache::mod::authnz_ldap
 
     $ldap_url = "${site::ldap::url}/${site::ldap::user_dn}?${site::ldap::user_id}"
