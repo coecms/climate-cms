@@ -40,6 +40,8 @@ class roles::proxy (
     ssl     => true,
   }
 
+  # Restrict access to /admin to administrators
+  include site::ldap
   apacheplus::location {'/admin':
     vhost             => $vhost,
     location_priority => '24',
