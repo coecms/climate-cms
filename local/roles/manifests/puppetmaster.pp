@@ -45,7 +45,7 @@ class roles::puppetmaster (
     incl    => '/etc/puppet/puppet.conf',
     changes => [
       'set master/reports   "http"',
-      'set master/reporturl "monitor:9200/puppet/report"',
+      'set master/reporturl "http://monitor:9200/puppet/report"',
     ],
     require => File['/etc/puppet/puppet.conf'],
     notify  => Service['puppetserver'],
