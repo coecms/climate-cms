@@ -18,13 +18,21 @@
 # Create an admin user
 
 define site::admin (
-  $home    = "/home/${name}",
   $mail    = undef,
   $pubkeys = [],
 ) {
+  validate_re($name, '^[a-z]{3}[0-9]{3}$')
+  $institute_code = regsubst($name,'^([a-z]{3})([0-9]{3})$','\2')
+  $home = "/home/${institute_code}/${name}"
+
+  ensure_resource(
+    'file',
+    "/home/${institute_code}",
+    {'ensure' => 'directory'})
 
   user {$name:
     ensure         => present,
+    forcelocal     => true,
     home           => $home,
     managehome     => true,
     purge_ssh_keys => true,
