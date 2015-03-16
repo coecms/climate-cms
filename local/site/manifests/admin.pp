@@ -44,6 +44,22 @@ define site::admin (
     require => User[$name],
   }
 
+  file {"${home}/.bashrc":
+    ensure => present,
+    owner  => $name,
+    source => '/etc/skel/.bashrc',
+  }
+  file {"${home}/.bash_profile":
+    ensure => present,
+    owner  => $name,
+    source => '/etc/skel/.bash_profile',
+  }
+  file {"${home}/.bash_logout":
+    ensure => present,
+    owner  => $name,
+    source => '/etc/skel/.bash_logout',
+  }
+
   site::admin::pubkey {$pubkeys:
     user => $name,
   }
