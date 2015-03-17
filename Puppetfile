@@ -19,6 +19,8 @@ mod 'dalen/puppetdbquery'
 # Helps with downloading & unzipping files
 mod 'nanliu/staging'
 
+mod 'zack/r10k'
+
 mod 'saz/sudo'
 mod 'saz/ssh'
 mod 'stahnma/epel'

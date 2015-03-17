@@ -28,18 +28,15 @@ class roles::puppetmaster (
     require   => Package['puppetserver'],
   }
 
-  package { 'r10k':
-    ensure   => present,
-    provider => gem,
+  class {'r10k':
+    remote => 'https://github.com/coecms/climate-cms',
   }
 
-  augeas { 'r10k':
-    lens    => 'Puppet.lns',
-    incl    => '/etc/puppet/puppet.conf',
-    changes => 'set agent/postrun_command "/usr/bin/r10k deploy environment --puppetfile"',
-    require => File['/etc/puppet/puppet.conf'],
-    notify  => Service['puppet'],
+  file {'/etc/puppet/hiera.yaml':
+    ensure => link,
+    target => '/etc/puppet/environments/production/hiera.yaml',
   }
+
   augeas { 'reports':
     lens    => 'Puppet.lns',
     incl    => '/etc/puppet/puppet.conf',
