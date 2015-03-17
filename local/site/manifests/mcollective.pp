@@ -47,7 +47,7 @@ class site::mcollective {
   }
 
   ::mcollective::user { $user:
-    user        => $user,
+    username    => $user,
     certificate => 'puppet:///private/certs/mcollective-user.pem',
     private_key => 'puppet:///private/private_keys/mcollective-user.pem',
   }
