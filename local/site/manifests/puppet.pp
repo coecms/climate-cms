@@ -15,7 +15,9 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-class site::puppet {
+class site::puppet (
+  $master = 'puppet',
+) {
 
   package { 'puppet':
     ensure => present,
@@ -29,6 +31,16 @@ class site::puppet {
     ensure  => running,
     enable  => true,
     require => Package['puppet'],
+  }
+
+  augeas { 'reports':
+    lens    => 'Puppet.lns',
+    incl    => '/etc/puppet/puppet.conf',
+    changes => [
+      "set agent/server '${master}'",
+    ],
+    require => File['/etc/puppet/puppet.conf'],
+    notify  => Service['puppet'],
   }
 
   $certdir       = '/var/lib/puppet/ssl/certs'
