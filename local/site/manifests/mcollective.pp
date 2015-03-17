@@ -16,14 +16,22 @@
 
 # Site defaults for mcollective
 class site::mcollective {
+  include site::puppet
 
   # Get middleware hosts from puppetdb
   $middleware_hosts = query_nodes('Class[roles::activemq]',
                                   hostname)
 
+  $shared_name = 'mcollective-servers'
+
   class {'::mcollective':
-    client           => true,
-    middleware_hosts => $middleware_hosts,
+    client             => true,
+    middleware_hosts   => $middleware_hosts,
+    middleware_ssl     => true,
+    securityprovider   => 'ssl',
+    ssl_ca_cert        => "file://${puppet::ca}",
+    ssl_server_public  => "puppet:///private/certs/${shared_name}.pem",
+    ssl_server_private => "puppet:///private/private_keys/${shared_name}.pem",
   }
 
   ::mcollective::plugin {['puppet','service']:
@@ -34,30 +42,6 @@ class site::mcollective {
   user {'mcollective':
     system => true,
     shell  => '/sbin/nologin',
-  }
-
-  include site::puppet
-
-  $shared_name        = 'mcollective-servers'
-  $shared_server_cert = "${puppet::certdir}/${shared_name}.pem"
-  $shared_server_key  = "${puppet::privatekeydir}/${shared_name}.pem"
-
-  $server_cert = "${puppet::certdir}/${site::hostname}.pem"
-  $server_key  = "${puppet::privatekeydir}/${site::hostname}.pem"
-
-  file {$shared_server_cert:
-    ensure => present,
-    source => "puppet:///private/certs/${shared_name}.pem",
-    mode   => '0555',
-    owner  => 'root',
-    group  => 'root',
-  }
-  file {$shared_server_key:
-    ensure => present,
-    source => "puppet:///private/private_keys/${shared_name}.pem",
-    mode   => '0500',
-    owner  => 'root',
-    group  => 'root',
   }
 
 }
