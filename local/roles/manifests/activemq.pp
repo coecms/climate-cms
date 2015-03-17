@@ -62,7 +62,7 @@ class roles::activemq (
   $truststore = '/etc/activemq/truststore.jks'
   $keystore   = '/etc/activemq/keystore.jks'
   include site::puppet
-  java_ks { 'puppetca:activemq':
+  java_ks { 'activemq truststore':
     ensure       => latest,
     certificate  => $site::puppet::ca,
     password     => $keystore_password,
@@ -71,7 +71,7 @@ class roles::activemq (
     notify       => File[$truststore],
     require      => Package[$package],
   }
-  java_ks { 'puppetcert:activemq':
+  java_ks { 'activemq keystore':
     ensure       => latest,
     certificate  => $site::puppet::cert,
     private_key  => $site::puppet::key,
