@@ -64,4 +64,29 @@ class roles::puppetmaster (
     require             => Class['puppetdb'],
   }
 
+  # Private files to share with servers
+  $private_path = '/etc/puppet/private'
+  file {$private_path:
+    ensure => directory,
+    owner  => 'puppet',
+    group  => 'root',
+    mode   => '0700',
+  }
+  augeas { 'private fileserver':
+    lens    => 'Puppet.lns',
+    incl    => '/etc/puppet/fileserver.conf',
+    changes => [
+      "set private/path '${private_path}'",
+      'set private/allow "*"',
+    ],
+    notify  => Service['puppetserver'],
+  }
+
+  # Generate shared host keys
+  include site::mcollective
+  exec {"puppet cert generate ${site::mcollective::shared_name}":
+    command => "puppet cert generate ${site::mcollective::shared_name} --ssldir ${private_path}",
+    path    => '/usr/bin/puppet',
+    creates => "${private_path}/private_keys/${site::mcollective::shared_name}.pem",
+  }
 }

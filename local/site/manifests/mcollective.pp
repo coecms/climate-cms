@@ -30,4 +30,38 @@ class site::mcollective {
     package => true,
   }
 
+  # User for Mcollective requests
+  user {'mcollective':
+    system => true,
+    shell  => '/sbin/nologin',
+  }
+
+  $shared_name        = 'mcollective-servers'
+  $shared_server_cert = "${::certdir}/${shared_name}.pem"
+  $shared_server_key  = "${::privatekeydir}/${shared_name}.pem"
+
+  $server_cert = "${::certdir}/${site::hostname}.pem"
+  $server_key  = "${::privatekeydir}/${site::hostname}.pem"
+
+  file {$shared_server_cert:
+    ensure => present,
+    source => "puppet:///private/mcollective/${shared_name}.cert",
+    mode   => '0555',
+    owner  => 'root',
+    group  => 'root',
+  }
+  file {$shared_server_key:
+    ensure => present,
+    source => "puppet:///private/mcollective/${shared_name}.key",
+    mode   => '0500',
+    owner  => 'root',
+    group  => 'root',
+  }
+
+  if false {
+    # On Puppet CA only
+    exec {"puppet cert generate ${shared_name}":
+      creates => $shared_server_cert,
+    }
+  }
 }

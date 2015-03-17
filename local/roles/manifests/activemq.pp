@@ -37,4 +37,8 @@ class roles::activemq {
   # Puppetlabs-firewall doesn't support using a list as the source, so do a
   # workaround
   roles::activemq::firewall {$clients:}
+
+  $cert = "${::certdir}/${site::hostname}.pem"
+  $key  = "${::privatekeydir}/${site::hostname}.pem"
+
 }
