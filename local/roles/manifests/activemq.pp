@@ -25,11 +25,11 @@ class roles::activemq (
   class {'::activemq':
     mq_admin_username => $admin_username,
     mq_admin_password => $admin_password,
-    server_config     => template('roles/activemq/activemq.xml.erb')
+    server_config     => template('roles/activemq/activemq.xml.erb'),
 
     # See https://github.com/puppetlabs/puppetlabs-activemq/pull/31
-    version => '5.9.1-2.el6',
-    before  => Class['mcollective'],
+    version           => '5.9.1-2.el6',
+    before            => Class['mcollective'],
   }
 
   # Create a link to the correct datapath
