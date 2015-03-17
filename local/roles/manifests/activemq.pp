@@ -39,7 +39,13 @@ class roles::activemq (
     notify  => Service[$service],
     require => Package[$package],
   }
+  file {'/var/run/activemq':
+    ensure => directory,
+    before => Service[$service],
+  }
   service {$service:
+    ensure  => running,
+    enable  => true,
     require => Package[$package],
   }
 
