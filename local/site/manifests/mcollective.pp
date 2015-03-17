@@ -41,16 +41,25 @@ class site::mcollective {
 
   # User for Mcollective requests
   $user = 'mcollective'
+  $home = '/var/mco-user'
+
   user {$user:
+    home       => $home,
     system     => true,
     shell      => '/sbin/nologin',
-    managehome => true,
+  }
+
+  file {$home:
+    ensure => directory,
+    owner  => $user,
   }
 
   ::mcollective::user { $user:
     username    => $user,
+    homedir     => $home,
     certificate => 'puppet:///private/certs/mcollective-user.pem',
     private_key => 'puppet:///private/private_keys/mcollective-user.pem',
+    require     => File[$home],
   }
 
 }
