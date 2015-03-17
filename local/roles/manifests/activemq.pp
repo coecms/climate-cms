@@ -47,8 +47,8 @@ class roles::activemq (
   file {'/usr/share/activemq/activemq-data':
     ensure  => link,
     target  => '/usr/share/activemq/data',
-    require => Package['activemq'],
-    notify  => Service['activemq'],
+    require => Package[$package],
+    notify  => Service[$service],
   }
 
   $clients = query_nodes('Class[site::mcollective]',
@@ -69,7 +69,7 @@ class roles::activemq (
     trustcacerts => true,
     target       => $truststore,
     notify       => File[$truststore],
-    require      => Class['::activemq::packages'],
+    require      => Class[$package],
   }
   java_ks { 'puppetcert:activemq':
     ensure       => latest,
@@ -78,7 +78,7 @@ class roles::activemq (
     password     => $keystore_password,
     target       => $keystore,
     notify       => File[$keystore],
-    require      => Class['::activemq::packages'],
+    require      => Class[$package],
   }
 
   file {[$truststore, $keystore]:
@@ -86,6 +86,6 @@ class roles::activemq (
     owner  => 'activemq',
     group  => 'root',
     mode   => '0600',
-    notify => Class['::activemq::service'],
+    notify => Service[$service],
   }
 }
