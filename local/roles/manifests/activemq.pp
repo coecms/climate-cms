@@ -18,9 +18,10 @@
 class roles::activemq (
   $admin_username,
   $admin_password,
-  $mcollective_password,
   $keystore_password,
 ) {
+  include site::mcollective
+  $mcollective_password = $site::mcollective::password
 
   $package = 'activemq'
   $user    = 'activemq'

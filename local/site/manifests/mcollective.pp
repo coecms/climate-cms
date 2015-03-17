@@ -15,7 +15,9 @@
 #  limitations under the License.
 
 # Site defaults for mcollective
-class site::mcollective {
+class site::mcollective (
+  $password, # Must be definied by the caller
+) {
   include site::puppet
 
   # Get middleware hosts from puppetdb
@@ -25,14 +27,15 @@ class site::mcollective {
   $shared_name = 'mcollective-servers'
 
   class {'::mcollective':
-    client             => true,
-    middleware_hosts   => $middleware_hosts,
-    middleware_ssl     => true,
-    securityprovider   => 'ssl',
-    ssl_ca_cert        => "file://${puppet::ca}",
-    ssl_server_public  => "puppet:///private/certs/${shared_name}.pem",
-    ssl_server_private => "puppet:///private/private_keys/${shared_name}.pem",
-    ssl_client_certs   => 'puppet:///private/agent_certs'
+    client              => true,
+    middleware_hosts    => $middleware_hosts,
+    middleware_ssl      => true,
+    middleware_password => $password,
+    securityprovider    => 'ssl',
+    ssl_ca_cert         => "file://${puppet::ca}",
+    ssl_server_public   => "puppet:///private/certs/${shared_name}.pem",
+    ssl_server_private  => "puppet:///private/private_keys/${shared_name}.pem",
+    ssl_client_certs    => 'puppet:///private/agent_certs'
   }
 
   ::mcollective::plugin {['puppet','service']:
