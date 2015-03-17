@@ -2,4 +2,5 @@
 classes:
   - roles::puppetmaster
   - roles::puppetdb
+  - roles::activemq
 
