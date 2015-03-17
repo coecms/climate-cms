@@ -33,7 +33,7 @@ class site::puppet (
     require => Package['puppet'],
   }
 
-  augeas { 'reports':
+  augeas { 'puppetmaster':
     lens    => 'Puppet.lns',
     incl    => '/etc/puppet/puppet.conf',
     changes => [
