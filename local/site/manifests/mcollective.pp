@@ -44,6 +44,7 @@ class site::mcollective {
   user {$user:
     system     => true,
     shell      => '/sbin/nologin',
+    managehome => true,
   }
 
   ::mcollective::user { $user:
