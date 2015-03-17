@@ -73,7 +73,7 @@ class roles::puppetmaster (
     mode   => '0700',
   }
   augeas { 'private fileserver':
-    lens    => 'Puppet.lns',
+    lens    => 'Puppetfileserver.lns',
     incl    => '/etc/puppet/fileserver.conf',
     changes => [
       "set private/path '${private_path}'",
