@@ -32,6 +32,7 @@ class site::mcollective {
     ssl_ca_cert        => "file://${puppet::ca}",
     ssl_server_public  => "puppet:///private/certs/${shared_name}.pem",
     ssl_server_private => "puppet:///private/private_keys/${shared_name}.pem",
+    ssl_client_certs   => 'puppet:///private/agent_certs'
   }
 
   ::mcollective::plugin {['puppet','service']:
@@ -39,9 +40,16 @@ class site::mcollective {
   }
 
   # User for Mcollective requests
-  user {'mcollective':
-    system => true,
-    shell  => '/sbin/nologin',
+  $user = 'mcollective'
+  user {$user:
+    system     => true,
+    shell      => '/sbin/nologin',
+  }
+
+  ::mcollective::user { $user:
+    user        => $user,
+    certificate => 'puppet:///private/certs/mcollective-user.pem',
+    private_key => 'puppet:///private/private_keys/mcollective-user.pem',
   }
 
 }

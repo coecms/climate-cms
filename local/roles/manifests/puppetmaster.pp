@@ -80,6 +80,12 @@ class roles::puppetmaster (
     notify  => Service['puppetserver'],
   }
 
+  # Signed agent keys
+  file {"${private_path}/agent_certs":
+    ensure => link,
+    target => '/var/lib/puppet/ssl/ca/signed',
+  }
+
   # Generate shared host keys
   include site::mcollective
   exec {"puppet cert generate ${site::mcollective::shared_name}":
@@ -87,5 +93,11 @@ class roles::puppetmaster (
     path    => '/usr/bin',
     require => File[$private_path],
     creates => "${private_path}/private_keys/${site::mcollective::shared_name}.pem",
+  }
+  exec {"puppet cert generate mcollective-user":
+    command => "puppet cert generate mcollective-user --ssldir ${private_path}",
+    path    => '/usr/bin',
+    require => File[$private_path],
+    creates => "${private_path}/private_keys/mcollective-user.pem",
   }
 }
