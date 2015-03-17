@@ -6,7 +6,7 @@
   http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd
   http://activemq.apache.org/camel/schema/spring http://activemq.apache.org/camel/schema/spring/camel-spring.xsd">
 
-    <broker xmlns="http://activemq.apache.org/schema/core" brokerName="<%= @mq_broker_name %>" useJmx="true">
+    <broker xmlns="http://activemq.apache.org/schema/core" brokerName="<%= @hostname %>" useJmx="true">
         <managementContext>
             <managementContext createConnector="false"/>
         </managementContext>
