@@ -12,6 +12,7 @@ mod 'puppetlabs/java'
 mod 'puppetlabs/tomcat'
 mod 'puppetlabs/activemq'
 mod 'puppetlabs/mcollective'
+mod 'puppetlabs/java_ks'
 
 # Provides functions to query puppetdb
 mod 'dalen/puppetdbquery'
