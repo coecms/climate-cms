@@ -36,32 +36,28 @@ class site::mcollective {
     shell  => '/sbin/nologin',
   }
 
-  $shared_name        = 'mcollective-servers'
-  $shared_server_cert = "${::certdir}/${shared_name}.pem"
-  $shared_server_key  = "${::privatekeydir}/${shared_name}.pem"
+  include site::puppet
 
-  $server_cert = "${::certdir}/${site::hostname}.pem"
-  $server_key  = "${::privatekeydir}/${site::hostname}.pem"
+  $shared_name        = 'mcollective-servers'
+  $shared_server_cert = "${puppet::certdir}/${shared_name}.pem"
+  $shared_server_key  = "${puppet::privatekeydir}/${shared_name}.pem"
+
+  $server_cert = "${puppet::certdir}/${site::hostname}.pem"
+  $server_key  = "${puppet::privatekeydir}/${site::hostname}.pem"
 
   file {$shared_server_cert:
     ensure => present,
-    source => "puppet:///private/mcollective/${shared_name}.cert",
+    source => "puppet:///private/certs/${shared_name}.pem",
     mode   => '0555',
     owner  => 'root',
     group  => 'root',
   }
   file {$shared_server_key:
     ensure => present,
-    source => "puppet:///private/mcollective/${shared_name}.key",
+    source => "puppet:///private/private_keys/${shared_name}.pem",
     mode   => '0500',
     owner  => 'root',
     group  => 'root',
   }
 
-  if false {
-    # On Puppet CA only
-    exec {"puppet cert generate ${shared_name}":
-      creates => $shared_server_cert,
-    }
-  }
 }

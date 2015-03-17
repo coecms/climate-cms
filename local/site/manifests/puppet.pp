@@ -31,4 +31,7 @@ class site::puppet {
     require => Package['puppet'],
   }
 
+  $certdir       = '/var/lib/puppet/ssl/certs'
+  $privatekeydir = '/var/lib/puppet/ssl/private_keys'
+
 }
