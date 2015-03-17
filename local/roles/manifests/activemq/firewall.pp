@@ -19,7 +19,7 @@ define roles::activemq::firewall {
 
   firewall { "300 activemq stomp from ${name}":
     proto  => 'tcp',
-    port   => '61613',
+    port   => '61614',
     source => $name,
     action => 'accept',
   }

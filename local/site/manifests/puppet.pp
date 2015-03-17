@@ -34,4 +34,10 @@ class site::puppet {
   $certdir       = '/var/lib/puppet/ssl/certs'
   $privatekeydir = '/var/lib/puppet/ssl/private_keys'
 
+  $ca   = "${certdir}/ca.pem"
+  $cert = "${certdir}/${site::hostname}.pem"
+  $key  = "${privatekeydir}/${site::hostname}.pem"
+
+  file {[$certdir,$privatekeydir,$ca,$cert,$key]:}
+
 }

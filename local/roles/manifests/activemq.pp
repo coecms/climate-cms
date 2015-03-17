@@ -15,9 +15,18 @@
 #  limitations under the License.
 
 # Middleware server for mcollective
-class roles::activemq {
+class roles::activemq (
+  $admin_username,
+  $admin_password,
+  $mcollective_password,
+  $keystore_password,
+) {
 
   class {'::activemq':
+    mq_admin_username => $admin_username,
+    mq_admin_password => $admin_password,
+    server_config     => template('roles/activemq/activemq.xml.erb')
+
     # See https://github.com/puppetlabs/puppetlabs-activemq/pull/31
     version => '5.9.1-2.el6',
     before  => Class['mcollective'],
@@ -38,7 +47,34 @@ class roles::activemq {
   # workaround
   roles::activemq::firewall {$clients:}
 
-  $cert = "${::certdir}/${site::hostname}.pem"
-  $key  = "${::privatekeydir}/${site::hostname}.pem"
+  # Use the same keys as Puppet
+  $truststore = '/etc/activemq/truststore.jks'
+  $keystore   = '/etc/activemq/keystore.jks'
+  include site::puppet
+  java_ks { 'puppetca:activemq':
+    ensure       => latest,
+    certificate  => $site::puppet::ca,
+    password     => $keystore_password,
+    trustcacerts => true,
+    target       => $truststore,
+    notify       => File[$truststore],
+    require      => Class['::activemq'],
+  }
+  java_ks { 'puppetcert:activemq':
+    ensure       => latest,
+    certificate  => $site::puppet::cert,
+    private_key  => $site::puppet::key,
+    password     => $keystore_password,
+    target       => $keystore,
+    notify       => File[$keystore],
+    require      => Class['::activemq'],
+  }
 
+  file {[$truststore, $keystore]:
+    ensure => present,
+    owner  => 'activemq',
+    group  => 'root',
+    mode   => '0600',
+    notify => Class['::activemq::service'],
+  }
 }
