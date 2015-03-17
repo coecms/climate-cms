@@ -86,7 +86,8 @@ class roles::puppetmaster (
   include site::mcollective
   exec {"puppet cert generate ${site::mcollective::shared_name}":
     command => "puppet cert generate ${site::mcollective::shared_name} --ssldir ${private_path}",
-    path    => '/usr/bin/puppet',
+    path    => '/usr/bin',
+    require => File[$private_path],
     creates => "${private_path}/private_keys/${site::mcollective::shared_name}.pem",
   }
 }
