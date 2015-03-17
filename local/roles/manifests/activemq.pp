@@ -22,14 +22,25 @@ class roles::activemq (
   $keystore_password,
 ) {
 
-  class {'::activemq':
-    mq_admin_username => $admin_username,
-    mq_admin_password => $admin_password,
-    server_config     => template('roles/activemq/activemq.xml.erb'),
+  $package = 'activemq'
+  $user    = 'activemq'
+  $service = 'activemq'
+  $config  = '/etc/activemq/activemq.xml'
 
-    # See https://github.com/puppetlabs/puppetlabs-activemq/pull/31
-    version           => '5.9.1-2.el6',
-    before            => Class['mcollective'],
+  package {$package: }
+  user {$user:
+    require => Package[$package],
+  }
+  file {$config:
+    owner   => $user,
+    group   => 'root',
+    mode    => '0600',
+    content => template('roles/activemq/activemq.xml.erb'),
+    notify  => Service[$service],
+    require => Package[$package],
+  }
+  service {$service:
+    require => Package[$package],
   }
 
   # Create a link to the correct datapath

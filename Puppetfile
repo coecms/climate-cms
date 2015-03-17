@@ -10,7 +10,6 @@ mod 'puppetlabs/inifile'
 mod 'puppetlabs/postgresql'
 mod 'puppetlabs/java'
 mod 'puppetlabs/tomcat'
-mod 'puppetlabs/activemq'
 mod 'puppetlabs/mcollective'
 mod 'puppetlabs/java_ks'
 
