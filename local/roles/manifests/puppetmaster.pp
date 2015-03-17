@@ -82,8 +82,10 @@ class roles::puppetmaster (
 
   # Signed agent keys
   file {"${private_path}/agent_certs":
-    ensure => link,
-    target => '/var/lib/puppet/ssl/ca/signed',
+    ensure  => directory,
+    purge   => true,
+    recurse => true,
+    source  => 'file:///var/lib/puppet/ssl/ca/signed',
   }
 
   # Generate shared host keys
