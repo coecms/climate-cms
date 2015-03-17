@@ -29,7 +29,8 @@ class roles::puppetmaster (
   }
 
   class {'r10k':
-    remote => 'https://github.com/coecms/climate-cms',
+    remote                 => 'https://github.com/coecms/climate-cms',
+    manage_ruby_dependency => false,
   }
 
   file {'/etc/puppet/hiera.yaml':
