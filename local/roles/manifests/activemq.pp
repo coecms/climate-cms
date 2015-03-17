@@ -58,7 +58,7 @@ class roles::activemq (
     trustcacerts => true,
     target       => $truststore,
     notify       => File[$truststore],
-    require      => Class['::activemq'],
+    require      => Class['::activemqi::packages'],
   }
   java_ks { 'puppetcert:activemq':
     ensure       => latest,
@@ -67,7 +67,7 @@ class roles::activemq (
     password     => $keystore_password,
     target       => $keystore,
     notify       => File[$keystore],
-    require      => Class['::activemq'],
+    require      => Class['::activemq::packages'],
   }
 
   file {[$truststore, $keystore]:
