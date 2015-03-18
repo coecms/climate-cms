@@ -19,9 +19,9 @@ class roles::postgresql (
 ) {
 
   class {'::postgresql::server':
-    ipmask_allow_all_users    => '10.0.0.0/16',
-    listen_addresses          => '*',
-    postgres_password         => $admin_password,
+    ip_mask_allow_all_users    => '10.0.0.0/16',
+    listen_addresses           => '*',
+    postgres_password          => $admin_password,
   }
 
   # Collect all defined databases
