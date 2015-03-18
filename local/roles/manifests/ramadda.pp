@@ -53,7 +53,7 @@ class roles::ramadda (
 
   $db_config = "
     ramadda.db=postgres
-    ramadda.db.postgres.url=jdbc:postgresql://localhost/ramadda
+    ramadda.db.postgres.url=jdbc:postgresql://db/ramadda
     ramadda.db.postgres.user=ramadda
     ramadda.db.postgres.password=${db_password}
   "
