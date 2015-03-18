@@ -35,7 +35,7 @@ class site::mcollective (
     ssl_ca_cert         => "file://${puppet::ca}",
     ssl_server_public   => "puppet:///private/mcollective/certs/mcollective-shared.pem",
     ssl_server_private  => "puppet:///private/mcollective/keys/mcollective-shared.pem",
-    ssl_client_certs    => 'puppet:///private/agent_certs'
+    ssl_client_certs    => 'puppet:///private/mcollective/clients'
   }
 
   ::mcollective::plugin {['puppet','service']:
