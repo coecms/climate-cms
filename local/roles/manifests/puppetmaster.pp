@@ -80,6 +80,11 @@ class roles::puppetmaster (
     notify  => Service['puppetserver'],
   }
 
+  # Certificate stuff for MCollective
+  # Users who need access to mcollective should put their certificates in
+  # ${private_path}/mcollective/certs. By default the 'mcollective' user is
+  # certified to use mco.
+
   # Generate shared host keys
   include site::puppet
   exec {'puppet cert generate mcollective-shared':
@@ -90,7 +95,6 @@ class roles::puppetmaster (
     path    => '/usr/bin',
     creates => "${site::puppet::certdir}/mcollective-user.pem",
   }
-
   file {[
     "${private_path}/mcollective",
     "${private_path}/mcollective/certs",

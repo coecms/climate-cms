@@ -20,6 +20,10 @@ class site::mcollective (
 ) {
   include site::puppet
 
+  # Certificates are generated on the Puppetmaster, using the Puppet CA, in
+  # roles::puppetmaster. Client certificates for admin users should be
+  # configured in /etc/puppet/private/mcollective/clients on the puppetmaster
+
   # Get middleware hosts from puppetdb
   $middleware_hosts = query_nodes('Class[roles::activemq]',
                                   hostname)
@@ -33,8 +37,8 @@ class site::mcollective (
     middleware_password => $password,
     securityprovider    => 'ssl',
     ssl_ca_cert         => "file://${puppet::ca}",
-    ssl_server_public   => "puppet:///private/mcollective/certs/mcollective-shared.pem",
-    ssl_server_private  => "puppet:///private/mcollective/keys/mcollective-shared.pem",
+    ssl_server_public   => 'puppet:///private/mcollective/certs/mcollective-shared.pem',
+    ssl_server_private  => 'puppet:///private/mcollective/keys/mcollective-shared.pem',
     ssl_client_certs    => 'puppet:///private/mcollective/clients'
   }
 
