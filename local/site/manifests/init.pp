@@ -22,7 +22,6 @@ class site (
   $secure    = false,
   $gdata     = {},
   $admins    = {},
-  $puppet_ip = '10.0.0.4',
   $proxy_ip  = '10.0.0.4',
   $proxy_fqdn = 'test.climate-cms.org',
   $admin_group = 'fe2_2',
