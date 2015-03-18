@@ -90,41 +90,44 @@ class roles::puppetmaster (
 
   # Generate shared host keys
   include site::puppet
-  exec {"puppet cert generate mcollective-shared":
+  exec {'puppet cert generate mcollective-shared':
     path    => '/usr/bin',
-    creates => "${puppet::certdir}/mcollective-shared.pem",
+    creates => "${site::puppet::certdir}/mcollective-shared.pem",
   }
-  exec {"puppet cert generate mcollective-user":
+  exec {'puppet cert generate mcollective-user':
     path    => '/usr/bin',
-    creates => "${puppet::certdir}/mcollective-user.pem",
+    creates => "${site::puppet::certdir}/mcollective-user.pem",
   }
 
-  file {["${private_path}/mcollective","${private_path}/mcollective/certs","${private_path}/mcollective/keys"]:
+  file {[
+    "${private_path}/mcollective",
+    "${private_path}/mcollective/certs",
+    "${private_path}/mcollective/keys"]:
     ensure  => directory,
-    owner  => 'puppet',
-    group  => 'puppet',
-    mode   => '0700',
+    owner   => 'puppet',
+    group   => 'puppet',
+    mode    => '0700',
     purge   => true,
     recurse => true,
   }
   file {"${private_path}/mcollective/certs/mcollective-shared.pem":
-    ensure  => present,
-    source  => "file://${puppet::certdir}/mcollective-shared.pem",
+    ensure  => file,
+    source  => "file://${site::puppet::certdir}/mcollective-shared.pem",
     require => Exec['puppet cert generate mcollective-shared'],
   }
   file {"${private_path}/mcollective/certs/mcollective-user.pem":
-    ensure  => present,
-    source  => "file://${puppet::certdir}/mcollective-user.pem",
+    ensure  => file,
+    source  => "file://${site::puppet::certdir}/mcollective-user.pem",
     require => Exec['puppet cert generate mcollective-user'],
   }
   file {"${private_path}/mcollective/keys/mcollective-shared.pem":
-    ensure  => present,
-    source  => "file://${puppet::privatekeydir}/mcollective-shared.pem",
+    ensure  => file,
+    source  => "file://${site::puppet::privatekeydir}/mcollective-shared.pem",
     require => Exec['puppet cert generate mcollective-shared'],
   }
   file {"${private_path}/mcollective/keys/mcollective-user.pem":
-    ensure  => present,
-    source  => "file://${puppet::privatekeydir}/mcollective-user.pem",
+    ensure  => file,
+    source  => "file://${site::puppet::privatekeydir}/mcollective-user.pem",
     require => Exec['puppet cert generate mcollective-user'],
   }
 }
