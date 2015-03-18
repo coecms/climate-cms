@@ -46,8 +46,7 @@ class roles::ramadda (
     group  => 'tomcat',
   }
 
-  include ::postgresql::server
-  postgresql::server::db {'ramadda':
+  @@postgresql::server::db {'ramadda':
     user     => 'ramadda',
     password => postgresql_password('ramadda',$db_password)
   }
