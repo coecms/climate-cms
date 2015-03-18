@@ -41,10 +41,7 @@ class roles::puppetmaster (
   augeas { 'reports':
     lens    => 'Puppet.lns',
     incl    => '/etc/puppet/puppet.conf',
-    changes => [
-      'set master/reports   "http"',
-      'set master/reporturl "http://monitor:9200/puppet/report"',
-    ],
+    changes => 'set master/reports "puppetdb"',
     require => File['/etc/puppet/puppet.conf'],
     notify  => Service['puppetserver'],
   }
