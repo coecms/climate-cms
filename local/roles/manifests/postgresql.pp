@@ -19,7 +19,6 @@ class roles::postgresql (
 ) {
 
   class {'::postgresql::server':
-    ipmask_deny_postgres_user => '0.0.0.0/32',
     ipmask_allow_all_users    => '10.0.0.0/16',
     listen_addresses          => '*',
     postgres_password         => $admin_password,
