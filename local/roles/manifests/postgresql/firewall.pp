@@ -14,21 +14,14 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-class roles::postgresql (
-  $admin_password,
-) {
+define roles::postgresql::firewall {
 
-  class {'::postgresql::server':
-    ipmask_deny_postgres_user => '0.0.0.0/32',
-    ipmask_allow_all_users    => '10.0.0.0/16',
-    listen_addresses          => '*',
-    postgres_password         => $admin_password,
+  $port = $::postgresql::server::port
+
+  firewall { "300 postgresql from ${name}":
+    proto  => 'tcp',
+    port   => $port,
+    source => $name,
+    action => 'accept',
   }
-
-  # Collect all defined databases
-  ::Postgresql::Server::Db <<||>>
-
-  # Nodes that are using databases
-  $db_clients_ip = query_nodes('@@Postgresql::Server::Db','ipaddress_eth0')
-  roles::postgresql::firewall {$db_clients_ip:}
 }
