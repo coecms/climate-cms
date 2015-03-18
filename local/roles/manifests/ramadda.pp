@@ -15,13 +15,9 @@
 #  limitations under the License.
 
 class roles::ramadda (
-  $db_password = 'insecure'
+  $db_password,
 ) {
   include site::tomcat
-
-  if $db_password == 'insecure' {
-    warning('Using insecure DB password')
-  }
 
   $source_url = 'http://downloads.sourceforge.net/project/ramadda/ramadda1.7'
   $ramadda_home = "${site::tomcat::content_path}/ramadda"
