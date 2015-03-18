@@ -46,6 +46,9 @@ class site::mcollective (
     package => true,
   }
 
+  class {'r10k::mcollective':
+  }
+
   # User for Mcollective requests
   $user = 'mcollective'
   $home = '/var/mco-user'

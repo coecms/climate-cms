@@ -51,7 +51,7 @@ puppet cert list --all
     "
 else
     # Get the master's IP
-    master_ip=10.0.0.4
+    master_ip=10.0.0.189
 fi
 
 userdata="#!/bin/bash
