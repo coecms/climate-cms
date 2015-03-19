@@ -67,6 +67,7 @@ class server::icingaweb (
        RewriteRule ^.*$ index.php [NC,L]
       "
       }],
+    require             => Vcsrepo[$install_path],
   }
 
 
