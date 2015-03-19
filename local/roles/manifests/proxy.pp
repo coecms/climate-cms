@@ -46,18 +46,18 @@ class roles::proxy (
   }
   file {'/var/www/html/favicon.ico':
     ensure => file,
-    source => 'puppet:///site/favicon.ico',
+    source => 'puppet:///modules/site/favicon.ico',
   }
   file {'/var/www/html/images':
     ensure => directory,
   }
   file {'/var/www/html/images/icon.jpg':
     ensure => file,
-    source => 'puppet:///site/icon.jpg',
+    source => 'puppet:///modules/site/icon.jpg',
   }
   file {'/var/www/html/images/logo.jpg':
     ensure => file,
-    source => 'puppet:///site/logo.jpg',
+    source => 'puppet:///modules/site/logo.jpg',
   }
 
   # Restrict access to /admin to administrators
