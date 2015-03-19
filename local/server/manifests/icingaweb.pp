@@ -52,6 +52,7 @@ class server::icingaweb (
   $www_port = 8090
   include ::apache::mod::rewrite
   include ::apache::mod::php
+  include ::apache::mod::env
   ::apache::vhost {'icingaweb':
     port                => $www_port,
     docroot             => $web_root,
