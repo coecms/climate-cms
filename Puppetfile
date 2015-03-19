@@ -13,6 +13,7 @@ mod 'puppetlabs/tomcat'
 mod 'puppetlabs/mcollective'
 mod 'puppetlabs/java_ks'
 mod 'puppetlabs/git'
+mod 'puppetlabs/vcsrepo'
 
 # Provides functions to query puppetdb
 mod 'dalen/puppetdbquery'
