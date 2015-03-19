@@ -31,6 +31,8 @@ class server::icinga (
     password => postgresql_password($db_user,$db_password),
   }
 
+  include ::postgresql::client
+
   # Install server
   class {'icinga2::server':
     server_db_type         => 'pgsql',
@@ -40,6 +42,7 @@ class server::icinga (
     db_user                => $db_user,
     db_password            => $db_password,
     install_nagios_plugins => false,
+    require                => Class['postgresql::client'],
   }
 
   # Monitor the service
