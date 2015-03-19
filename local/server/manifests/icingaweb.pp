@@ -54,7 +54,8 @@ class server::icingaweb (
   }
 
   # Serve on a new vhost
-  $web_root   = "${install_path}/public"
+  $path     = '/admin/icinga'
+  $web_root = "${install_path}/public"
   $www_port = 8090
   include ::apache::mod::rewrite
   include ::apache::mod::php
@@ -63,7 +64,7 @@ class server::icingaweb (
     port                => $www_port,
     docroot             => '/var/www/html',
     aliases             => {
-      alias             => '/icingaweb2',
+      alias             => $path,
       path              => $web_root,
     },
     directories         => [{
@@ -74,7 +75,7 @@ class server::icingaweb (
        SetEnv ICINGAWEB_CONFIGDIR '${config_dir}'
        EnableSendfile Off
        RewriteEngine on
-       RewriteBase /icingaweb2/
+       RewriteBase ${path}/
        RewriteCond %{REQUEST_FILENAME} -s [OR]
        RewriteCond %{REQUEST_FILENAME} -l [OR]
        RewriteCond %{REQUEST_FILENAME} -d
@@ -85,8 +86,8 @@ class server::icingaweb (
     require             => Vcsrepo[$install_path],
   }
 
-  @@roles::proxy::connection {'/admin/icinga':
-    target_url => "http://${::hostname}:8090/icingaweb2",
+  @@roles::proxy::connection {$path:
+    target_url => "http://${::hostname}:8090${path}",
   }
 
 }
