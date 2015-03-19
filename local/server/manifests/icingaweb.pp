@@ -36,7 +36,7 @@ class server::icingaweb (
   }
 
   # Install icinga-web2
-  $install_path = '/usr/local/icingaweb'
+  $install_path = '/usr/share/icingaweb'
   include ::git
   vcsrepo {$install_path:
     ensure   => present,
