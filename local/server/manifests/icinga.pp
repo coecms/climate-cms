@@ -34,8 +34,8 @@ class server::icinga (
   include ::postgresql::client
 
   # Install server
-  class {'icinga2::server':
-    server_db_type         => 'pgsql',
+  class {'icinga2':
+    db_type                => 'pgsql',
     db_host                => $db_host,
     db_port                => $db_port,
     db_name                => $db_name,
