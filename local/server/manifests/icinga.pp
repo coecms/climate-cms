@@ -46,7 +46,7 @@ class server::icinga (
   }
 
   # Monitor the service
-  client::icinga::check_service {'icinga2':}
+  client::icinga::check_process {'icinga2':}
 
   # Install connector
   icinga2::object::idopgsqlconnection { 'postgres_connection':

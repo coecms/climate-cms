@@ -24,6 +24,8 @@ class client::icinga {
     nrpe_allowed_hosts => $allowed_hosts,
   }
 
+  client::icinga::check_process {'nrpe':}
+
   @@icinga2::object::host { $::fqdn:
     display_name     => $::hostname,
     ipv4_address     => $::ipaddress_eth0,

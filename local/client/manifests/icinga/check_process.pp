@@ -14,20 +14,26 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# Tells icinga to monitor a service
-define client::icinga::check_service (
-  $process = $name,
+# Tells icinga to monitor a process
+define client::icinga::check_process (
+  $display  = $name,
+  $process  = $name,
+  $warn     = '1:1',
+  $critical = '1:1',
 ) {
-  $service = $name
 
   # Service[$service] -> Client::Icinga::Service[$name]
 
-  @@icinga2::object::service {"${::fqdn}-service-${service}":
-    object_servicename => $service,
-    display_name       => $service,
-    check_command      => "check_nrpe service-${service}",
+  @@icinga2::object::service {"${::fqdn}-process-${process}":
+    display_name       => $display,
+    check_command      => 'check_nrpe',
     vars               => {
-      '"nrpe_command"' => "\"service-${service}\"",
+      'nrpe_command' => "process-${process}",
     },
+  }
+
+  icinga2::nrpe::command {"process-${process}":
+    nrpe_plugin_name => 'check_procs',
+    nrpe_plugin_args => "-w ${warn} -c ${critical} -C ${process}",
   }
 }
