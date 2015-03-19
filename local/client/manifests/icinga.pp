@@ -24,7 +24,11 @@ class client::icinga {
     nrpe_allowed_hosts => $allowed_hosts,
   }
 
-  client::icinga::check_process {'nrpe':}
+  # Since nrpe is running to check nrpe we expect more than one process
+  client::icinga::check_process {'nrpe':
+    warn     => '1:',
+    critical => '1:',
+  }
 
   @@icinga2::object::host { $::fqdn:
     display_name     => $::hostname,
