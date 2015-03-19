@@ -25,4 +25,8 @@ class server::php {
     notify => Service['httpd'],
   }
 
+  ::php::extension {'pdo':
+    package => 'php-pdo',
+  }
+
 }
