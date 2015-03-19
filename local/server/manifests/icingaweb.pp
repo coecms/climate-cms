@@ -37,9 +37,11 @@ class server::icingaweb (
 
   # Install icinga-web2
   $install_path = '/usr/local/icingaweb'
+  include ::git
   vcsrepo {$install_path:
     source   => 'https://github.com/Icinga/icingaweb2.git',
     provider => 'git',
+    require  => Class['git'],
   }
 
   # Serve on a new vhost
