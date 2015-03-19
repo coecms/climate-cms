@@ -40,6 +40,19 @@ class roles::proxy (
     ssl     => true,
   }
 
+  # ARCCSS logos
+  file {'/var/www/html/images':
+    ensure => directory,
+  }
+  file {'/var/www/html/images/icon.jpg':
+    ensure => file,
+    source => 'puppet:///site/icon.jpg',
+  }
+  file {'/var/www/html/images/logo.jpg':
+    ensure => file,
+    source => 'puppet:///site/logo.jpg',
+  }
+
   # Restrict access to /admin to administrators
   include site::ldap
   apacheplus::location {'/admin':
