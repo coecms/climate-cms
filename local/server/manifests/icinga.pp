@@ -64,6 +64,14 @@ class server::icinga (
       'DbCatEventHandler' ],
   }
 
+  icinga2::object::checkcommand {'check_nrpe':
+    command   => ['/check_nrpe'],
+    arguments => {
+      '"-H"'  => '"$HOSTADDRESS$"',
+      '"-c"'  => '"$ARG1$"',
+    },
+  }
+
   # Collect objects to monitor
   Icinga2::Object::Host    <<||>>
   Icinga2::Object::Service <<||>>
