@@ -26,9 +26,9 @@ class server::php {
   }
 
   # Database abstraction
-  ::php::extension {'pdo':
+  ::php::extension {'pgsql':
     ensure  => present,
-    package => 'php-pdo',
+    package => 'php-pgsql',
   }
 
 }
