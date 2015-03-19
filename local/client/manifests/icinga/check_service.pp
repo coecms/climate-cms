@@ -20,7 +20,7 @@ define client::icinga::check_service (
 ) {
   $service = $name
 
-  Service[$service] -> Client::Icinga::Service[$name]
+  # Service[$service] -> Client::Icinga::Service[$name]
 
   @@icinga2::object::service {"${::fqdn}-service-${service}":
     object_servicename => $service,
