@@ -19,10 +19,11 @@ class server::icinga (
   $db_password,
 ) {
 
-  $db_host = query_nodes('Class[roles::postgresql]','ipaddress_eth0')
-  $db_port = 5432
-  $db_name = 'icinga'
-  $db_user = 'icinga'
+  $db_hosts = query_nodes('Class[roles::postgresql]','ipaddress_eth0')
+  $db_host  = $db_hosts[0]
+  $db_port  = 5432
+  $db_name  = 'icinga'
+  $db_user  = 'icinga'
 
   # Install DB
   @@postgresql::server::db {$db_name:
