@@ -36,7 +36,7 @@ mod 'file_concat',
     :branch => 'maint/master/remove-unnnecessary-require'
 mod 'pdxcat/collectd'
 
-mod 'jippi/php'
+mod 'nodes/php'
 
 mod 'ajcrowe/supervisord'
 
