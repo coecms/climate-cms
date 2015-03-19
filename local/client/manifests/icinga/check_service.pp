@@ -26,5 +26,8 @@ define client::icinga::check_service (
     object_servicename => $service,
     display_name       => $service,
     check_command      => "check_nrpe service-${service}",
+    vars               => {
+      '"nrpe_command"' => "\"service-${service}\"",
+    },
   }
 }

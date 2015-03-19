@@ -68,7 +68,7 @@ class server::icinga (
     command   => ['"/check_nrpe"'],
     arguments => {
       '"-H"'  => '"$HOSTADDRESS$"',
-      '"-c"'  => '"$ARG1$"',
+      '"-c"'  => '"$nrpe_command$"',
     },
   }
 
