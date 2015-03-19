@@ -25,7 +25,9 @@ class server::php {
     notify => Service['httpd'],
   }
 
+  # Database abstraction
   ::php::extension {'pdo':
+    ensure  => present,
     package => 'php-pdo',
   }
 
