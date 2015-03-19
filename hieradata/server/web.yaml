@@ -5,6 +5,7 @@ classes:
   - roles::las
   - roles::kibana
   - roles::ramadda
+  - server::icingaweb
 
 # NCI project mounts
 site::gdata:
