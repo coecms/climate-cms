@@ -53,11 +53,11 @@ class roles::proxy (
   }
   file {'/var/www/html/images/icon.jpg':
     ensure => file,
-    source => 'puppet:///modules/site/icon.jpg',
+    source => 'puppet:///modules/site/icon.jpeg',
   }
   file {'/var/www/html/images/logo.jpg':
     ensure => file,
-    source => 'puppet:///modules/site/logo.jpg',
+    source => 'puppet:///modules/site/logo.jpeg',
   }
 
   # Restrict access to /admin to administrators
