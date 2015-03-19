@@ -43,7 +43,7 @@ class server::icingaweb (
   }
 
   # Serve on a new vhost
-  $web_root   = $install_path
+  $web_root   = "${install_path}/public"
   $config_dir = '/etc/icingaweb'
   $www_port = 8090
   include ::apache::mod::rewrite
