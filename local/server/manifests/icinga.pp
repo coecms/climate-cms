@@ -32,13 +32,13 @@ class server::icinga (
 
   # Install server
   class {'icinga2::server':
-    server_db_type                => 'pgsql',
-    db_host                       => $db_host,
-    db_port                       => $db_port,
-    db_name                       => $db_name,
-    db_user                       => $db_user,
-    db_password                   => $db_password,
-    server_install_nagios_plugins => false,
+    server_db_type         => 'pgsql',
+    db_host                => $db_host,
+    db_port                => $db_port,
+    db_name                => $db_name,
+    db_user                => $db_user,
+    db_password            => $db_password,
+    install_nagios_plugins => false,
   }
 
   # Monitor the service
