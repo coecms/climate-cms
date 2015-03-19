@@ -25,5 +25,6 @@ define client::icinga::check_service (
   @@icinga2::object::service {"${::fqdn}-service-${service}":
     object_servicename => $service,
     display_name       => $service,
+    check_command      => "check_nrpe service-${service}",
   }
 }
