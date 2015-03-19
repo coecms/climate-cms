@@ -46,21 +46,31 @@ class server::icingaweb (
     require  => Class['git'],
   }
 
+  # Configure
+  $config_dir = '/etc/icingaweb'
+  file {$config_dir:
+    ensure => directory,
+    owner  => 'apache',
+  }
+
   # Serve on a new vhost
   $web_root   = "${install_path}/public"
-  $config_dir = '/etc/icingaweb'
   $www_port = 8090
   include ::apache::mod::rewrite
   include ::apache::mod::php
   ::apache::mod {'env': }
   ::apache::vhost {'icingaweb':
     port                => $www_port,
-    docroot             => $web_root,
-    directories         => [
-      {'path'           => $web_root,
-      'provider'        => 'directory',
-      'options'         => 'SymLinksIfOwnerMatch',
-      'custom_fragment' => "
+    docroot             => '/var/www/html',
+    aliases             => {
+      alias             => '/icingaweb2',
+      path              => $web_root,
+    },
+    directories         => [{
+      path              => $web_root,
+      provider          => 'directory',
+      options           => 'SymLinksIfOwnerMatch',
+      custom_fragment   => "
        SetEnv ICINGAWEB_CONFIGDIR '${config_dir}'
        EnableSendfile Off
        RewriteEngine on
