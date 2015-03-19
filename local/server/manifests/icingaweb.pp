@@ -17,6 +17,7 @@
 class server::icingaweb (
   $db_password,
 ) {
+  include server::php
 
   $db_hosts       = query_nodes('Class[roles::postgresql]','ipaddress_eth0')
   $db_host        = $db_hosts[0]
