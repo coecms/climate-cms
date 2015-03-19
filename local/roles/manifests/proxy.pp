@@ -41,6 +41,13 @@ class roles::proxy (
   }
 
   # ARCCSS logos
+  file {'/var/www/html/robots.txt':
+    ensure => file,
+  }
+  file {'/var/www/html/favicon.ico':
+    ensure => file,
+    source => 'puppet:///site/favicon.ico',
+  }
   file {'/var/www/html/images':
     ensure => directory,
   }
