@@ -65,7 +65,7 @@ class server::icinga (
   }
 
   icinga2::object::checkcommand {'check_nrpe':
-    command   => ['/check_nrpe'],
+    command   => ['"/check_nrpe"'],
     arguments => {
       '"-H"'  => '"$HOSTADDRESS$"',
       '"-c"'  => '"$ARG1$"',
