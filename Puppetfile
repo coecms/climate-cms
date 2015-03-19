@@ -40,5 +40,3 @@ mod 'ajcrowe/supervisord'
 mod 'icinga2',
     :git    => 'https://github.com/Icinga/puppet-icinga2.git',
     :branch => 'develop'
-mod 'icingaweb2',
-    :git    => 'https://github.com/Icinga/puppet-icingaweb2.git'

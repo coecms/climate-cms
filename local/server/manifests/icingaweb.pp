@@ -36,37 +36,27 @@ class server::icingaweb (
   }
 
   # Install icinga-web2
-  class {'::icingaweb2':
-    auth_backend => 'external',
-
-    ido_db       => 'pgsql',
-    ido_db_host  => $db_host,
-    ido_db_port  => $db_port,
-    ido_db_name  => $icinga_db_name,
-    ido_db_user  => $icinga_db_user,
-    ido_db_pass  => $icinga_db_pass,
-
-    web_db       => 'pgsql',
-    web_db_host  => $db_host,
-    web_db_port  => $db_port,
-    web_db_name  => $db_name,
-    web_db_user  => $db_user,
-    web_db_pass  => $db_password,
+  $install_path = '/usr/local/icingaweb'
+  vcsrepo {$install_path:
+    source   => 'https://github.com/Icinga/icingaweb2.git',
+    provider => 'git',
   }
 
   # Serve on a new vhost
+  $web_root   = $install_path
+  $config_dir = '/etc/icingaweb'
   $www_port = 8090
   include ::apache::mod::rewrite
   include ::apache::mod::php
   ::apache::vhost {'icingaweb':
     port                => $www_port,
-    docroot             => $::icingaweb2::web_root,
+    docroot             => $web_root,
     directories         => [
-      {'path'           => $::icingaweb2::web_root,
+      {'path'           => $web_root,
       'provider'        => 'directory',
       'options'         => 'SymLinksIfOwnerMatch',
       'custom_fragment' => "
-       SetEnv ICINGAWEB_CONFIGDIR '${::icingaweb2::config_dir}'
+       SetEnv ICINGAWEB_CONFIGDIR '${config_dir}'
        EnableSendfile Off
        RewriteEngine on
        RewriteBase /icingaweb2/
