@@ -47,8 +47,6 @@ class server::icinga (
 
   # Install connector
   icinga2::object::idopgsqlconnection { 'postgres_connection':
-    target_dir       => '/etc/icinga2/features-enabled',
-    target_file_name => 'ido-pgsql.conf',
     host             => $db_host,
     port             => $db_port,
     user             => $db_user,
