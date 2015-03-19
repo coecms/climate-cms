@@ -36,3 +36,7 @@ mod 'file_concat',
 mod 'pdxcat/collectd'
 
 mod 'ajcrowe/supervisord'
+
+mod 'icinga2',
+    :git => 'https://github.com/Icinga/puppet-icinga2.git',
+    :tag => '0.6.2'
