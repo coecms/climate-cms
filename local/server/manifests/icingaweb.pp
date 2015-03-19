@@ -85,5 +85,8 @@ class server::icingaweb (
     require             => Vcsrepo[$install_path],
   }
 
+  @@roles::proxy::connection {'/admin/icinga':
+    target_url => "http://${::hostname}:8090/icingaweb2",
+  }
 
 }
