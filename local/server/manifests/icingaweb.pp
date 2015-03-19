@@ -39,8 +39,10 @@ class server::icingaweb (
   $install_path = '/usr/local/icingaweb'
   include ::git
   vcsrepo {$install_path:
+    ensure   => present,
     source   => 'https://github.com/Icinga/icingaweb2.git',
     provider => 'git',
+    revision => 'v2.0.0-beta3',
     require  => Class['git'],
   }
 
