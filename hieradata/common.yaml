@@ -7,7 +7,7 @@ classes:
 
 site::domain: 'climate-cms.nci.org.au'
 
-site::puppet::master: puppet-2
+client::puppet::master: puppet-2
 site::proxy_ip:  '10.0.1.10'
 
 # Default class arguments

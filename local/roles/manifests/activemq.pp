@@ -68,10 +68,10 @@ class roles::activemq (
   # Use the same keys as Puppet
   $truststore = '/etc/activemq/truststore.jks'
   $keystore   = '/etc/activemq/keystore.jks'
-  include site::puppet
+  include client::puppet
   java_ks { 'activemq truststore':
     ensure       => latest,
-    certificate  => $site::puppet::ca,
+    certificate  => $client::puppet::ca,
     password     => $keystore_password,
     trustcacerts => true,
     target       => $truststore,
@@ -80,8 +80,8 @@ class roles::activemq (
   }
   java_ks { 'activemq keystore':
     ensure       => latest,
-    certificate  => $site::puppet::cert,
-    private_key  => $site::puppet::key,
+    certificate  => $client::puppet::cert,
+    private_key  => $client::puppet::key,
     password     => $keystore_password,
     target       => $keystore,
     notify       => File[$keystore],

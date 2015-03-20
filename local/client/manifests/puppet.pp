@@ -15,7 +15,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-class site::puppet (
+class client::puppet (
   $master = 'puppet',
 ) {
 
@@ -51,5 +51,8 @@ class site::puppet (
   $key  = "${privatekeydir}/${site::hostname}.pem"
 
   file {[$certdir,$privatekeydir,$ca,$cert,$key]:}
+
+  # Monitoring
+  client::icinga::check_process {'puppet':}
 
 }

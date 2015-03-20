@@ -4,4 +4,3 @@ classes:
   - roles::puppetdb
   - roles::activemq
 
-site::puppet::master: puppet-2

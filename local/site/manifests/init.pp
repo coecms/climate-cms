@@ -32,7 +32,6 @@ class site (
 
   include ::ntp
   include site::network
-  include site::puppet
   include site::security
   include site::mcollective
   include site::logstash
