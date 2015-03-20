@@ -25,9 +25,10 @@ define client::icinga::check_process (
   # Service[$service] -> Client::Icinga::Service[$name]
 
   @@icinga2::object::service {"${::fqdn}-process-${process}":
-    display_name       => $display,
-    check_command      => 'check_nrpe',
-    vars               => {
+    display_name     => $display,
+    host_name        => $::fqdn,
+    check_command    => 'check_nrpe',
+    vars             => {
       'nrpe_command' => "process-${process}",
     },
   }
