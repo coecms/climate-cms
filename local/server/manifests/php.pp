@@ -25,10 +25,7 @@ class server::php {
     notify => Service['httpd'],
   }
 
-  # Database abstraction
-  ::php::extension {'pgsql':
-    ensure  => present,
-    package => 'php-pgsql',
-  }
+  # Ordering
+  ::Php::Extension <||> -> ::Php::Config <||> ~> Service['httpd']
 
 }

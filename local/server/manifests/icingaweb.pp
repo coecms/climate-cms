@@ -87,6 +87,16 @@ class server::icingaweb (
     require             => Vcsrepo[$install_path],
   }
 
+  # Database abstraction
+  ::php::extension {'pgsql':
+    ensure  => present,
+    package => 'php-pgsql',
+  }
+  ::php::extension {'xml':
+    ensure  => present,
+    package => 'php-xml',
+  }
+
   @@roles::proxy::connection {$path:
     target_url => "http://${::hostname}:8090${path}",
     chain_auth => true,
