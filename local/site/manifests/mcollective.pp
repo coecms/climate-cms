@@ -18,6 +18,8 @@
 class site::mcollective (
   $password, # Must be definied by the caller
 ) {
+  include client::puppet
+
   # Certificates are generated on the Puppetmaster, using the Puppet CA, in
   # roles::puppetmaster. Client certificates for admin users should be
   # configured in /etc/puppet/private/mcollective/clients on the puppetmaster
@@ -34,7 +36,7 @@ class site::mcollective (
     middleware_ssl      => true,
     middleware_password => $password,
     securityprovider    => 'ssl',
-    ssl_ca_cert         => "file://${puppet::ca}",
+    ssl_ca_cert         => "file://${client::puppet::ca}",
     ssl_server_public   => 'puppet:///private/mcollective/certs/mcollective-shared.pem',
     ssl_server_private  => 'puppet:///private/mcollective/keys/mcollective-shared.pem',
     ssl_client_certs    => 'puppet:///private/mcollective/clients'
