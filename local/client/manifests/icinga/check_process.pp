@@ -18,8 +18,8 @@
 define client::icinga::check_process (
   $display  = $name,
   $process  = $name,
-  $warn     = '1:1',
-  $critical = '1:1',
+  $warn     = '1:',
+  $critical = '1:',
 ) {
 
   # Service[$service] -> Client::Icinga::Service[$name]
