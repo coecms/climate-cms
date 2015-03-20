@@ -16,16 +16,17 @@
 
 define roles::proxy::connection (
   $target_url,
-  $path  = $name,
-  $order = undef,
-  $allow = undef,
-  $deny  = undef,
+  $path       = $name,
+  $order      = undef,
+  $allow      = undef,
+  $deny       = undef,
+  $chain_auth = false,
 ) {
 
-  concat::fragment {"proxy-${path}":
-    target  => "25-${roles::proxy::vhost}.conf",
-    order   => '21',
-    content => "ProxyPass ${path} ${target_url}\n",
+  if $chain_auth {
+    $_auth_env = 'SetEnv proxy-chain-auth'
+  } else {
+    $_auth_env = ''
   }
 
   apacheplus::location {$name:
@@ -33,7 +34,11 @@ define roles::proxy::connection (
     order           => $order,
     allow           => $allow,
     deny            => $deny,
-    custom_fragment => "ProxyPassReverse ${target_url}",
+    custom_fragment => "
+      ${_auth_env}
+      ProxyPass        ${target_url}
+      ProxyPassReverse ${target_url}
+    ",
   }
 
 }

@@ -89,6 +89,7 @@ class server::icingaweb (
 
   @@roles::proxy::connection {$path:
     target_url => "http://${::hostname}:8090${path}",
+    chain_auth => true,
   }
 
 }
