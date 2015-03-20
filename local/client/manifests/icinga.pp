@@ -36,4 +36,11 @@ class client::icinga {
     target_file_name => "${::fqdn}.conf",
   }
 
+  firewall {"300 nrpe":
+    proto  => 'tcp',
+    source => $server_ip,
+    port   => '5666',
+    action => 'accept',
+  }
+
 }
