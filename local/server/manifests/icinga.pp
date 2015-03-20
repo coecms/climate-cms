@@ -73,7 +73,8 @@ class server::icinga (
   }
 
   # Collect objects to monitor
-  Icinga2::Object::Host    <<||>>
-  Icinga2::Object::Service <<||>>
+  Icinga2::Object::Host         <<||>>
+  Icinga2::Object::Service      <<||>>
+  Icinga2::Object::Servicegroup <<||>>
 
 }
