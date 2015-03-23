@@ -32,8 +32,8 @@ mod 'richardc/datacat'
 mod 'elasticsearch/logstash'
 mod 'elasticsearch/elasticsearch'
 mod 'file_concat',
-    :git    => 'https://github.com/cprice404/puppet-lib-file_concat.git',
-    :branch => 'maint/master/remove-unnnecessary-require'
+    :git    => 'https://github.com/electrical/puppet-lib-file_concat',
+    :commit => '2834ea51c275fdf884a023225071ca954806be22'
 mod 'pdxcat/collectd'
 
 mod 'nodes/php'
