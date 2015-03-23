@@ -49,7 +49,7 @@ class site::logstash (
   }
 
   logstash::configfile {'input collectd':
-    content => "input {collectd{}}\n",
+    content => "input {collectd{type => \"collectd\"}}\n",
     order   => '10',
   }
   logstash::configfile {'output elasticsearch':
