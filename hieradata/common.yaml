@@ -10,7 +10,3 @@ site::domain: 'climate-cms.nci.org.au'
 
 client::puppet::master: puppet-2
 site::proxy_ip:  '10.0.1.10'
-
-# Default class arguments
-apache::default_vhost: false
-apache::default_mods:  false
