@@ -40,13 +40,4 @@ class roles::elasticsearch (
     source => $kibana_ip,
     action => 'accept',
   }
-
-  $master_ip = query_nodes('Class[roles::puppetmaster]',
-                                ipaddress_eth0)
-  firewall {'920 puppetmaster -> elasticsearch':
-    proto  => 'tcp',
-    port   => '9200',
-    source => $master_ip,
-    action => 'accept',
-  }
 }

@@ -16,8 +16,7 @@
 #  limitations under the License.
 
 # Server for Puppet orchestration
-class roles::puppetmaster (
-) {
+class server::puppet {
 
   package { 'puppetserver':
     ensure => present,
