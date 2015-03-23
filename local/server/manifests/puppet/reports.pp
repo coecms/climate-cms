@@ -33,9 +33,9 @@ class server::puppet::reports {
     content => "
     input {
       tcp {
-        type   => \"puppet-report\"
-        port   => \"${report_port}\"
-        format => \"json_event\"
+        type  => \"puppet_report\"
+        port  => \"${report_port}\"
+        codec => \"json\"
       }
     }
     \n",

@@ -53,7 +53,7 @@ class site::logstash (
     order   => '10',
   }
   logstash::configfile {'output elasticsearch':
-    content => "output {elasticsearch{host => '${elasticsearch_ip}'}}\n",
+    content => "output {elasticsearch{host => '${elasticsearch_ip}' codec => json}}\n",
     order   => '90',
   }
 
