@@ -22,11 +22,9 @@ define server::icinga::service (
   $display_name = $name,
 ) {
 
-  @icinga2::object::servicegroup {$service_name:
+  ensure_resource('icinga2::object::servicegroup', $service_name, {
     display_name => $display_name,
-  }
-
-  realize Icinga2::Object::Servicegroup[$service_name]
+  })
 
   icinga2::object::service {$name:
     display_name  => $display_name,
