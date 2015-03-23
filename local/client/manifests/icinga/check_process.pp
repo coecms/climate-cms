@@ -22,15 +22,10 @@ define client::icinga::check_process (
   $critical = '1:',
 ) {
 
-  # Service[$service] -> Client::Icinga::Service[$name]
-  @@icinga2::object::servicegroup {$name:
-    display_name => $display,
-  }
-
-  @@icinga2::object::service {"${::fqdn}-process-${process}":
+  @@server::icinga::service {"${::fqdn}-process-${process}":
+    service_name     => $name,
     display_name     => $display,
     host_name        => $::fqdn,
-    groups           => [$display],
     check_command    => 'check_nrpe',
     vars             => {
       'nrpe_command' => "process-${process}",
