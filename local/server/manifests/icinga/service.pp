@@ -31,6 +31,7 @@ define server::icinga::service (
   icinga2::object::service {$name:
     display_name  => $display_name,
     host_name     => $host_name,
+    groups        => [$service_name],
     check_command => $check_command,
     vars          => $vars,
   }
