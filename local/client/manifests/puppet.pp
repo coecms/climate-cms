@@ -53,6 +53,8 @@ class client::puppet (
   file {[$certdir,$privatekeydir,$ca,$cert,$key]:}
 
   # Monitoring
-  client::icinga::check_process {'puppet':}
+  client::icinga::check_process {'puppet':
+    display_name => 'puppet agent',
+  }
 
 }

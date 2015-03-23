@@ -21,6 +21,8 @@ class server::apache {
     default_mods  => false,
   }
 
-  client::icinga::check_process {'httpd':}
+  client::icinga::check_process {'httpd':
+    display_name => 'apache',
+  }
 
 }
