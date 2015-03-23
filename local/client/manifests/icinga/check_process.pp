@@ -16,15 +16,15 @@
 
 # Tells icinga to monitor a process
 define client::icinga::check_process (
-  $display  = $name,
-  $process  = $name,
-  $warn     = '1:',
-  $critical = '1:',
+  $display_name = $name,
+  $process      = $name,
+  $warn         = '1:',
+  $critical     = '1:',
 ) {
 
   @@server::icinga::service {"${::fqdn}-process-${process}":
     service_name     => $name,
-    display_name     => $display,
+    display_name     => $display_name,
     host_name        => $::fqdn,
     check_command    => 'check_nrpe',
     vars             => {
