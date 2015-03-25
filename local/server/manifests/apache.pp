@@ -23,6 +23,7 @@ class server::apache {
 
   client::icinga::check_process {'httpd':
     display_name => 'apache',
+    user         => 'apache',
   }
 
 }

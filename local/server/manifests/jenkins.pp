@@ -35,4 +35,10 @@ class server::jenkins {
     protocol => 'ajp://',
     port     => $port,
   }
+
+  client::icinga::check_process {'jenkins':
+    command  => 'java',
+    argument => '-jar /usr/lib/jenkins/jenkins.war',
+    user     => 'jenkins',
+  }
 }

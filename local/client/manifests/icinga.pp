@@ -24,10 +24,8 @@ class client::icinga {
     nrpe_allowed_hosts => $allowed_hosts,
   }
 
-  # Since nrpe is running to check nrpe we expect more than one process
   client::icinga::check_process {'nrpe':
-    warn     => '1:',
-    critical => '1:',
+    user => 'nrpe',
   }
 
   @@icinga2::object::host { $::fqdn:
@@ -36,7 +34,8 @@ class client::icinga {
     target_file_name => "${::fqdn}.conf",
   }
 
-  firewall {"300 nrpe":
+  # Allow Icinga to connect to run nrpe checks
+  firewall {'300 nrpe checks':
     proto  => 'tcp',
     source => $server_ip,
     port   => '5666',

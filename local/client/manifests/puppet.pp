@@ -55,6 +55,7 @@ class client::puppet (
   # Monitoring
   client::icinga::check_process {'puppet':
     display_name => 'puppet agent',
+    user         => 'root'
   }
 
 }

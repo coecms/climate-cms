@@ -45,9 +45,6 @@ class server::icinga (
     require                => Class['postgresql::client'],
   }
 
-  # Monitor the service
-  client::icinga::check_process {'icinga2':}
-
   # Install connector
   icinga2::object::idopgsqlconnection { 'postgres_connection':
     host             => $db_host,
@@ -75,5 +72,10 @@ class server::icinga (
   # Collect objects to monitor
   Icinga2::Object::Host   <<||>>
   Server::Icinga::Service <<||>>
+
+  # Monitor the service
+  client::icinga::check_process {'icinga2':
+    user => 'icinga',
+  }
 
 }

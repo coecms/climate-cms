@@ -70,4 +70,11 @@ class server::puppet {
 
   include server::puppet::ca
   include server::puppet::reports
+
+  client::icinga::check_process {'puppetserver':
+    command  => 'java',
+    argument => '/usr/share/puppetserver/puppet-server-release.jar',
+    user     => 'puppet',
+  }
+
 }

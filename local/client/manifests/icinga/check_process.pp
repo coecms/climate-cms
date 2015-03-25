@@ -17,23 +17,41 @@
 # Tells icinga to monitor a process
 define client::icinga::check_process (
   $display_name = $name,
-  $process      = $name,
+  $command      = $name,
+  $argument     = undef,
+  $user         = $name,
   $warn         = '1:',
   $critical     = '1:',
 ) {
 
-  @@server::icinga::service {"${::fqdn}-process-${process}":
+  @@server::icinga::service {"${::fqdn}-process-${name}":
     service_name     => $name,
     display_name     => $display_name,
     host_name        => $::fqdn,
     check_command    => 'check_nrpe',
     vars             => {
-      'nrpe_command' => "process-${process}",
+      'nrpe_command' => "process-${name}",
     },
   }
 
-  icinga2::nrpe::command {"process-${process}":
+  $_command = "--command='${command}'"
+
+  if $argument {
+    $_argument = "--argument-array='${argument}'"
+  } else {
+    $_argument = ''
+  }
+
+  if $user {
+    $_user = "--user='${user}'"
+  } else {
+    $_user = ''
+  }
+
+  $_args = "${_command} ${_argument} ${_user}"
+
+  icinga2::nrpe::command {"process-${name}":
     nrpe_plugin_name => 'check_procs',
-    nrpe_plugin_args => "-w ${warn} -c ${critical} -C ${process}",
+    nrpe_plugin_args => "-w ${warn} -c ${critical} ${_args}",
   }
 }
