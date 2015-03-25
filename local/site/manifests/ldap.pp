@@ -65,6 +65,7 @@ class site::ldap (
     command => "authconfig ${auth_optlist}",
     path    => ['/usr/sbin','/usr/bin'],
     unless  => 'getent group access',
+    require => Package['sssd'],
   }
 
 }
