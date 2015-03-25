@@ -42,6 +42,7 @@ class server::icinga (
     db_user                => $db_user,
     db_pass                => $db_password,
     install_nagios_plugins => false,
+    purge_configs          => true,
     require                => Class['postgresql::client'],
   }
 
