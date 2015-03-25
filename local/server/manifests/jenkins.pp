@@ -27,7 +27,8 @@ class server::jenkins {
   }
 
   client::proxy::connection {'/jenkins':
-    allow => 'from all',
-    port  => $port,
+    allow       => 'from all',
+    target_path => '/',
+    port        => $port,
   }
 }
