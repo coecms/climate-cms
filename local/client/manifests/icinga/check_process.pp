@@ -43,7 +43,7 @@ define client::icinga::check_process (
   }
 
   if $user {
-    $_user = "--user='${user}'"
+    $_user = "-u '${user}'"
   } else {
     $_user = ''
   }
