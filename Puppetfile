@@ -46,3 +46,5 @@ mod 'icinga2',
 
 mod 'logstash_reporter',
     :git    => 'https://github.com/logstash/puppet-logstash-reporter.git'
+
+mod 'rtyler/jenkins'
