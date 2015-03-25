@@ -21,11 +21,9 @@ class server::jenkins {
   $port = 8009
 
   class {'::jenkins':
-    port               => $port,
     config_hash        => {
-      'JENKINS_ARGS'   => "--prefix=${path}",
-      'AJP_PORT'       => "${port}",
-    },
+      'JENKINS_ARGS'   => {'value' => "--prefix=${path}"},
+      'AJP_PORT'       => {'value' => "${port}"},},
     install_java       => false,
     configure_firewall => false,
     require            => Class['java'],
