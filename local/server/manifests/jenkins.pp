@@ -20,8 +20,9 @@ class server::jenkins {
   $port = 8080
 
   class {'::jenkins':
-    port    => $port,
-    require => Class['java'],
+    port         => $port,
+    install_java => false,
+    require      => Class['java'],
   }
 
   client::proxy::connection {'/jenkins':
