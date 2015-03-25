@@ -17,18 +17,23 @@
 class server::jenkins {
   include site::java
 
-  $port = 8080
+  $path = '/jenkins'
+  $port = 8009
 
   class {'::jenkins':
     port               => $port,
+    config_hash        => {
+      'JENKINS_ARGS'   => "--prefix=${path}",
+      'AJP_PORT'       => "${port}",
+    },
     install_java       => false,
     configure_firewall => false,
     require            => Class['java'],
   }
 
-  client::proxy::connection {'/jenkins':
-    allow       => 'from all',
-    target_path => '/',
-    port        => $port,
+  client::proxy::connection {$path:
+    allow    => 'from all',
+    protocol => 'ajp://',
+    port     => $port,
   }
 }
