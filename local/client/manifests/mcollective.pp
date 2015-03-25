@@ -72,9 +72,7 @@ class client::mcollective (
     require     => File[$home],
   }
 
-  client::icinga::check_process {'mcollective':
-    command  => 'ruby',
-    argument => '/usr/sbin/mcollectived',
+  client::icinga::check_process {'mcollectived':
     user     => 'root',
   }
 
