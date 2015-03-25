@@ -15,7 +15,7 @@
 #  limitations under the License.
 
 # Site defaults for mcollective
-class site::mcollective (
+class client::mcollective (
   $password, # Must be definied by the caller
 ) {
   include client::puppet
@@ -70,6 +70,12 @@ class site::mcollective (
     certificate => 'puppet:///private/mcollective/certs/mcollective-user.pem',
     private_key => 'puppet:///private/mcollective/keys/mcollective-user.pem',
     require     => File[$home],
+  }
+
+  client::icinga::check_process {'mcollective':
+    command  => 'ruby',
+    argument => '/usr/sbin/mcollectived',
+    user     => 'root',
   }
 
 }

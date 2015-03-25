@@ -33,7 +33,6 @@ class site (
   include ::ntp
   include site::network
   include site::security
-  include site::mcollective
   include site::logstash
 
   # Don't require a tty for sudoers

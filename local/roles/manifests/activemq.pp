@@ -20,8 +20,8 @@ class roles::activemq (
   $admin_password,
   $keystore_password,
 ) {
-  include site::mcollective
-  $mcollective_password = $site::mcollective::password
+  include client::mcollective
+  $mcollective_password = $client::mcollective::password
 
   $package = 'activemq'
   $user    = 'activemq'
@@ -58,7 +58,7 @@ class roles::activemq (
     notify  => Service[$service],
   }
 
-  $clients = query_nodes('Class[site::mcollective]',
+  $clients = query_nodes('Class[client::mcollective]',
                           ipaddress_eth0)
 
   # Puppetlabs-firewall doesn't support using a list as the source, so do a
