@@ -18,6 +18,7 @@ class server::icingaweb (
   $db_password,
 ) {
   include server::php
+  include site::ldap
 
   $db_hosts       = query_nodes('Class[roles::postgresql]','ipaddress_eth0')
   $db_host        = $db_hosts[0]
@@ -68,23 +69,31 @@ class server::icingaweb (
       alias             => $path,
       path              => $web_root,
     },
-    directories         => [{
-      path              => $web_root,
-      provider          => 'directory',
-      options           => 'SymLinksIfOwnerMatch',
-      custom_fragment   => "
-       SetEnv ICINGAWEB_CONFIGDIR '${config_dir}'
-       EnableSendfile Off
-       RewriteEngine on
-       RewriteBase ${path}/
-       RewriteCond %{REQUEST_FILENAME} -s [OR]
-       RewriteCond %{REQUEST_FILENAME} -l [OR]
-       RewriteCond %{REQUEST_FILENAME} -d
-       RewriteRule ^.*$ - [NC,L]
-       RewriteRule ^.*$ index.php [NC,L]
-      "
-      }],
     require             => Vcsrepo[$install_path],
+  }
+
+  apacheplus::location {$web_root:
+    vhost           => 'icingaweb',
+    type            => 'Directory',
+    ldap_require    => "ldap-group ${site::ldap::group_id}=${site::admin_group},${site::ldap::group_dn}",
+    options         => 'SymLinksIfOwnerMatch',
+    custom_fragment => "
+     SetEnv ICINGAWEB_CONFIGDIR '${config_dir}'
+     EnableSendfile Off
+     RewriteEngine on
+     RewriteBase ${path}/
+     RewriteCond %{REQUEST_FILENAME} -s [OR]
+     RewriteCond %{REQUEST_FILENAME} -l [OR]
+     RewriteCond %{REQUEST_FILENAME} -d
+     RewriteRule ^.*$ - [NC,L]
+     RewriteRule ^.*$ index.php [NC,L]
+    "
+  }
+
+  # Pass authentication to the 'icingaweb' vhost
+  @@roles::proxy::connection {$path:
+    target_url => "http://${::hostname}:${www_port}${path}",
+    chain_auth => true,
   }
 
   # Database abstraction
@@ -95,11 +104,6 @@ class server::icingaweb (
   ::php::extension {'xml':
     ensure  => present,
     package => 'php-xml',
-  }
-
-  @@roles::proxy::connection {$path:
-    target_url => "http://${::hostname}:8090${path}",
-    chain_auth => true,
   }
 
 }
