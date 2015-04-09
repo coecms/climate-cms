@@ -14,12 +14,13 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-class roles::ramadda (
+class server::ramadda (
   $db_password,
+  $version = '2.0',
 ) {
   include site::tomcat
 
-  $source_url = 'http://downloads.sourceforge.net/project/ramadda/ramadda1.7'
+  $source_url = "http://downloads.sourceforge.net/project/ramadda/ramadda${version}"
   $ramadda_home = "${site::tomcat::content_path}/ramadda"
 
   tomcat::war {'repository.war':

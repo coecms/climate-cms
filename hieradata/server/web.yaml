@@ -4,7 +4,7 @@ classes:
   - roles::thredds
   - roles::las
   - roles::kibana
-  - roles::ramadda
+  - server::ramadda
   - server::icingaweb
 
 # NCI project mounts
