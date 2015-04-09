@@ -70,5 +70,5 @@ class server::proxy (
   }
 
   # Collect all external proxy sites
-  Roles::Proxy::Connection<<||>>
+  Server::Proxy::Connection<<||>>
 }
