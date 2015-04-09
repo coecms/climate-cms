@@ -18,13 +18,13 @@ class server::ramadda (
   $db_password,
   $version = '2.0',
 ) {
-  include site::tomcat
+  include server::tomcat
 
   $source_url = "http://downloads.sourceforge.net/project/ramadda/ramadda${version}"
-  $ramadda_home = "${site::tomcat::content_path}/ramadda"
+  $ramadda_home = "${server::tomcat::content_path}/ramadda"
 
   tomcat::war {'repository.war':
-    catalina_base => $site::tomcat::catalina_home,
+    catalina_base => $server::tomcat::catalina_home,
     war_source    => "${source_url}/repository.war",
     notify        => Tomcat::Service['default'],
   }
@@ -34,7 +34,7 @@ class server::ramadda (
     target_url => "ajp://${::hostname}:8009/repository",
   }
 
-  file {"${site::tomcat::catalina_home}/conf/repository.properties":
+  file {"${server::tomcat::catalina_home}/conf/repository.properties":
     ensure  => file,
     content => "ramadda_home=${ramadda_home}\n",
     require => Tomcat::Instance['default'],

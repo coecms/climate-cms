@@ -14,7 +14,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-class site::tomcat {
+class server::tomcat {
 
   include ::epel
   include ::apache
@@ -49,6 +49,12 @@ class site::tomcat {
     require      => Tomcat::Instance['default'],
   }
 
+  client::icinga::check_process {'tomcat':
+    command  => 'java',
+    argument => 'org.apache.catalina.startup.Bootstrap start',
+    user     => 'tomcat',
+  }
+
   package {['log4j','tomcat-native']:
     notify => Tomcat::Service['default'],
   }
@@ -66,27 +72,31 @@ class site::tomcat {
       "set \$ldap/#attribute/roleName      '${site::ldap::group_id}'",
       "set \$ldap/#attribute/roleSearch    '(${site::ldap::group_member}={1})'",
     ],
-    notify => Tomcat::Service['default'],
+    notify  => Tomcat::Service['default'],
   }
 
   # Install LDAP cert
   # http://docs.oracle.com/cd/E19509-01/820-3399/ggfrj/index.html
   $keystore  = "${java_home}/lib/security/cacerts"
   $pass      = 'changeit'
-  exec {'install LDAP cert for Java':
-    command => "keytool -import -alias 'ldap' -keystore '${keystore}' -storepass '${pass}' -file '${ldap::ca_file}' -trustcacerts -noprompt",
-    unless  => "keytool -list   -alias 'ldap' -keystore '${keystore}' -storepass '${pass}'",
-    path    => "${java_home}/bin",
-    require => File[$ldap::ca_file],
-    notify  => Tomcat::Service['default'],
-  }
 
-  exec {'install Apache cert for Java':
-    command => "keytool -import -alias 'apache' -keystore '${keystore}' -storepass '${pass}' -file '${apache::default::ssl::cert}' -trustcacerts -noprompt",
-    unless  => "keytool -list   -alias 'apache' -keystore '${keystore}' -storepass '${pass}'",
-    path    => "${java_home}/bin",
-    require => Class['apache'],
-    notify  => Tomcat::Service['default'],
+  java_ks { 'ldap':
+    ensure       => latest,
+    certificate  => $site::ldap::ca_file,
+    trustcacerts => true,
+    target       => $keystore,
+    password     => $pass,
+    require      => File[$ldap::ca_file],
+    notify       => Tomcat::Service['default'],
+  }
+  java_ks { 'apache-self-signed':
+    ensure       => latest,
+    certificate  => '/etc/pki/tls/certs/localhost.crt',
+    trustcacerts => true,
+    target       => $keystore,
+    password     => $pass,
+    require      => Class['apache'],
+    notify       => Tomcat::Service['default'],
   }
 
   # Firewall port
@@ -107,8 +117,8 @@ class site::tomcat {
   }
 
   file {"${catalina_home}/content":
-    ensure => link,
-    target => $content_path,
+    ensure  => link,
+    target  => $content_path,
     require => Tomcat::Instance['default'],
   }
 

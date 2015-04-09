@@ -15,15 +15,15 @@
 #  limitations under the License.
 
 class roles::thredds {
-  include site::tomcat
+  include server::tomcat
 
   $admin_group = $site::admin_group
 
   tomcat::war {'thredds.war':
-    catalina_base => $site::tomcat::catalina_home,
+    catalina_base => $server::tomcat::catalina_home,
     war_source    => 'ftp://ftp.unidata.ucar.edu/pub/thredds/4.3/current/thredds.war',
     notify        => Tomcat::Service['default'],
-    require       => File["${site::tomcat::catalina_home}/content"],
+    require       => File["${server::tomcat::catalina_home}/content"],
   }
 
   @@roles::proxy::connection {'/thredds':
@@ -31,14 +31,14 @@ class roles::thredds {
     target_url => "ajp://${::hostname}:8009/thredds",
   }
 
-  $web_xml = "${site::tomcat::catalina_home}/webapps/thredds/WEB-INF/web.xml"
+  $web_xml = "${server::tomcat::catalina_home}/webapps/thredds/WEB-INF/web.xml"
   # Extract the war so we can change configs
-  file {"${site::tomcat::catalina_home}/webapps/thredds":
+  file {"${server::tomcat::catalina_home}/webapps/thredds":
     ensure => directory,
   }
   staging::extract {'thredds.war':
-    target  => "${site::tomcat::catalina_home}/webapps/thredds",
-    source  => "${site::tomcat::catalina_home}/webapps/thredds.war",
+    target  => "${server::tomcat::catalina_home}/webapps/thredds",
+    source  => "${server::tomcat::catalina_home}/webapps/thredds.war",
     creates => $web_xml,
     require => Tomcat::War['thredds.war'],
   }

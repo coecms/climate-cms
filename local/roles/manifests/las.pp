@@ -17,7 +17,7 @@
 class roles::las (
 ) {
   include site::java
-  include site::tomcat
+  include server::tomcat
 
   package {'ant': }
   package {'libX11': }
