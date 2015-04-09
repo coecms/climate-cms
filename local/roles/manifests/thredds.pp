@@ -26,9 +26,10 @@ class roles::thredds {
     require       => File["${server::tomcat::catalina_home}/content"],
   }
 
-  @@roles::proxy::connection {'/thredds':
-    allow      => 'from all',
-    target_url => "ajp://${::hostname}:8009/thredds",
+  client::proxy::connection {'/thredds':
+    allow    => 'from all',
+    protocol => 'ajp',
+    port     => '8009',
   }
 
   $web_xml = "${server::tomcat::catalina_home}/webapps/thredds/WEB-INF/web.xml"

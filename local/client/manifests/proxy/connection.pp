@@ -18,7 +18,7 @@
 define client::proxy::connection (
   $proxy_path  = $name,
 
-  $protocol    = 'http://',
+  $protocol    = 'http',
   $target_host = $::ipaddress_eth0,
   $port        = 8080,
   $target_path = $name,
@@ -29,7 +29,7 @@ define client::proxy::connection (
   $chain_auth = undef,
 ) {
 
-  $proxy_ip = query_nodes('Class[roles::proxy]','ipaddress_eth0')
+  $proxy_ip = query_nodes('Class[server::proxy]','ipaddress_eth0')
 
   firewall {"400 proxy connection to ${name}":
     proto  => 'tcp',
@@ -38,9 +38,9 @@ define client::proxy::connection (
     action => 'accept',
   }
 
-  @@roles::proxy::connection {$name:
+  @@server::proxy::connection {$name:
     path       => $proxy_path,
-    target_url => "${protocol}${target_host}:${port}${target_path}",
+    target_url => "${protocol}://${target_host}:${port}${target_path}",
     order      => $order,
     allow      => $allow,
     deny       => $deny,

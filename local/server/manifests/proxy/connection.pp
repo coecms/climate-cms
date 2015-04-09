@@ -14,7 +14,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-define roles::proxy::connection (
+define server::proxy::connection (
   $target_url,
   $path       = $name,
   $order      = undef,

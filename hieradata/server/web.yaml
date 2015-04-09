@@ -1,6 +1,6 @@
 ---
 classes:
-  - roles::proxy
+  - server::proxy
   - roles::thredds
   - roles::las
   - roles::kibana

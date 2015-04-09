@@ -29,9 +29,10 @@ class server::ramadda (
     notify        => Tomcat::Service['default'],
   }
 
-  @@roles::proxy::connection {'/repository':
+  client::proxy::connection {'/repository':
     allow      => 'from all',
-    target_url => "ajp://${::hostname}:8009/repository",
+    protocol   => 'ajp',
+    port       => '8009',
   }
 
   file {"${server::tomcat::catalina_home}/conf/repository.properties":

@@ -91,8 +91,8 @@ class server::icingaweb (
   }
 
   # Pass authentication to the 'icingaweb' vhost
-  @@roles::proxy::connection {$path:
-    target_url => "http://${::hostname}:${www_port}${path}",
+  client::proxy::connection {$path:
+    port       => $www_port,
     chain_auth => true,
   }
 

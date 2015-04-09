@@ -32,7 +32,7 @@ class server::jenkins {
 
   client::proxy::connection {$path:
     allow    => 'from all',
-    protocol => 'ajp://',
+    protocol => 'ajp',
     port     => $port,
   }
 
