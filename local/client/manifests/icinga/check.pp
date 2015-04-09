@@ -14,34 +14,26 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# Tells icinga to monitor a process
-define client::icinga::check_process (
-  $display_name = $name,
-  $command      = $name,
-  $argument     = undef,
-  $user         = $name,
-  $warn         = '1:',
-  $critical     = '1:',
+# Run a check on this host
+define client::icinga::check (
+  $display_name      = $name,
+  $nrpe_command_name = $name,
+  $nrpe_plugin       = undef,
+  $nrpe_plugin_args  = '',
 ) {
-  $_command = "--command='${command}'"
 
-  if $argument {
-    $_argument = "--argument-array='${argument}'"
-  } else {
-    $_argument = ''
-  }
-
-  if $user {
-    $_user = "-u '${user}'"
-  } else {
-    $_user = ''
-  }
-
-  $_args = "${_command} ${_argument} ${_user}"
-
-  client::icinga::check {"process-${name}":
+  @@server::icinga::service {"${::fqdn}-${name}":
+    service_name     => $name,
     display_name     => $display_name,
-    nrpe_plugin      => 'check_procs',
-    nrpe_plugin_args => "-w ${warn} -c ${critical} ${_args}",
+    host_name        => $::fqdn,
+    check_command    => 'check_nrpe',
+    vars             => {
+      'nrpe_command' => $nrpe_command_name,
+    },
+  }
+
+  icinga2::nrpe::command {$nrpe_command_name:
+    nrpe_plugin_name => $nrpe_plugin,
+    nrpe_plugin_args => $nrpe_plugin_args,
   }
 }
