@@ -28,6 +28,11 @@ class client::icinga {
     user => 'nrpe',
   }
 
+  client::icinga::check {'disk':
+    nrpe_plugin      => 'check_disk',
+    nrpe_plugin_args => '-w 10% -c 5% -p /',
+  }
+
   @@icinga2::object::host { $::fqdn:
     display_name     => $::hostname,
     ipv4_address     => $::ipaddress_eth0,
