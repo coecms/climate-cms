@@ -1,8 +1,11 @@
-<Location "<%= @location %>" >
+<<%= @type %> "<%= @location %>" >
     Order      <%= @order %>
     Deny       <%= @deny %>
     Allow      <%= @allow %>
     AuthName   "<%= @auth_name %>"
+    <% if @options %>
+    Options    <%= @options %>
+    <% end %>
 
     <% if @ldap_require %>
     Satisfy                     Any
@@ -16,4 +19,4 @@
     <% end %>
 
     <%= @custom_fragment %>
-</Location>
+</<%= @type %>>

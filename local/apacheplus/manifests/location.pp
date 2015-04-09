@@ -25,8 +25,10 @@ define apacheplus::location (
   $deny              = 'from all',
   $auth_name         = $site::hostname,
   $ldap_require      = undef,
+  $options           = undef,
   $custom_fragment   = '',
   $template          = 'apacheplus/location.erb',
+  $type              = 'Location',
 ) {
 
   if $ldap_require {
