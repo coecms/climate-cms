@@ -22,6 +22,7 @@ define server::proxy::connection (
   $deny       = undef,
   $chain_auth = false,
 ) {
+  include server::proxy
 
   if $chain_auth {
     $_auth_env = 'SetEnv proxy-chain-auth'
@@ -30,7 +31,7 @@ define server::proxy::connection (
   }
 
   apacheplus::location {$name:
-    vhost           => $roles::proxy::vhost,
+    vhost           => $server::proxy::vhost,
     order           => $order,
     allow           => $allow,
     deny            => $deny,
