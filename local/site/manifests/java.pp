@@ -20,16 +20,4 @@ class site::java (
 ) {
   class {'::java':
   }
-
-  # Install LDAP cert
-  include site::ldap
-  java_ks {$site::ldap::domain:
-    ensure       => latest,
-    certificate  => $site::ldap::ca_file,
-    target       => '/usr/lib/jvm/jre/lib/security/cacerts',
-    password     => 'changeit',
-    trustcacerts => true,
-    require      => File[$site::ldap::ca_file],
-  }
-
 }
