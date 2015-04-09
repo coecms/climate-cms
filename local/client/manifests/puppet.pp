@@ -28,7 +28,7 @@ class client::puppet (
   }
 
   service { 'puppet':
-    ensure  => running,
+    ensure  => present,
     enable  => true,
     require => Package['puppet'],
   }
