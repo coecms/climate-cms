@@ -86,7 +86,7 @@ class server::tomcat {
     trustcacerts => true,
     target       => $keystore,
     password     => $pass,
-    require      => File[$ldap::ca_file],
+    require      => File[$site::ldap::ca_file],
     notify       => Tomcat::Service['default'],
   }
   java_ks { 'apache-self-signed':
