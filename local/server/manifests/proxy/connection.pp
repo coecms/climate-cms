@@ -24,14 +24,24 @@ define server::proxy::connection (
 ) {
   include server::proxy
 
+  $vhost = $server::proxy::vhost
+
   if $chain_auth {
     $_auth_env = 'SetEnv proxy-chain-auth'
   } else {
     $_auth_env = ''
   }
 
+  # Escape slashes
+  $escaped_name = regsubst($name, '/', '-', 'G')
+  client::icinga::check {"https-${escaped_name}":
+    display_name     => "https://${vhost}${name}",
+    nrpe_plugin      => 'check_http',
+    nrpe_plugin_args => "-H '${vhost}' -u '${name}' --ssl",
+  }
+
   apacheplus::location {$name:
-    vhost           => $server::proxy::vhost,
+    vhost           => $vhost,
     order           => $order,
     allow           => $allow,
     deny            => $deny,
