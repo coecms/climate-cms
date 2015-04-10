@@ -123,4 +123,6 @@ class server::icinga (
     assign_where => 'service.vars.nrpe_plugin == "check_disk"',
   }
 
+  include icinga2::feature::command
+
 }
