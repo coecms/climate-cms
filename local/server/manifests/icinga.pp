@@ -84,7 +84,7 @@ class server::icinga (
     groups => ['fe2_2','access.admin'],
   }
 
-  icinga2::object::user_group {'access.admin':
+  icinga2::object::usergroup {'access.admin':
   }
   icinga2::object::apply_notification_to_host {'accessdev-notifications':
     assign_where => 'host.vars.domain == "accessdev.nci.org.au"',
@@ -92,7 +92,7 @@ class server::icinga (
     user_groups  => ['access.admin'],
   }
 
-  icinga2::object::user_group {'fe2_2':
+  icinga2::object::usergroup {'fe2_2':
   }
   icinga2::object::apply_notification_to_host {'climate-notifications':
     assign_where => 'host.vars.domain == "climate-cms.nci.org.au"',
