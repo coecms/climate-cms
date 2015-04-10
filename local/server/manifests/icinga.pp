@@ -113,4 +113,14 @@ class server::icinga (
     user_groups  => ['fe2_2'],
   }
 
+  icinga2::object::servicegroup {'service':
+    assign_where => 'vars.nrpe_command == "check_process"',
+  }
+  icinga2::object::servicegroup {'web':
+    assign_where => 'vars.nrpe_command == "check_http"',
+  }
+  icinga2::object::servicegroup {'disk':
+    assign_where => 'vars.nrpe_command == "check_disk"',
+  }
+
 }

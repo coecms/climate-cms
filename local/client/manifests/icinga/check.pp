@@ -14,7 +14,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# Run a check on this host
+# Run a check on this host using nrpe
 define client::icinga::check (
   $display_name      = $name,
   $nrpe_command_name = $name,
