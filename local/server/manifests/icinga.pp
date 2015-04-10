@@ -79,6 +79,9 @@ class server::icinga (
     user => 'icinga',
   }
 
+  # Notifications
+  package {'mail':}
+
   icinga2::object::user {'saw562':
     email  => 'saw562@nci.org.au',
     groups => ['fe2_2','access.admin'],
