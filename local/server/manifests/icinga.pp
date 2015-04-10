@@ -125,9 +125,9 @@ class server::icinga (
 
 
   $cmd_user = 'icingacmd'
-  $cmd_group = 'icinga'
+  $cmd_group = 'icingacmd'
   $cmd_home = '/var/icingacmd'
-  $cmd_path = "${cmd_home}/commands"
+  $cmd_path = '/var/run/icinga2/cmd/icinga2.cmd'
 
   user {$cmd_user:
     gid    => $cmd_group,
