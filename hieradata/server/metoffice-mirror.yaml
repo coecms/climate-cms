@@ -7,16 +7,16 @@ classes:
 roles::svnmirror::access_ip: '130.56.244.72 130.56.244.73 130.56.244.115'
 
 # List of servers to mirror
-roles::svnmirror::mirrors:
-    um:
-        url:       /svn/um
-        origin:    https://code.metoffice.gov.uk/svn/um
-    gcom:
-        url:       /svn/gcom
-        origin:    https://code.metoffice.gov.uk/svn/gcom
-    jules:
-        url:       /svn/jules
-        origin:    https://code.metoffice.gov.uk/svn/jules
-    roses-u:
-        url:       /svn/roses-u
-        origin:    https://code.metoffice.gov.uk/svn/roses-u
+#roles::svnmirror::mirrors:
+#    um:
+#        url:       /svn/um
+#        origin:    https://code.metoffice.gov.uk/svn/um
+#    gcom:
+#        url:       /svn/gcom
+#        origin:    https://code.metoffice.gov.uk/svn/gcom
+#    jules:
+#        url:       /svn/jules
+#        origin:    https://code.metoffice.gov.uk/svn/jules
+#    roses-u:
+#        url:       /svn/roses-u
+#        origin:    https://code.metoffice.gov.uk/svn/roses-u
