@@ -15,13 +15,11 @@
 #  limitations under the License.
 
 define server::icinga::service (
-  $host_name = '',
+  $host,
   $service_name,
-  $vars = {},
-  $host = $host_name,
   $check_command,
-  $check_vars = $vars,
-  $display_name = $name,
+  $check_vars,
+  $display_name = $service_name,
 ) {
 
   ensure_resource('icinga2::object::service', $service_name, {
