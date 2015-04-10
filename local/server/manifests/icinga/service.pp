@@ -22,12 +22,6 @@ define server::icinga::service (
   $display_name = $service_name,
 ) {
 
-  ensure_resource('icinga2::object::service', $service_name, {
-    display_name  => $display_name,
-    check_command => $check_command,
-    vars          => $check_vars,
-  })
-
   icinga2::object::apply_service_to_host {$name:
     object_servicename => $service_name,
     display_name       => $display_name,
