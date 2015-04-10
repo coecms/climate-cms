@@ -1,0 +1,10 @@
+---
+classes:
+    - client::scratchdisk
+
+# NCI project mounts
+site::gdata:
+    v45:
+      gid: 5636
+    ua8:
+      gid: 5972
