@@ -22,12 +22,11 @@ define client::icinga::check (
   $nrpe_plugin_args  = '',
 ) {
 
-  @@server::icinga::service {"${::fqdn}-${name}":
-    service_name     => $name,
+  @@server::icinga::service {"${name}":
     display_name     => $display_name,
-    host_name        => $::fqdn,
+    host             => $::fqdn,
     check_command    => 'check_nrpe',
-    vars             => {
+    check_vars       => {
       'nrpe_command' => $nrpe_command_name,
     },
   }

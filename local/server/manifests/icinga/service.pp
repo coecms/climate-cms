@@ -15,23 +15,21 @@
 #  limitations under the License.
 
 define server::icinga::service (
-  $service_name,
-  $host_name,
+  $host,
   $check_command,
-  $vars,
+  $check_vars,
   $display_name = $name,
 ) {
 
-  ensure_resource('icinga2::object::servicegroup', $service_name, {
-    display_name => $display_name,
+  ensure_resource('icinga2::object::service', $name, {
+    display_name  => $display_name,
+    check_command => $check_command,
+    vars          => $check_vars,
   })
 
-  icinga2::object::service {$name:
-    display_name  => $display_name,
-    host_name     => $host_name,
-    groups        => [$service_name],
-    check_command => $check_command,
-    vars          => $vars,
+  icinga2::object::apply_service_to_host {"${host}-${name}":
+    object_servicename => $name,
+    assign             => "assign where host.name=='${host}'",
   }
 
 }
