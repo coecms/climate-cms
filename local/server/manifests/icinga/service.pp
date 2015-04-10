@@ -15,9 +15,9 @@
 #  limitations under the License.
 
 define server::icinga::service (
-  $host_name,
+  $host_name = '',
   $service_name,
-  $vars,
+  $vars = {},
   $host = $host_name,
   $check_command,
   $check_vars = $vars,
