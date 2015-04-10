@@ -32,7 +32,7 @@ define server::icinga::service (
 
   icinga2::object::apply_service_to_host {$name:
     object_servicename => $service_name,
-    assign             => "assign where host.name=='${host}'",
+    assign_where       => "host.name=='${host}'",
   }
 
 }
