@@ -123,6 +123,27 @@ class server::icinga (
     assign_where => 'service.vars.nrpe_plugin == "check_disk"',
   }
 
-  include icinga2::feature::command
+
+  $cmd_user = 'icingacmd'
+  $cmd_group = 'icinga'
+  $cmd_home = '/var/icingacmd'
+  $cmd_path = "${cmd_home}/commands"
+
+  user {$cmd_user:
+    gid    => $cmd_group,
+    home   => $cmd_home,
+    system => true,
+  }
+
+  file {$cmd_home:
+    ensure => directory,
+    owner  => $cmd_user,
+    group  => $cmd_group,
+    mode   => '0750',
+  }
+
+  class {'icinga2::feature::command':
+    command_path => $cmd_path,
+  }
 
 }
