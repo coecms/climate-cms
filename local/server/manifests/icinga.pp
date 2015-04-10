@@ -93,7 +93,7 @@ class server::icinga (
   }
   icinga2::object::apply_notification_to_service {'accessdev-services-notifications':
     assign_where => 'host.vars.domain == "accessdev.nci.org.au"',
-    command      => 'mail-host-notification',
+    command      => 'mail-service-notification',
     user_groups  => ['access.admin'],
   }
 
@@ -106,7 +106,7 @@ class server::icinga (
   }
   icinga2::object::apply_notification_to_service {'climate-service-notifications':
     assign_where => 'host.vars.domain == "climate-cms.nci.org.au"',
-    command      => 'mail-host-notification',
+    command      => 'mail-service-notification',
     user_groups  => ['fe2_2'],
   }
 
