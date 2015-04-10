@@ -32,6 +32,8 @@ define server::icinga::service (
     object_servicename => $service_name,
     display_name       => $display_name,
     assign_where       => "host.name==\"${host}\"",
+    check_command      => $check_command,
+    vars               => $check_vars,
   }
 
 }
