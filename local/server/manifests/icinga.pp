@@ -86,7 +86,12 @@ class server::icinga (
 
   icinga2::object::usergroup {'access.admin':
   }
-  icinga2::object::apply_notification_to_host {'accessdev-notifications':
+  icinga2::object::apply_notification_to_host {'accessdev-host-notifications':
+    assign_where => 'host.vars.domain == "accessdev.nci.org.au"',
+    command      => 'mail-host-notification',
+    user_groups  => ['access.admin'],
+  }
+  icinga2::object::apply_notification_to_service {'accessdev-services-notifications':
     assign_where => 'host.vars.domain == "accessdev.nci.org.au"',
     command      => 'mail-host-notification',
     user_groups  => ['access.admin'],
@@ -94,7 +99,12 @@ class server::icinga (
 
   icinga2::object::usergroup {'fe2_2':
   }
-  icinga2::object::apply_notification_to_host {'climate-notifications':
+  icinga2::object::apply_notification_to_host {'climate-host-notifications':
+    assign_where => 'host.vars.domain == "climate-cms.nci.org.au"',
+    command      => 'mail-host-notification',
+    user_groups  => ['fe2_2'],
+  }
+  icinga2::object::apply_notification_to_service {'climate-service-notifications':
     assign_where => 'host.vars.domain == "climate-cms.nci.org.au"',
     command      => 'mail-host-notification',
     user_groups  => ['fe2_2'],
