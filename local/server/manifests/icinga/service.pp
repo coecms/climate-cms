@@ -17,9 +17,10 @@
 define server::icinga::service (
   $host_name,
   $service_name,
-  $host,
+  $vars,
+  $host = $host_name,
   $check_command,
-  $check_vars,
+  $check_vars = $vars,
   $display_name = $name,
 ) {
 
