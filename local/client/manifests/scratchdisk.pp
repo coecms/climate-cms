@@ -40,7 +40,7 @@ class client::scratchdisk {
 
   client::icinga::check {'scratch':
     nrpe_plugin      => 'check_disk',
-    nrpe_plugin_args => "-w 10% -c 5% -p ${target}",
+    nrpe_plugin_args => '-w 10% -c 5% -p \'/dev/vdb\'',
   }
 
 }

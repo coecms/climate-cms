@@ -49,6 +49,6 @@ define site::gdata (
   client::icinga::check {"gdata-${name}":
     display_name     => $mountpoint,
     nrpe_plugin      => 'check_disk',
-    nrpe_plugin_args => "-w 10% -c 5% -p ${mountpoint}",
+    nrpe_plugin_args => "-w 10% -c 5% -p '${mountpoint}' -x '/dev/vda1'",
   }
 }
