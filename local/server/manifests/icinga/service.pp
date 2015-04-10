@@ -24,14 +24,14 @@ define server::icinga::service (
   $display_name = $name,
 ) {
 
-  ensure_resource('icinga2::object::service', $name, {
+  ensure_resource('icinga2::object::service', $service_name, {
     display_name  => $display_name,
     check_command => $check_command,
     vars          => $check_vars,
   })
 
-  icinga2::object::apply_service_to_host {"${host}-${name}":
-    object_servicename => $name,
+  icinga2::object::apply_service_to_host {$name:
+    object_servicename => $service_name,
     assign             => "assign where host.name=='${host}'",
   }
 
