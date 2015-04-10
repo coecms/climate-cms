@@ -20,9 +20,14 @@ class client::scratchdisk {
 
   file {$target:
     ensure => directory,
-    owner  => root,
-    group  => root,
-    mode   => '0777',
+  }
+
+  file {"${target}/data":
+    ensure  => directory,
+    owner   => root,
+    group   => root,
+    mode    => '0777',
+    require => Mount[$target],
   }
 
   mount {$target:
