@@ -114,13 +114,13 @@ class server::icinga (
   }
 
   icinga2::object::servicegroup {'service':
-    assign_where => 'service.vars.nrpe_command == "check_process"',
+    assign_where => 'service.vars.nrpe_plugin == "check_procs"',
   }
   icinga2::object::servicegroup {'web':
-    assign_where => 'service.vars.nrpe_command == "check_http"',
+    assign_where => 'service.vars.nrpe_plugin == "check_http"',
   }
   icinga2::object::servicegroup {'disk':
-    assign_where => 'service.vars.nrpe_command == "check_disk"',
+    assign_where => 'service.vars.nrpe_plugin == "check_disk"',
   }
 
 }

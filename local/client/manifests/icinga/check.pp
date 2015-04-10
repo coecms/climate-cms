@@ -29,6 +29,7 @@ define client::icinga::check (
     check_command    => 'check_nrpe',
     check_vars       => {
       'nrpe_command' => $nrpe_command_name,
+      'nrpe_plugin'  => $nrpe_plugin,
     },
   }
 
