@@ -79,4 +79,25 @@ class server::icinga (
     user => 'icinga',
   }
 
+  icinga2::object::user {'saw562':
+    email  => 'saw562@nci.org.au',
+    groups => ['fe2_2','access.admin'],
+  }
+
+  icinga2::object::user_group {'access.admin':
+  }
+  icinga2::object::apply_notification_to_host {'accessdev-notifications':
+    assign_where => 'host.vars.domain == "accessdev.nci.org.au"',
+    command      => 'mail-host-notification',
+    user_groups  => ['access.admin'],
+  }
+
+  icinga2::object::user_group {'fe2_2':
+  }
+  icinga2::object::apply_notification_to_host {'climate-notifications':
+    assign_where => 'host.vars.domain == "climate-cms.nci.org.au"',
+    command      => 'mail-host-notification',
+    user_groups  => ['fe2_2'],
+  }
+
 }

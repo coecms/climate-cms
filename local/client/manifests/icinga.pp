@@ -37,6 +37,10 @@ class client::icinga {
     display_name     => $::hostname,
     ipv4_address     => $::ipaddress_eth0,
     target_file_name => "${::fqdn}.conf",
+    vars             => {
+      'hostname'     => $::site::hostname,
+      'domain'       => $::site::domain,
+    }
   }
 
   # Allow Icinga to connect to run nrpe checks
