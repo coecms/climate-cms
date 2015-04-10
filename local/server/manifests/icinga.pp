@@ -86,6 +86,9 @@ class server::icinga (
     email  => 'saw562@nci.org.au',
     groups => ['fe2_2','access.admin'],
   }
+  icinga2::object::user {'pxp581':
+    email  => 'pxp581@nci.org.au',
+  }
 
   icinga2::object::usergroup {'access.admin':
   }
@@ -125,6 +128,11 @@ class server::icinga (
   icinga2::object::servicegroup {'gdata':
     assign_where => 'service.vars.gdata',
   }
+  icinga2::object::apply_notification_to_service {'disk-notifications':
+    assign_where => 'service.vars.nrpe_plugin == "check_disk"',
+    users        => ['pxp581'],
+  }
+
 
   $cmd_user = 'icingacmd'
   $cmd_group = 'icingacmd'
