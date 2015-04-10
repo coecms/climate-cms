@@ -1,10 +1,11 @@
 ---
 classes:
     - client::scratchdisk
+    - site::ldap
 
 # NCI project mounts
 site::gdata:
-    v45:
-      gid: 5636
     ua8:
-      gid: 5972
+      mode: rw
+#   ua6:
+#     mode: rw

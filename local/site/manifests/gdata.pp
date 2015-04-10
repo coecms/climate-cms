@@ -20,15 +20,18 @@ define site::gdata (
   $server   = 'nnfs2.nci.org.au',
   $cluster  = 'data1',
   $gid      = undef,
+  $mode     = 'ro',
 ) {
 
   $mountpoint = "/g/${cluster}/${project}"
 
   # Group needs to match LDAP's GID
-  group {$project:
-    ensure     => present,
-    forcelocal => true,
-    gid        => $gid,
+  if $gid {
+    group {$project:
+      ensure     => present,
+      forcelocal => true,
+      gid        => $gid,
+    }
   }
 
   file {$mountpoint:
@@ -39,7 +42,13 @@ define site::gdata (
     ensure  => mounted,
     device  => "${server}:/mnt/g${cluster}/${project}",
     fstype  => 'nfs',
-    options => 'ro,nolock',
+    options => "${mode},nolock",
     require => [Package['nfs-utils'],File[$mountpoint]],
+  }
+
+  client::icinga::check {"gdata-${name}":
+    display_name     => $mountpoint,
+    nrpe_plugin      => 'check_disk',
+    nrpe_plugin_args => "-w 10% -c 5% -p ${mountpoint}",
   }
 }
