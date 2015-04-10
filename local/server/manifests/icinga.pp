@@ -80,7 +80,7 @@ class server::icinga (
   }
 
   # Notifications
-  package {'mail':}
+  package {'mailx':}
 
   icinga2::object::user {'saw562':
     email  => 'saw562@nci.org.au',
