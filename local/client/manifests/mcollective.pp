@@ -42,6 +42,8 @@ class client::mcollective (
     ssl_client_certs    => 'puppet:///private/mcollective/clients'
   }
 
+  # Required for puppet plugin - https://tickets.puppetlabs.com/browse/MCO-454
+  package {'ruby-json':}
   ::mcollective::plugin {['puppet','service']:
     package => true,
   }
