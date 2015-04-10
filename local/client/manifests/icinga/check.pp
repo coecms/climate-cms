@@ -20,17 +20,21 @@ define client::icinga::check (
   $nrpe_command_name = $name,
   $nrpe_plugin       = undef,
   $nrpe_plugin_args  = '',
+  $vars              = {},
 ) {
+
+  $nrpe_vars = {
+      'nrpe_command' => $nrpe_command_name,
+      'nrpe_plugin'  => $nrpe_plugin,
+  }
+  $_vars = merge($nrpe_vars, $vars)
 
   @@server::icinga::service {"${::fqdn}-${name}":
     service_name     => $name,
     display_name     => $display_name,
     host             => $::fqdn,
     check_command    => 'check_nrpe',
-    check_vars       => {
-      'nrpe_command' => $nrpe_command_name,
-      'nrpe_plugin'  => $nrpe_plugin,
-    },
+    check_vars       => $_vars,
   }
 
   icinga2::nrpe::command {$nrpe_command_name:

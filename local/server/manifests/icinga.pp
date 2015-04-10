@@ -122,7 +122,9 @@ class server::icinga (
   icinga2::object::servicegroup {'disk':
     assign_where => 'service.vars.nrpe_plugin == "check_disk"',
   }
-
+  icinga2::object::servicegroup {'gdata':
+    assign_where => 'service.vars.gdata',
+  }
 
   $cmd_user = 'icingacmd'
   $cmd_group = 'icingacmd'
