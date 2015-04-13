@@ -57,9 +57,4 @@ class client::puppet (
   #    nrpe_plugin  => 'check_puppet_agent',
   #  }
 
-  icinga2::checkplugin {'check_puppet_agent':
-    checkplugin_file_distribution_method => 'source',
-    checkplugin_source_file              => 'puppet:///modules/client/puppet/check_puppet_agent',
-  }
-
 }

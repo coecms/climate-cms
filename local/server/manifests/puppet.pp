@@ -70,6 +70,7 @@ class server::puppet {
 
   include server::puppet::ca
   include server::puppet::reports
+  include server::puppet::monitor
 
   client::icinga::check_process {'puppetserver':
     command  => 'java',
