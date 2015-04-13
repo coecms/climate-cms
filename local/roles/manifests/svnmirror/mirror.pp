@@ -62,6 +62,7 @@ define roles::svnmirror::mirror (
     path      => ['/bin','/usr/bin'],
     user      => $user,
     group     => $group,
+    cwd       => $home,
     unless    => "grep '^${origin}$' ${path}/db/revprops/0/0",
     logoutput => true,
     require   => [
