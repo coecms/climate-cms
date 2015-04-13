@@ -99,7 +99,7 @@ class roles::svnmirror (
   user {$user:
     gid            => $group,
     home           => $home,
-    shell          => '/sbin/nologin',
+    shell          => '/bin/bash',
     system         => true,
     purge_ssh_keys => true,
   }
