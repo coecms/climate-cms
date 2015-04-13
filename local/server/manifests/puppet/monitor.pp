@@ -16,7 +16,7 @@
 
 class server::puppet::monitor {
 
-  $plugin = 'https://raw.githubusercontent.com/evgeni/check_puppetdb_nodes/master/check_puppetdb_nodes'
+  $plugin = 'puppet:///modules/server/puppet/check_puppetdb_nodes'
 
   # Dependencies
   package {[
