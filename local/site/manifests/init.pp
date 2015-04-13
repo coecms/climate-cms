@@ -53,6 +53,10 @@ class site (
     action => 'accept',
   }
 
+  resources {'cron':
+    purge => true,
+  }
+
   # Updates
   class {'yum_cron':
     check_only => 'no',
