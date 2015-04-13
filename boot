@@ -21,7 +21,7 @@ environment='production'
 
 image='centos-6.6-20150129'
 flavor='m1.small'
-secgroups='ssh,elasticsearch'
+secgroups='ssh'
 
 if [ "$hostname" == 'puppet' ]; then
     # This is the Puppetmaster, we'll need to set that up

@@ -38,12 +38,6 @@ class site::security {
     policy => 'drop',
   }
 
-  cron {'yum update':
-    command => 'yum update -y',
-    hour    => 1,
-    minute  => 0,
-  }
-
   class {'::ssh':
     server_options             => {
       'PermitRootLogin'        => 'yes',
