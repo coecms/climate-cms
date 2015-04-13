@@ -43,6 +43,7 @@ class server::icinga (
     db_pass                => $db_password,
     install_nagios_plugins => false,
     purge_configs          => true,
+    purge_confd            => true, # Temporary
     require                => Class['postgresql::client'],
   }
 
@@ -157,6 +158,15 @@ class server::icinga (
 
   class {'icinga2::feature::command':
     command_path => $cmd_path,
+  }
+
+  # Config files we don't want purged
+  file {[
+    '/etc/icinga2/conf.d/commands.conf',
+    '/etc/icinga2/conf.d/notifications.conf',
+    '/etc/icinga2/conf.d/templates.conf',
+    '/etc/icinga2/conf.d/timeperiods.conf',
+  ]:
   }
 
 }
