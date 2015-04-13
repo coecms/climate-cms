@@ -37,7 +37,8 @@ define site::cron (
     weekday => $weekday,
   }
 
-  client::icinga::check_exit_code {"cron-${name}":
+  $_name = regsubst($name,'\s+','-','G')
+  client::icinga::check_exit_code {"cron-${_name}":
     display_name => $name,
     logfile      => $status_file,
   }
