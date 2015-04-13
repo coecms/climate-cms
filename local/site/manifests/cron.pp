@@ -24,7 +24,9 @@ define site::cron (
 ) {
   validate_string($command)
 
-  $status_file = "/tmp/cron-status-${name}"
+  # Remove spaces from filename
+  $_name = regsubst($name,'\s+','-','G')
+  $status_file = "/tmp/cron-status-${_name}"
 
   $_command = "${command} 2>1 > ${status_file}; echo 'Exit code:' \$? >> ${status_file}"
 
@@ -37,7 +39,6 @@ define site::cron (
     weekday => $weekday,
   }
 
-  $_name = regsubst($name,'\s+','-','G')
   client::icinga::check_exit_code {"cron-${_name}":
     display_name => $name,
     logfile      => $status_file,
