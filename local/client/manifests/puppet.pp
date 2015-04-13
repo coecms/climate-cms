@@ -52,10 +52,10 @@ class client::puppet (
   file {[$certdir,$privatekeydir,$ca,$cert,$key]:}
 
   # Monitoring
-  client::icinga::check {'puppet':
-    display_name => 'puppet agent',
-    nrpe_plugin  => 'check_puppet_agent',
-  }
+  #  client::icinga::check {'puppet':
+  #    display_name => 'puppet agent',
+  #    nrpe_plugin  => 'check_puppet_agent',
+  #  }
 
   icinga2::checkplugin {'check_puppet_agent':
     checkplugin_file_distribution_method => 'source',
