@@ -14,24 +14,13 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-class server::puppet::monitor {
+# Nodes should export this class to have their Puppet agent monitored
+define server::puppet::monitor_agent {
+  $node = $name
 
-  $plugin = 'puppet:///modules/server/puppet/check_puppetdb_nodes'
-
-  # Dependencies
-  package {[
-    'perl-JSON',
-    'perl-DateTime-Format-DateParse',
-  ]:
-    require => Class['epel'],
+  client::icinga::check {"puppet-agent-${node}":
+    display_name     => "${node} puppet agent",
+    nrpe_plugin      => 'check_puppetdb_nodes',
+    nrpe_plugin_args => "--hostname='${node}'",
   }
-
-  icinga2::checkplugin {'check_puppetdb_nodes':
-    checkplugin_file_distribution_method => 'source',
-    checkplugin_source_file              => $plugin,
-  }
-
-  # Collect agents to monitor
-  Server::Puppet::Monitor_agent <<||>>
-
 }

@@ -51,10 +51,7 @@ class client::puppet (
 
   file {[$certdir,$privatekeydir,$ca,$cert,$key]:}
 
-  # Monitoring
-  #  client::icinga::check {'puppet':
-  #    display_name => 'puppet agent',
-  #    nrpe_plugin  => 'check_puppet_agent',
-  #  }
+  # Monitor agent run results
+  @@server::puppet::monitor_agent {$::hostname:}
 
 }
