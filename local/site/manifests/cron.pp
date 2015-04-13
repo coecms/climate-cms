@@ -31,7 +31,6 @@ define site::cron (
   $_command = "${command} 2>1 > ${status_file}; echo 'Exit code:' \$? >> ${status_file}"
 
   cron {$name:
-    ensure  => absent,
     command => $_command,
     user    => $user,
     hour    => $hour,
