@@ -59,7 +59,7 @@ class client::puppet (
 
   icinga2::checkplugin {'check_puppet_agent':
     checkplugin_file_distribution_method => 'source',
-    source                               => 'puppet:///modules/client/puppet/check_puppet_agent',
+    checkplugin_source_file              => 'puppet:///modules/client/puppet/check_puppet_agent',
   }
 
 }
