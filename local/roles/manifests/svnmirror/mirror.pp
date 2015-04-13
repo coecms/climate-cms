@@ -62,6 +62,7 @@ define roles::svnmirror::mirror (
     path      => ['/bin','/usr/bin'],
     user      => $user,
     group     => $group,
+    cwd       => $path,
     unless    => "grep '^${origin}$' ${path}/db/revprops/0/0",
     logoutput => true,
     require   => [
@@ -72,7 +73,7 @@ define roles::svnmirror::mirror (
 
   # Do regular pulls
   site::cron {"svnsync sync ${name}":
-    command   => "/usr/bin/svnsync sync --non-interactive file://${path}",
+    command   => "cd ${path} && /usr/bin/svnsync sync --non-interactive file://${path}",
     user      => $user,
     minute    => "*/${update_minutes}",
     require   => Exec["svnsync init ${path}"],
