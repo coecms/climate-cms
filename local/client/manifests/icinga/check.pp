@@ -22,6 +22,9 @@ define client::icinga::check (
   $nrpe_plugin_args  = '',
   $vars              = {},
 ) {
+  # Ensure no white-space for filenames
+  validate_re($name,'^\S+$')
+  validate_re($nrpe_command_name, '^\S+$')
 
   $nrpe_vars = {
       'nrpe_command' => $nrpe_command_name,
