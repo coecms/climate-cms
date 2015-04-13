@@ -21,6 +21,6 @@ define server::puppet::monitor_agent {
   client::icinga::check {"puppet-agent-${node}":
     display_name     => "${node} puppet agent",
     nrpe_plugin      => 'check_puppetdb_nodes',
-    nrpe_plugin_args => "--hostname='${node}'",
+    nrpe_plugin_args => "--node='${node}'",
   }
 }
