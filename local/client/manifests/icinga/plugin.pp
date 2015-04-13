@@ -14,31 +14,11 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# Local type for a monitored cron job
-define site::cron (
-  $command = $name,
-  $user    = undef,
-  $hour    = undef,
-  $minute  = undef,
-  $weekday = undef,
+define client::icinga::plugin (
+  $source = "puppet:///modules/client/icinga/${name}"
 ) {
-  validate_string($command)
-
-  $status_file = "/tmp/cron-status-${name}"
-
-  $_command = "${command} 2>1 > ${status_file}; echo 'Exit code:' \$? >> ${status_file}"
-
-  ::cron {$name:
-    command => $_command,
-    user    => $user,
-    hour    => $hour,
-    minute  => $minute,
-    weekday => $weekday,
+  icinga2::checkplugin {$name:
+    checkplugin_file_distribution_method => 'source',
+    checkplugin_source_file              => $source,
   }
-
-  client::icinga::check_exit_code {"cron-${name}":
-    display_name => $name,
-    logfile      => $status_file,
-  }
-
 }

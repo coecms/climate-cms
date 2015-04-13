@@ -14,31 +14,23 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# Local type for a monitored cron job
-define site::cron (
-  $command = $name,
-  $user    = undef,
-  $hour    = undef,
-  $minute  = undef,
-  $weekday = undef,
+# Check a file for the string 'Exit code: %d' & report if non-zero
+define client::icinga::check_exit_code (
+  $logfile,
+  $timeout       = 120, # Report error if not modified in this many minutes
+  $display_name  = undef,
+  $vars          = undef,
 ) {
-  validate_string($command)
+  validate_absolute_path($logfile)
+  validate_re($timeout,'^[0-9]+$')
 
-  $status_file = "/tmp/cron-status-${name}"
+  include client::icinga::plugin::check_exit_code
 
-  $_command = "${command} 2>1 > ${status_file}; echo 'Exit code:' \$? >> ${status_file}"
-
-  ::cron {$name:
-    command => $_command,
-    user    => $user,
-    hour    => $hour,
-    minute  => $minute,
-    weekday => $weekday,
-  }
-
-  client::icinga::check_exit_code {"cron-${name}":
-    display_name => $name,
-    logfile      => $status_file,
+  client::icinga::check_nrpe {$name:
+    display_name     => $display_name,
+    nrpe_plugin      => 'check_exit_code',
+    nrpe_plugin_args => "-f '${logfile}' -t '${timeout}'",
+    vars             => $vars,
   }
 
 }
