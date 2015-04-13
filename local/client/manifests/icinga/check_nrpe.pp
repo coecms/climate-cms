@@ -15,7 +15,7 @@
 #  limitations under the License.
 
 # Run a check on this host using nrpe
-define client::icinga::check (
+define client::icinga::check_nrpe (
   $display_name      = $name,
   $nrpe_command_name = $name,
   $nrpe_plugin       = undef,

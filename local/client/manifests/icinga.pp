@@ -28,7 +28,7 @@ class client::icinga {
     user => 'nrpe',
   }
 
-  client::icinga::check {'disk':
+  client::icinga::check_nrpe {'disk':
     nrpe_plugin      => 'check_disk',
     nrpe_plugin_args => '-w 10% -c 5% -p /',
   }

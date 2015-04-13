@@ -39,7 +39,7 @@ define client::icinga::check_process (
 
   $_args = "${_command} ${_argument} ${_user}"
 
-  client::icinga::check {"process-${name}":
+  client::icinga::check_nrpe {"process-${name}":
     display_name     => $display_name,
     nrpe_plugin      => 'check_procs',
     nrpe_plugin_args => "-w ${warn} -c ${critical} ${_args}",

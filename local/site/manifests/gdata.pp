@@ -46,7 +46,7 @@ define site::gdata (
     require => [Package['nfs-utils'],File[$mountpoint]],
   }
 
-  client::icinga::check {"gdata-${name}":
+  client::icinga::check_nrpe {"gdata-${name}":
     display_name     => $mountpoint,
     nrpe_plugin      => 'check_disk',
     nrpe_plugin_args => "-w 10% -c 5% -p '${mountpoint}' -x '/dev/vda1'",

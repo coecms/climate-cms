@@ -38,7 +38,7 @@ class client::scratchdisk {
     require => File[$target],
   }
 
-  client::icinga::check {'scratch':
+  client::icinga::check_nrpe {'scratch':
     nrpe_plugin      => 'check_disk',
     nrpe_plugin_args => '-w 10% -c 5% -p \'/dev/vdb\'',
   }
