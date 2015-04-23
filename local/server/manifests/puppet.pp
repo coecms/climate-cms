@@ -78,4 +78,13 @@ class server::puppet {
     user     => 'puppet',
   }
 
+  # Lower memory allocation
+  $memory = '512m'
+  file_line {'puppetserver memory':
+    path   => '/etc/sysconfig/puppetserver',
+    line   => "JAVA_ARGS=\"-Xms${memory} -Xmx${memory} -XX:MaxPermSize=256m\"",
+    match  => '^JAVA_ARGS=',
+    notify => Service['puppetserver'],
+  }
+
 }
