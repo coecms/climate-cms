@@ -72,6 +72,7 @@ class roles::kibana {
   }
 
   client::proxy::connection {'/admin/kibana':
-    port => '5601',
+    target_path => '',
+    port        => '5601',
   }
 }
