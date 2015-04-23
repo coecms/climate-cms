@@ -15,7 +15,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-class roles::elasticsearch (
+class server::elasticsearch (
 ) {
   include site::java
 
@@ -39,5 +39,15 @@ class roles::elasticsearch (
     port   => '9200',
     source => $kibana_ip,
     action => 'accept',
+  }
+
+  package {'elasticsearch-curator':
+    ensure   => present,
+    provider => 'pip',
+  }
+
+  site::cron {'elasticsearch-curator':
+    command => '/usr/bin/curator delete indices --older-than 30 --time-unit days --timestring %Y.%m.%d',
+    hour    => 1,
   }
 }

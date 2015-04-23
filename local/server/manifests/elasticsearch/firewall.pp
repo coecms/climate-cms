@@ -14,7 +14,8 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-define roles::elasticsearch::firewall {
+# Allow a client VM to connect to the elasticsearch server
+define server::elasticsearch::firewall {
 
   firewall {"930 elasticsearch from ${name}":
     proto  => 'tcp',

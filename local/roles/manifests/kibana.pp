@@ -19,7 +19,7 @@ class roles::kibana {
   $package    = 'kibana-4.0.1-linux-x64'
   $source_url = "https://download.elasticsearch.org/kibana/kibana/${package}.tar.gz"
 
-  $elasticsearch = query_nodes('Class[roles::elasticsearch]',
+  $elasticsearch = query_nodes('Class[server::elasticsearch]',
                                 ipaddress_eth0)
 
   class {'supervisord': }

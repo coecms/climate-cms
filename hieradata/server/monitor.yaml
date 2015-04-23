@@ -1,5 +1,4 @@
 ---
 classes:
-  - roles::elasticsearch
+  - server::elasticsearch
   - server::icinga
-  - client::icinga

@@ -20,7 +20,7 @@ class site::logstash (
 ) {
   include site::java
 
-  $elasticsearch_ip = query_nodes('Class[roles::elasticsearch]',
+  $elasticsearch_ip = query_nodes('Class[server::elasticsearch]',
                                 ipaddress_eth0)
 
   class {'::logstash':
