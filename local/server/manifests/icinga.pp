@@ -85,7 +85,7 @@ class server::icinga (
 
   icinga2::object::user {'saw562':
     email  => 'saw562@nci.org.au',
-    groups => ['fe2_2','access.admin'],
+    groups => ['climate-admin','access-admin'],
   }
   icinga2::object::user {'pxp581':
     email  => 'pxp581@nci.org.au',
@@ -98,26 +98,34 @@ class server::icinga (
     command      => 'mail-service-notification',
   }
 
-  icinga2::object::usergroup {'access.admin':
+  icinga2::object::usergroup {'access-admin':
   }
   icinga2::object::apply_notification_to_host {'accessdev-host-notifications':
     assign_where => 'host.vars.domain == "accessdev.nci.org.au"',
-    user_groups  => ['access.admin'],
+    user_groups  => ['access-admin'],
+    period       => '9to5',
+    interval     => '0',
   }
   icinga2::object::apply_notification_to_service {'accessdev-services-notifications':
     assign_where => 'host.vars.domain == "accessdev.nci.org.au"',
-    user_groups  => ['access.admin'],
+    user_groups  => ['access-admin'],
+    period       => '9to5',
+    interval     => '0',
   }
 
-  icinga2::object::usergroup {'fe2_2':
+  icinga2::object::usergroup {'climate-admin':
   }
   icinga2::object::apply_notification_to_host {'climate-host-notifications':
     assign_where => 'host.vars.domain == "climate-cms.nci.org.au"',
-    user_groups  => ['fe2_2'],
+    user_groups  => ['climate-admin'],
+    period       => '9to5',
+    interval     => '0',
   }
   icinga2::object::apply_notification_to_service {'climate-service-notifications':
     assign_where => 'host.vars.domain == "climate-cms.nci.org.au"',
-    user_groups  => ['fe2_2'],
+    user_groups  => ['climate-admin'],
+    period       => '9to5',
+    interval     => '0',
   }
 
   icinga2::object::servicegroup {'service':
@@ -132,9 +140,12 @@ class server::icinga (
   icinga2::object::servicegroup {'gdata':
     assign_where => 'service.vars.gdata',
   }
+
   icinga2::object::apply_notification_to_service {'disk-notifications':
     assign_where => 'service.vars.nrpe_plugin == "check_disk"',
     users        => ['pxp581'],
+    period       => '9to5',
+    interval     => '0',
   }
 
 
@@ -163,7 +174,6 @@ class server::icinga (
   # Config files we don't want purged
   file {[
     '/etc/icinga2/conf.d/commands.conf',
-    '/etc/icinga2/conf.d/notifications.conf',
     '/etc/icinga2/conf.d/templates.conf',
     '/etc/icinga2/conf.d/timeperiods.conf',
   ]:
