@@ -79,6 +79,13 @@ class site::ldap (
     path    => ['/usr/sbin','/usr/bin'],
     unless  => 'getent group access',
     require => Package['sssd'],
+    notify  => Exec['rehash ldap certs'],
+  }
+
+  exec {'rehash ldap certs':
+    command     => 'cacertdir_rehash /etc/openldap/cacerts',
+    path        => '/usr/sbin',
+    refreshonly => true,
   }
 
 }
