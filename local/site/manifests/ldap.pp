@@ -83,8 +83,7 @@ class site::ldap (
   }
 
   exec {'rehash ldap certs':
-    command     => 'cacertdir_rehash /etc/openldap/cacerts',
-    path        => '/usr/sbin',
+    command     => '/usr/sbin/cacertdir_rehash /etc/openldap/cacerts',
     refreshonly => true,
   }
 
