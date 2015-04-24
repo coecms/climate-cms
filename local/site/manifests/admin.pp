@@ -19,7 +19,6 @@
 
 define site::admin (
   $mail    = undef,
-  $uid     = undef,
   $pubkeys = [],
 ) {
   validate_re($name, '^[a-z]{3}[0-9]{3}$')
@@ -33,7 +32,6 @@ define site::admin (
 
   user {$name:
     ensure         => present,
-    uid            => $uid,
     home           => $home,
     forcelocal     => true,
     managehome     => true,
