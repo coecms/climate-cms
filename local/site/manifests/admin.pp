@@ -30,12 +30,12 @@ define site::admin (
     "/home/${institute_code}",
     {'ensure' => 'directory'})
 
+  # Users come from LDAP
+  include site::ldap
+  include site::nfsh
   user {$name:
-    ensure         => present,
-    home           => $home,
+    ensure         => absent,
     forcelocal     => true,
-    managehome     => true,
-    purge_ssh_keys => true,
   }
 
   file {$home:
