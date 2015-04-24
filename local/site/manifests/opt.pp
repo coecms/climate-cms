@@ -14,11 +14,8 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# NCI shell wrapper
-class site::nfsh {
-  include site::opt
-  file {'/opt/bin/nfsh':
-    ensure => link,
-    target => '/bin/bash',
+class site::opt {
+  file {['/opt/bin']:
+    ensure => directory,
   }
 }
