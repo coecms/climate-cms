@@ -34,7 +34,7 @@ class site::ldap (
     validate_string($cert)
   }
 
-  $url          = "${protocol}${domain}:${port}"
+  $url          = "${protocol}://${domain}:${port}"
 
   $user_dn      = "${user_rdn},${base_dn}"
   $user_pattern = "${user_id}={0},${user_dn}"
@@ -66,7 +66,7 @@ class site::ldap (
   $auth_opts = [
     '--enableldap',
     '--enableldapauth',
-    "--ldapserver=${protocol}://${domain}:${port}",
+    "--ldapserver=${url}",
     "--ldapbasedn=${base_dn}",
     $_ldaptls,
     "--ldaploadcacert=file://${ca_file}",
