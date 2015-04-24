@@ -37,7 +37,6 @@ class server::tomcat {
   # Connect tomcat user to groups
   $projects = keys($site::gdata)
   user {'tomcat':
-    uid    => '5424',
     gid    => 'tomcat',
     groups => $projects,
     system => true,
