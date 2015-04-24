@@ -48,17 +48,17 @@ class site::ldap (
   file {$ca_path:
     ensure => directory,
   }
+  file {$ca_file:
+    ensure  => file,
+    content => $cert,
+  }
 
   package {'sssd':
     ensure => present,
   }
 
   if $tls {
-    file {$ca_file:
-      ensure  => file,
-      content => $cert,
-    }
-    $_ldaptls = "--enableldaptls, --ldaploadcacert=file://${ca_file}"
+    $_ldaptls = '--enableldaptls'
   } else {
     $_ldaptls = '--disableldaptls'
   }
@@ -69,6 +69,7 @@ class site::ldap (
     "--ldapserver=${protocol}://${domain}:${port}",
     "--ldapbasedn=${base_dn}",
     $_ldaptls,
+    "--ldaploadcacert=file://${ca_file}",
     '--updateall',
   ]
   $auth_optlist = join($auth_opts, ' ')
