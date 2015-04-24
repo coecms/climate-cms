@@ -16,7 +16,7 @@
 
 # Type to contain LDAP parameters
 class site::ldap (
-  $protocol     = 'ldaps://',
+  $protocol     = 'ldaps',
   $domain       = 'example.com',
   $port         = '636',
   $base_dn      = 'dc=example,dc=com',
@@ -25,8 +25,15 @@ class site::ldap (
   $user_id      = 'uid',
   $group_id     = 'cn',
   $group_member = 'memberUid',
-  $cert         = '',
+  $tls          = true,
+  $cert         = undef,
 ) {
+
+  validate_bool($tls)
+  if $tls {
+    validate_string($cert)
+  }
+
   $url          = "${protocol}${domain}:${port}"
 
   $user_dn      = "${user_rdn},${base_dn}"
@@ -41,23 +48,28 @@ class site::ldap (
   file {$ca_path:
     ensure => directory,
   }
-  file {$ca_file:
-    ensure  => file,
-    content => $cert,
-  }
 
   package {'sssd':
     ensure => present,
   }
 
+  if $tls {
+    file {$ca_file:
+      ensure  => file,
+      content => $cert,
+    }
+    $_ldaptls = "--enableldaptls, --ldaploadcacert=file://${ca_file}"
+  } else {
+    $_ldaptls = '--disableldaptls'
+  }
+
   $auth_opts = [
     '--enableldap',
     '--enableldapauth',
-    "--ldapserver=${protocol}${domain}:${port}",
+    "--ldapserver=${protocol}://${domain}:${port}",
     "--ldapbasedn=${base_dn}",
-    '--enableldaptls',
-    "--ldaploadcacert=file://${ca_file}",
-    "--updateall",
+    $_ldaptls,
+    '--updateall',
   ]
   $auth_optlist = join($auth_opts, ' ')
 
