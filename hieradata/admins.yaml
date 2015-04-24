@@ -4,10 +4,12 @@
 #  - These users will have sudo rights by default
 site::admins:
     saw562:
+        uid: 5424
         mail: saw562@nci.org.au
         pubkeys:
             - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC66UV5uI+2k1WtgefX33ugqS+6trtMnD3bzkQZm6hCRe1Zjt8cABiBx06yNRECjTYX1Crfh8sOzwFTH6NlhF0oEg4iSv3WWutAOROONoKKsMFr0m3e31dUVwf0BrpuCt0HqJ/Z+lKgzB6Cz1vPTjfMjn2ut0So3u3zTpZjIYputEweAjF/FQEzlNjx9FmMcOMC0XrEDYdMrKq/9dwmXHT/4W6w9LC4sBsXVB+Cs2xcmxoD+K5j1PlUUIM9ffJxU5uGF90eR2GH3ZM2+R34uE/8LQutE3ctRDM+sHOrhyMFo+4Hqc0QtyWkBF/IGa5tfd0MNxKKuh/1l6SHQW2gLbaL swales@walesnix
     pxp581:
+        uid: 2014
         pubkeys:
             - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCj2kJUiTTXXuxCvVqo0h0L6JJ11nLj6VAHFDTYPkzjl/dNoCcNmCIo73zYIHhYIGIYSygmLcSlwwHKiknytZc6FoyizXk8xMCJZGNxc2goSisMuoCHoPFP61gg875L8NZgzHiRPngpfW1nBWuGzoJ7co5URL41/y3ecJN2ZYz2O3hBw9uDFD4KvdiUXLgofDWmgm/cywGmN1vuQM5DPovWPhwwdFb52OYvvxzt6WAkXxspBZamQgLZx9w+M9gzcF2Z5pCslwW8QqPTZ8yKyy7mDAGHa1Y2O8Q40DchXEqNi4fNSBi5GL08YV9hDO7G3CNY9TsLLJF+QpSg7eOFO5pJ paolap@scls-spn-16637-wb.imas.utas.edu.au
 
