@@ -20,3 +20,6 @@ roles::svnmirror::mirrors:
     roses-u:
         url:       /svn/roses-u
         origin:    https://code.metoffice.gov.uk/svn/roses-u
+    socrates:
+        url:       /svn/socrates
+        origin:    https://code.metoffice.gov.uk/svn/socrates
