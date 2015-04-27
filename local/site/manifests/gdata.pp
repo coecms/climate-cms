@@ -25,6 +25,12 @@ define site::gdata (
 
   $mountpoint = "/g/${cluster}/${project}"
 
+  # Local copy of the group
+  group {$project:
+    gid        => $gid,
+    forcelocal => true,
+  }
+
   file {$mountpoint:
     ensure => directory,
   }
