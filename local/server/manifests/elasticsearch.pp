@@ -47,7 +47,7 @@ class server::elasticsearch (
   }
 
   site::cron {'elasticsearch-curator':
-    command => '/usr/bin/curator delete indices --older-than 30 --time-unit days --timestring \'\\%Y.\\%m.\\%d\'',
+    command => '/usr/bin/curator delete indices --older-than 30 --time-unit days --timestring \'\%Y.\%m.\%d\'',
     hour    => 1,
     minute  => 0,
   }
