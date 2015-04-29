@@ -4,7 +4,7 @@ classes:
 
 # Where will users access this server from? (other IPs will be blocked by
 # Apache)
-roles::svnmirror::access_ip: '130.56.244.72 130.56.244.73 130.56.244.115'
+roles::svnmirror::access_ip: '130.56.244.72/29 130.56.244.112/30'
 
 # List of servers to mirror
 roles::svnmirror::mirrors:
