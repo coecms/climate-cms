@@ -38,9 +38,16 @@ define site::cron (
     weekday => $weekday,
   }
 
+  if $hour {
+    $timeout = 2*24*60 # 2 days in minutes
+  } else {
+    $timeout = 2*60    # 2 hours in minutes
+  }
+
   client::icinga::check_exit_code {"cron-${_name}":
     display_name => $name,
     logfile      => $status_file,
+    timeout      => $timeout,
   }
 
 }
