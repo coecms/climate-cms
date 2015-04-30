@@ -22,7 +22,7 @@ define client::icinga::check_exit_code (
   $vars          = undef,
 ) {
   validate_absolute_path($logfile)
-  validate_re($timeout,'^[0-9]+$')
+  validate_integer($timeout)
 
   include client::icinga::plugin::check_exit_code
 

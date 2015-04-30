@@ -1,6 +1,6 @@
 forge "https://forge.puppetlabs.com"
 
-mod 'puppetlabs/stdlib'
+mod 'puppetlabs/stdlib', '4.6.0'
 mod 'puppetlabs/apache'
 mod 'puppetlabs/firewall'
 mod 'puppetlabs/ntp'
