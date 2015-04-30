@@ -32,7 +32,7 @@ class site::mail (
     lens    => 'Postfix_main.lns',
     context => '/files/etc/postfix/main.cf',
     changes => [
-      "set myhostname '${::fqdn}'",
+      "set myhostname '${::hostname}.climate-cms.org'",
       "set relayhost  '${relay}'",
     ],
     notify  => Service['postfix'],
