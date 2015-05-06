@@ -37,7 +37,7 @@ define server::proxy::connection (
   client::icinga::check_nrpe {"https-${escaped_name}":
     display_name     => "https://${vhost}${name}",
     nrpe_plugin      => 'check_http',
-    nrpe_plugin_args => "-H '${vhost}' -u '${name}' --ssl -f follow -w 1 -c 10",
+    nrpe_plugin_args => "-H '${vhost}' -u '${name}' --ssl -f follow -w 2 -c 10",
   }
 
   apacheplus::location {$name:
