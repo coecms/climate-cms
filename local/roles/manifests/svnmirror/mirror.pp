@@ -80,11 +80,13 @@ define roles::svnmirror::mirror (
   }
 
   # The mirror is accessed from here
-  # Also allow access from the local machine's IP address for testing
+  # Also allow access from the local machine's IP address and Jenkins for
+  # testing
+  $jenkins_ip = query_nodes('Class[server::jenkins]','ipaddress_eth0')
   apacheplus::location {$url:
     vhost           => $vhost,
     order           => 'Deny,Allow',
-    allow           => "from ${access_ip} ${::ipaddress_eth0} localhost",
+    allow           => "from ${access_ip} ${::ipaddress_eth0} ${jenkins_ip} localhost",
     deny            => 'from all',
     custom_fragment => "
       DAV                  svn
