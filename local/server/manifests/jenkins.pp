@@ -19,6 +19,11 @@ class server::jenkins {
   include site::ldap
   include ::git
 
+  package { 'puppet-lint':
+    ensure   => '1.1.0',
+    provider => 'gem',
+  }
+
   $path = '/jenkins'
   $port = 8009
 
