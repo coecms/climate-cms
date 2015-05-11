@@ -17,6 +17,7 @@
 class server::jenkins {
   include site::java
   include site::ldap
+  include ::git
 
   $path = '/jenkins'
   $port = 8009
