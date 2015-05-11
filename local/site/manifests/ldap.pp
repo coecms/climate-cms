@@ -51,6 +51,7 @@ class site::ldap (
   file {$ca_file:
     ensure  => file,
     content => $cert,
+    notify  => Exec['authconfig'],
   }
 
   package {'sssd':
