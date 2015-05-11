@@ -42,7 +42,7 @@ class site::ldap (
   $group_dn      = "${group_rdn},${base_dn}"
   $group_pattern = "${group_id}={0},${group_dn}"
 
-  $ca_path       = '/etc/openldap/CA'
+  $ca_path       = '/etc/openldap/cacerts'
   $ca_file       = "${ca_path}/${domain}"
 
   file {$ca_path:
@@ -51,7 +51,7 @@ class site::ldap (
   file {$ca_file:
     ensure  => file,
     content => $cert,
-    notify  => Exec['authconfig'],
+    notify  => Exec['rehash ldap certs'],
   }
 
   package {'sssd':
@@ -70,7 +70,6 @@ class site::ldap (
     "--ldapserver=${url}",
     "--ldapbasedn=${base_dn}",
     $_ldaptls,
-    "--ldaploadcacert=file://${ca_file}",
     '--updateall',
   ]
   $auth_optlist = join($auth_opts, ' ')
