@@ -3,5 +3,6 @@ classes:
   - server::puppet
   - roles::puppetdb
   - roles::activemq
-  - salt
+  - server::salt
+  - client::salt
 
