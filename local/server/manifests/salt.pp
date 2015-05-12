@@ -36,5 +36,8 @@ class server::salt {
 
   # Allow jenkins to connnect to the salt server so it can test the nodes
   include client::jenkins
+  sudo::conf {'jenkins-salt':
+    content => 'jenkins root = NOPASSWD: salt'
+  }
 
 }
