@@ -14,27 +14,26 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# Installs a salt master
-#
-# Salt is a way to run commands on multiple computers at once, for instance if
-# you run on the salt master
-#
-#    salt '*' puppet.run agent test
-#
-# Puppet will be run on every salt client instance
+# Client class so Jenkins can connect to a machine as a worker node
+class client::jenkins (
+  $ssh_key,
+  $key_type = 'ssh-rsa',
+) {
+  $user = 'jenkins'
+  $home = '/var/lib/jenkins'
 
-class server::salt {
-
-  # Install master
-  class {'::salt::master':
+  user {$user:
+    home => $home,
   }
 
-  # Allow minions to see the master
-  $client_ips = query_nodes('Class[client::salt]','ipaddress_eth0')
-  server::salt::firewall {$client_ips:
+  file {$home:
+    ensure => directory,
+    owner  => $user,
   }
 
-  # Allow jenkins to connnect to the salt server so it can test the nodes
-  include client::jenkins
-
+  ssh_authorized_key {$name:
+    user => $user,
+    type => $key_type,
+    key  => $ssh_key,
+  }
 }
