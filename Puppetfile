@@ -48,3 +48,5 @@ mod 'logstash_reporter',
     :git    => 'https://github.com/logstash/puppet-logstash-reporter.git'
 
 mod 'rtyler/jenkins'
+
+mod 'aboe/salt'
