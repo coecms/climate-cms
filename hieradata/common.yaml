@@ -5,7 +5,7 @@ classes:
     - site
     - client::icinga
     - client::puppet
-    - client::mcollective
+    - client::salt
 
 site::domain: 'climate-cms.nci.org.au'
 
