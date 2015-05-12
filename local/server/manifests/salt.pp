@@ -31,7 +31,7 @@ class server::salt {
 
   # Allow minions to see the master
   $client_ips = query_nodes('Class[client::salt]','ipaddress_eth0')
-  server::salt::firwall {$client_ips:
+  server::salt::firewall {$client_ips:
   }
 
 }
