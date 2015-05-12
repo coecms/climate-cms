@@ -14,24 +14,13 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# Installs a salt master
-#
-# Salt is a way to run commands on multiple computers at once, for instance if
-# you run on the salt master
-#
-#    salt '*' puppet.run agent test
-#
-# Puppet will be run on every salt client instance
+define server::salt::firewall {
 
-class server::salt {
-
-  # Install master
-  class {'::salt::master':
-  }
-
-  # Allow minions to see the master
-  $client_ips = query_nodes('Class[client::salt]','ipaddress_eth0')
-  server::salt::firwall {$client_ips:
+  firewall {"450 salt from ${name}":
+    proto  => 'tcp',
+    port   => '4505-4506',
+    source => $name,
+    action => 'accept',
   }
 
 }
