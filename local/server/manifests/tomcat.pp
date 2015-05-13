@@ -23,6 +23,7 @@ class server::tomcat {
 
   $catalina_home = '/usr/share/tomcat'
   $java_home     = '/usr/lib/jvm/jre'
+  $user          = 'v45_tomcat'
 
   class {'::tomcat':
     install_from_source => false,
@@ -34,12 +35,11 @@ class server::tomcat {
     require      => Class['epel'],
   }
 
-  # Connect tomcat user to groups
-  $projects = keys($site::gdata)
-  user {'tomcat':
-    gid    => 'tomcat',
-    groups => $projects,
-    system => true,
+  file_line {'tomcat user':
+    path    => "${catalina_home}/conf/tomcat.conf",
+    line    => "TOMCAT_USER=${user}",
+    match   => '^TOMCAT_USER=.*',
+    require => Tomcat::Instance['default'],
   }
 
   tomcat::service {'default':
@@ -51,7 +51,7 @@ class server::tomcat {
   client::icinga::check_process {'tomcat':
     command  => 'java',
     argument => 'org.apache.catalina.startup.Bootstrap start',
-    user     => 'tomcat',
+    user     => $user,
   }
 
   package {['log4j','tomcat-native']:
