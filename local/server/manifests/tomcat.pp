@@ -37,9 +37,10 @@ class server::tomcat {
 
   file_line {'tomcat user':
     path    => "${catalina_home}/conf/tomcat.conf",
-    line    => "TOMCAT_USER=${user}",
+    line    => "TOMCAT_USER=\"${user}\"",
     match   => '^TOMCAT_USER=.*',
     require => Tomcat::Instance['default'],
+    notify  => Tomcat::Service['default'],
   }
 
   tomcat::service {'default':
