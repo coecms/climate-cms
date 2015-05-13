@@ -23,7 +23,7 @@ class server::tomcat {
 
   $catalina_home = '/usr/share/tomcat'
   $java_home     = '/usr/lib/jvm/jre'
-  $user          = 'v45_tomcat'
+  $user          = 'v45_apache'
 
   class {'::tomcat':
     install_from_source => false,
