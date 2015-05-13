@@ -2,3 +2,4 @@
 *.swp
 /Gemfile.lock
 /hieradata/*private*
+/doc/_build
