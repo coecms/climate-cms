@@ -1,0 +1,157 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Servers &mdash; climate-cms cloud 0.1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="climate-cms cloud 0.1.0 documentation" href="index.html" />
+    <link rel="next" title="Puppet Classes" href="modules.html" />
+    <link rel="prev" title="Admin Tasks" href="tasks.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="modules.html" title="Puppet Classes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tasks.html" title="Admin Tasks"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">climate-cms cloud 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="servers">
+<h1>Servers<a class="headerlink" href="#servers" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="web">
+<h2>web<a class="headerlink" href="#web" title="Permalink to this headline">¶</a></h2>
+<p>Apache and Tomcat server. All web requests are proxied through here. Has
+<tt class="docutils literal"><span class="pre">/g/data</span></tt> mounted read-only so that data services running under Tomcat can
+see it.</p>
+</div>
+<div class="section" id="puppet-2">
+<h2>puppet-2<a class="headerlink" href="#puppet-2" title="Permalink to this headline">¶</a></h2>
+<p>Puppet master server. Controls configuration of all other servers using Puppet and Salt</p>
+</div>
+<div class="section" id="downloader-2">
+<h2>downloader-2<a class="headerlink" href="#downloader-2" title="Permalink to this headline">¶</a></h2>
+<p>Large storage node for data downloads. Has <tt class="docutils literal"><span class="pre">/g/data</span></tt> mounted read-write and a
+large <tt class="docutils literal"><span class="pre">/scratch</span></tt> disk to use as a cache</p>
+</div>
+<div class="section" id="db">
+<h2>db<a class="headerlink" href="#db" title="Permalink to this headline">¶</a></h2>
+<p>Postgres database, used by PuppetDB and some data tools</p>
+</div>
+<div class="section" id="code">
+<h2>code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h2>
+<p>Jenkins server</p>
+</div>
+<div class="section" id="metoffice-mirror">
+<h2>metoffice-mirror<a class="headerlink" href="#metoffice-mirror" title="Permalink to this headline">¶</a></h2>
+<p>Subversion server that mirrors external repositories at the Met Office</p>
+</div>
+<div class="section" id="monitor">
+<h2>monitor<a class="headerlink" href="#monitor" title="Permalink to this headline">¶</a></h2>
+<p>Icinga and ELK server for monitoring the other hosts</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Servers</a><ul>
+<li><a class="reference internal" href="#web">web</a></li>
+<li><a class="reference internal" href="#puppet-2">puppet-2</a></li>
+<li><a class="reference internal" href="#downloader-2">downloader-2</a></li>
+<li><a class="reference internal" href="#db">db</a></li>
+<li><a class="reference internal" href="#code">code</a></li>
+<li><a class="reference internal" href="#metoffice-mirror">metoffice-mirror</a></li>
+<li><a class="reference internal" href="#monitor">monitor</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tasks.html"
+                        title="previous chapter">Admin Tasks</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="modules.html"
+                        title="next chapter">Puppet Classes</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/servers.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="modules.html" title="Puppet Classes"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tasks.html" title="Admin Tasks"
+             >previous</a> |</li>
+        <li><a href="index.html">climate-cms cloud 0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Scott Wales.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
