@@ -75,6 +75,45 @@ Tomcat is a server for running Java web programs. It is used by many of the
 data tools, such as Thredds and Ramadda. Access to the Tomcat server is via an
 Apache proxy.
 
+roles::kibana
+^^^^^^^^^^^^^
+
+Kibana is a web interface for Elasticsearch, allowing searching and graphing
+log data.
+
+The web interface for Kibana is available at ``/admin/kibana``
+
+roles::las
+^^^^^^^^^^
+
+The Live Access Server is a web interface for viewing and analysing climate data
+
+The web interface for LAS is available at ``/las``
+
+roles::postgresql
+^^^^^^^^^^^^^^^^^
+
+Postgresql is a SQL database
+
+roles::puppetdb
+^^^^^^^^^^^^^^^
+
+PuppetDB is a database interface used by Puppet to store the state of the
+servers it manages. It is used by the client and server classes to identify
+which hosts they should connect to.
+
+roles::svnmirror
+^^^^^^^^^^^^^^^^
+
+Mirrors an external subversion repository
+
+roles::thredds
+^^^^^^^^^^^^^^
+
+Thredds is a web interface for accessing climate data and metadata
+
+The web interface for Thredds is available at ``/thredds``
+
 Clients
 -------
 
@@ -115,4 +154,57 @@ client::scratchdisk
 
 Mounts the scratch SSD available on some NCI nodes to ``/scratch``
 
+Et Cetera
+---------
 
+site::admin
+^^^^^^^^^^^
+
+Sets up admin accounts with ssh and sudo access
+
+site::cron
+^^^^^^^^^^
+
+Similar to Puppet's default ``cron`` type, but the result gets monitored by Icinga
+
+site::gdata
+^^^^^^^^^^^
+
+Mounts ``/g/data`` projects. The projects have to be exported by NCI, and the
+VM needs a public IP in order to see them.
+
+site::java
+^^^^^^^^^^
+
+Installs Java 7
+
+site::ldap
+^^^^^^^^^^
+
+Configures LDAP accounts on the server
+
+site::logstash
+^^^^^^^^^^^^^^
+
+Collects server logs to send to the Elasticsearch server
+
+site::mail
+^^^^^^^^^^
+
+Configures Postfix so mail can be sent to users (will only send to NCI addresses)
+
+site::network
+^^^^^^^^^^^^^
+
+Sets up hostnames for all of the servers
+
+site::nfsh
+^^^^^^^^^^
+
+Sets up a basic ``nfsh``, the default shell used at NCI (actually just a link
+to bash in this case)
+
+site::security
+^^^^^^^^^^^^^^
+
+Sets up basic server security - firewall, fail2ban, ssh options

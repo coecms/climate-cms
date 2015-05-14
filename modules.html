@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -10,12 +8,12 @@
     
     <title>Puppet Classes &mdash; climate-cms cloud 0.1.0 documentation</title>
     
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    './',
         VERSION:     '0.1.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
@@ -26,26 +24,26 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="climate-cms cloud 0.1.0 documentation" href="index.html" />
-    <link rel="prev" title="Getting Started" href="gettingstarted.html" /> 
+    <link rel="prev" title="Servers" href="servers.html" /> 
   </head>
-  <body>
-    <div class="related">
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="gettingstarted.html" title="Getting Started"
+          <a href="servers.html" title="Servers"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">climate-cms cloud 0.1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">climate-cms cloud 0.1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
     <div class="document">
       <div class="documentwrapper">
         <div class="bodywrapper">
-          <div class="body">
+          <div class="body" role="main">
             
   <div class="section" id="puppet-classes">
 <h1>Puppet Classes<a class="headerlink" href="#puppet-classes" title="Permalink to this headline">¶</a></h1>
@@ -68,18 +66,18 @@ accessing system logs alongside Logstash and Kibana.</p>
 <h3>server::icinga<a class="headerlink" href="#server-icinga" title="Permalink to this headline">¶</a></h3>
 <p>Icinga is a service that checks the condition of servers. It can check if the
 disk is full, or make sure other services are running.</p>
-<p>The web interface for icinga is available at <tt class="docutils literal"><span class="pre">/admin/icinga</span></tt></p>
+<p>The web interface for icinga is available at <code class="docutils literal"><span class="pre">/admin/icinga</span></code></p>
 </div>
 <div class="section" id="server-jenkins">
 <h3>server::jenkins<a class="headerlink" href="#server-jenkins" title="Permalink to this headline">¶</a></h3>
 <p>Jenkins is a server for automatically building software and running tests.</p>
-<p>The web interface for Jenkins is available at <tt class="docutils literal"><span class="pre">/jenkins</span></tt></p>
+<p>The web interface for Jenkins is available at <code class="docutils literal"><span class="pre">/jenkins</span></code></p>
 </div>
 <div class="section" id="server-proxy">
 <h3>server::proxy<a class="headerlink" href="#server-proxy" title="Permalink to this headline">¶</a></h3>
 <p>The Proxy class sets up an Apache host and is responsible for wiring together
 web services. Web services requesting a connection using
-<tt class="docutils literal"><span class="pre">client::proxy::connection</span></tt> are gathered together here.</p>
+<code class="docutils literal"><span class="pre">client::proxy::connection</span></code> are gathered together here.</p>
 </div>
 <div class="section" id="server-puppet">
 <h3>server::puppet<a class="headerlink" href="#server-puppet" title="Permalink to this headline">¶</a></h3>
@@ -92,8 +90,8 @@ configuration.</p>
 <div class="section" id="server-ramadda">
 <h3>server::ramadda<a class="headerlink" href="#server-ramadda" title="Permalink to this headline">¶</a></h3>
 <p>Ramadda is a web service for managing and sharing data. Ramadda is set up so
-that it can serve data in NCI&#8217;s <tt class="docutils literal"><span class="pre">/g/data</span></tt> storage</p>
-<p>The web interface for Ramadda is available at <tt class="docutils literal"><span class="pre">/repository</span></tt></p>
+that it can serve data in NCI&#8217;s <code class="docutils literal"><span class="pre">/g/data</span></code> storage</p>
+<p>The web interface for Ramadda is available at <code class="docutils literal"><span class="pre">/repository</span></code></p>
 </div>
 <div class="section" id="server-salt">
 <h3>server::salt<a class="headerlink" href="#server-salt" title="Permalink to this headline">¶</a></h3>
@@ -108,12 +106,42 @@ updates by performing a dry run of Puppet on all servers.</p>
 data tools, such as Thredds and Ramadda. Access to the Tomcat server is via an
 Apache proxy.</p>
 </div>
+<div class="section" id="roles-kibana">
+<h3>roles::kibana<a class="headerlink" href="#roles-kibana" title="Permalink to this headline">¶</a></h3>
+<p>Kibana is a web interface for Elasticsearch, allowing searching and graphing
+log data.</p>
+<p>The web interface for Kibana is available at <code class="docutils literal"><span class="pre">/admin/kibana</span></code></p>
+</div>
+<div class="section" id="roles-las">
+<h3>roles::las<a class="headerlink" href="#roles-las" title="Permalink to this headline">¶</a></h3>
+<p>The Live Access Server is a web interface for viewing and analysing climate data</p>
+<p>The web interface for LAS is available at <code class="docutils literal"><span class="pre">/las</span></code></p>
+</div>
+<div class="section" id="roles-postgresql">
+<h3>roles::postgresql<a class="headerlink" href="#roles-postgresql" title="Permalink to this headline">¶</a></h3>
+<p>Postgresql is a SQL database</p>
+</div>
+<div class="section" id="roles-puppetdb">
+<h3>roles::puppetdb<a class="headerlink" href="#roles-puppetdb" title="Permalink to this headline">¶</a></h3>
+<p>PuppetDB is a database interface used by Puppet to store the state of the
+servers it manages. It is used by the client and server classes to identify
+which hosts they should connect to.</p>
+</div>
+<div class="section" id="roles-svnmirror">
+<h3>roles::svnmirror<a class="headerlink" href="#roles-svnmirror" title="Permalink to this headline">¶</a></h3>
+<p>Mirrors an external subversion repository</p>
+</div>
+<div class="section" id="roles-thredds">
+<h3>roles::thredds<a class="headerlink" href="#roles-thredds" title="Permalink to this headline">¶</a></h3>
+<p>Thredds is a web interface for accessing climate data and metadata</p>
+<p>The web interface for Thredds is available at <code class="docutils literal"><span class="pre">/thredds</span></code></p>
+</div>
 </div>
 <div class="section" id="clients">
 <h2>Clients<a class="headerlink" href="#clients" title="Permalink to this headline">¶</a></h2>
 <p>Clients are generally installed on multiple hosts and talk to a server. These
 classes install client software and open up internal firewall ports</p>
-<p>These classes can be found in <tt class="docutils literal"><span class="pre">local/clients/</span></tt> and <tt class="docutils literal"><span class="pre">local/site/</span></tt></p>
+<p>These classes can be found in <code class="docutils literal"><span class="pre">local/clients/</span></code> and <code class="docutils literal"><span class="pre">local/site/</span></code></p>
 <div class="section" id="client-icinga">
 <h3>client::icinga<a class="headerlink" href="#client-icinga" title="Permalink to this headline">¶</a></h3>
 <p>Sets up Icinga monitors on the host and connects them to the Icinga server.
@@ -138,7 +166,52 @@ classes use this to expose their web interfaces</p>
 </div>
 <div class="section" id="client-scratchdisk">
 <h3>client::scratchdisk<a class="headerlink" href="#client-scratchdisk" title="Permalink to this headline">¶</a></h3>
-<p>Mounts the scratch SSD available on some NCI nodes to <tt class="docutils literal"><span class="pre">/scratch</span></tt></p>
+<p>Mounts the scratch SSD available on some NCI nodes to <code class="docutils literal"><span class="pre">/scratch</span></code></p>
+</div>
+</div>
+<div class="section" id="et-cetera">
+<h2>Et Cetera<a class="headerlink" href="#et-cetera" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="site-admin">
+<h3>site::admin<a class="headerlink" href="#site-admin" title="Permalink to this headline">¶</a></h3>
+<p>Sets up admin accounts with ssh and sudo access</p>
+</div>
+<div class="section" id="site-cron">
+<h3>site::cron<a class="headerlink" href="#site-cron" title="Permalink to this headline">¶</a></h3>
+<p>Similar to Puppet&#8217;s default <code class="docutils literal"><span class="pre">cron</span></code> type, but the result gets monitored by Icinga</p>
+</div>
+<div class="section" id="site-gdata">
+<h3>site::gdata<a class="headerlink" href="#site-gdata" title="Permalink to this headline">¶</a></h3>
+<p>Mounts <code class="docutils literal"><span class="pre">/g/data</span></code> projects. The projects have to be exported by NCI, and the
+VM needs a public IP in order to see them.</p>
+</div>
+<div class="section" id="site-java">
+<h3>site::java<a class="headerlink" href="#site-java" title="Permalink to this headline">¶</a></h3>
+<p>Installs Java 7</p>
+</div>
+<div class="section" id="site-ldap">
+<h3>site::ldap<a class="headerlink" href="#site-ldap" title="Permalink to this headline">¶</a></h3>
+<p>Configures LDAP accounts on the server</p>
+</div>
+<div class="section" id="site-logstash">
+<h3>site::logstash<a class="headerlink" href="#site-logstash" title="Permalink to this headline">¶</a></h3>
+<p>Collects server logs to send to the Elasticsearch server</p>
+</div>
+<div class="section" id="site-mail">
+<h3>site::mail<a class="headerlink" href="#site-mail" title="Permalink to this headline">¶</a></h3>
+<p>Configures Postfix so mail can be sent to users (will only send to NCI addresses)</p>
+</div>
+<div class="section" id="site-network">
+<h3>site::network<a class="headerlink" href="#site-network" title="Permalink to this headline">¶</a></h3>
+<p>Sets up hostnames for all of the servers</p>
+</div>
+<div class="section" id="site-nfsh">
+<h3>site::nfsh<a class="headerlink" href="#site-nfsh" title="Permalink to this headline">¶</a></h3>
+<p>Sets up a basic <code class="docutils literal"><span class="pre">nfsh</span></code>, the default shell used at NCI (actually just a link
+to bash in this case)</p>
+</div>
+<div class="section" id="site-security">
+<h3>site::security<a class="headerlink" href="#site-security" title="Permalink to this headline">¶</a></h3>
+<p>Sets up basic server security - firewall, fail2ban, ssh options</p>
 </div>
 </div>
 </div>
@@ -147,7 +220,7 @@ classes use this to expose their web interfaces</p>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
@@ -162,6 +235,12 @@ classes use this to expose their web interfaces</p>
 <li><a class="reference internal" href="#server-ramadda">server::ramadda</a></li>
 <li><a class="reference internal" href="#server-salt">server::salt</a></li>
 <li><a class="reference internal" href="#server-tomcat">server::tomcat</a></li>
+<li><a class="reference internal" href="#roles-kibana">roles::kibana</a></li>
+<li><a class="reference internal" href="#roles-las">roles::las</a></li>
+<li><a class="reference internal" href="#roles-postgresql">roles::postgresql</a></li>
+<li><a class="reference internal" href="#roles-puppetdb">roles::puppetdb</a></li>
+<li><a class="reference internal" href="#roles-svnmirror">roles::svnmirror</a></li>
+<li><a class="reference internal" href="#roles-thredds">roles::thredds</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#clients">Clients</a><ul>
@@ -173,19 +252,34 @@ classes use this to expose their web interfaces</p>
 <li><a class="reference internal" href="#client-scratchdisk">client::scratchdisk</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#et-cetera">Et Cetera</a><ul>
+<li><a class="reference internal" href="#site-admin">site::admin</a></li>
+<li><a class="reference internal" href="#site-cron">site::cron</a></li>
+<li><a class="reference internal" href="#site-gdata">site::gdata</a></li>
+<li><a class="reference internal" href="#site-java">site::java</a></li>
+<li><a class="reference internal" href="#site-ldap">site::ldap</a></li>
+<li><a class="reference internal" href="#site-logstash">site::logstash</a></li>
+<li><a class="reference internal" href="#site-mail">site::mail</a></li>
+<li><a class="reference internal" href="#site-network">site::network</a></li>
+<li><a class="reference internal" href="#site-nfsh">site::nfsh</a></li>
+<li><a class="reference internal" href="#site-security">site::security</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="gettingstarted.html"
-                        title="previous chapter">Getting Started</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/modules.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
+  <p class="topless"><a href="servers.html"
+                        title="previous chapter">Servers</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/modules.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
       <input type="text" name="q" />
@@ -202,21 +296,21 @@ classes use this to expose their web interfaces</p>
       </div>
       <div class="clearer"></div>
     </div>
-    <div class="related">
+    <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="gettingstarted.html" title="Getting Started"
+          <a href="servers.html" title="Servers"
              >previous</a> |</li>
-        <li><a href="index.html">climate-cms cloud 0.1.0 documentation</a> &raquo;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">climate-cms cloud 0.1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
-    <div class="footer">
+    <div class="footer" role="contentinfo">
         &copy; Copyright 2015, Scott Wales.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
     </div>
   </body>
 </html>
