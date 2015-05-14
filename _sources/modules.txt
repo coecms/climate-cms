@@ -8,6 +8,11 @@ configure service monitoring and backups
 Servers
 -------
 
+Server classes are connected to from elsewhere - either other cloud nodes or
+the outside world. There is normally only one instance of each server in the
+cloud. These classes can be found in ``/local/server`` and
+``/local/roles``.
+
 server::apache
 ^^^^^^^^^^^^^^
 
@@ -156,6 +161,8 @@ Mounts the scratch SSD available on some NCI nodes to ``/scratch``
 
 Et Cetera
 ---------
+
+These classes set up general configuration options used on all servers
 
 site::admin
 ^^^^^^^^^^^

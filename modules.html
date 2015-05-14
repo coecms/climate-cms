@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="climate-cms cloud 0.1.0 documentation" href="index.html" />
-    <link rel="prev" title="Servers" href="servers.html" /> 
+    <link rel="prev" title="Development" href="development.html" /> 
   </head>
   <body role="document">
     <div class="related" role="navigation" aria-label="related navigation">
@@ -34,7 +34,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="servers.html" title="Servers"
+          <a href="development.html" title="Development"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">climate-cms cloud 0.1.0 documentation</a> &raquo;</li> 
       </ul>
@@ -52,6 +52,10 @@ from the Puppet Forge. They set up default arguments, open firewall ports and
 configure service monitoring and backups</p>
 <div class="section" id="servers">
 <h2>Servers<a class="headerlink" href="#servers" title="Permalink to this headline">¶</a></h2>
+<p>Server classes are connected to from elsewhere - either other cloud nodes or
+the outside world. There is normally only one instance of each server in the
+cloud. These classes can be found in <code class="docutils literal"><span class="pre">/local/server</span></code> and
+<code class="docutils literal"><span class="pre">/local/roles</span></code>.</p>
 <div class="section" id="server-apache">
 <h3>server::apache<a class="headerlink" href="#server-apache" title="Permalink to this headline">¶</a></h3>
 <p>Apache is a web server. All incoming web connections go through an Apache
@@ -171,6 +175,7 @@ classes use this to expose their web interfaces</p>
 </div>
 <div class="section" id="et-cetera">
 <h2>Et Cetera<a class="headerlink" href="#et-cetera" title="Permalink to this headline">¶</a></h2>
+<p>These classes set up general configuration options used on all servers</p>
 <div class="section" id="site-admin">
 <h3>site::admin<a class="headerlink" href="#site-admin" title="Permalink to this headline">¶</a></h3>
 <p>Sets up admin accounts with ssh and sudo access</p>
@@ -270,8 +275,8 @@ to bash in this case)</p>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="servers.html"
-                        title="previous chapter">Servers</a></p>
+  <p class="topless"><a href="development.html"
+                        title="previous chapter">Development</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -303,7 +308,7 @@ to bash in this case)</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="servers.html" title="Servers"
+          <a href="development.html" title="Development"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">climate-cms cloud 0.1.0 documentation</a> &raquo;</li> 
       </ul>
