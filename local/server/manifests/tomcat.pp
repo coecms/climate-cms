@@ -43,6 +43,12 @@ class server::tomcat {
     notify  => Tomcat::Service['default'],
   }
 
+  # The tomcat init script does `chown ${TOMCAT_USER}:${TOMCAT_USER}, so make
+  # sure that group exists
+  group {$user:
+    ensure => present,
+  }
+
   tomcat::service {'default':
     use_init     => true,
     service_name => 'tomcat',
