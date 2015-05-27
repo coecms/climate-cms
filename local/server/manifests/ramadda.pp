@@ -44,8 +44,8 @@ class server::ramadda (
 
   file {$ramadda_home:
     ensure => directory,
-    owner  => 'tomcat',
-    group  => 'tomcat',
+    owner  => $server::tomcat::user,
+    group  => $server::tomcat::group,
   }
 
   @@postgresql::server::db {'ramadda':

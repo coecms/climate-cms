@@ -45,7 +45,8 @@ class server::tomcat {
 
   # The tomcat init script does `chown ${TOMCAT_USER}:${TOMCAT_USER}, so make
   # sure that group exists
-  group {$user:
+  $group = $user
+  group {$group:
     ensure => present,
   }
 
@@ -117,8 +118,8 @@ class server::tomcat {
 
   file {$content_path:
     ensure  => directory,
-    owner   => 'tomcat',
-    group   => 'tomcat',
+    owner   => $user,
+    group   => $user,
     require => Tomcat::Instance['default'],
   }
 
