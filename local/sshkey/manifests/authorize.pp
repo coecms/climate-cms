@@ -14,22 +14,23 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-class client::backup {
+# Authorise the ssh key for a server found with a puppetdb query
+define sshkey::authorize (
+  $query,
+  $user        = $name,
+  $remote_user = $name,
+) {
 
-  $server = query_nodes('Class[server::backup]','hostname')
+  $sshkey = query($query, "${remote_user}_sshkey")
+  $_parts = split($sshkey, ' ')
+  $type   = $_parts[0]
+  $key    = $_parts[1]
+  $host   = $_parts[2]
 
-  class {'::amanda::client':
-    server => $server[0],
+  ssh_authorized_key {"${host} -> ${user}":
+    user => $user,
+    type => $type,
+    key  => $key,
   }
-
-  user {'amandabackup':
-    purge_ssh_keys => true,
-  }
-  sshkey::authorize {'amandabackup':
-    query => 'Class[server::backup]',
-  }
-
-  # Backup user and configuration directories
-  client::backup::directory {['/etc','/home']:}
 
 }

@@ -14,22 +14,20 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-class client::backup {
+# Creates a ssh key for the user, storing the public key in the fact
+# '${user}_sshkey'
+define sshkey (
+  $user = $name,
+) {
 
-  $server = query_nodes('Class[server::backup]','hostname')
-
-  class {'::amanda::client':
-    server => $server[0],
+  file {'/usr/local/bin/puppet_ssh_keygen':
+    source => 'puppet:///modules/sshkey/puppet_ssh_keygen',
+    mode   => '0500',
   }
 
-  user {'amandabackup':
-    purge_ssh_keys => true,
+  exec {"ssh-keygen ${name}":
+    command => "/usr/local/bin/puppet_ssh_keygen ${user}",
+    creates => "/etc/facter/facts.d/${user}_sshkey.txt",
   }
-  sshkey::authorize {'amandabackup':
-    query => 'Class[server::backup]',
-  }
-
-  # Backup user and configuration directories
-  client::backup::directory {['/etc','/home']:}
 
 }

@@ -68,4 +68,7 @@ class server::backup {
   ::server::backup::config {'daily':
   }
 
+  # Create a ssh key and store in fact 'amandabackup_sshkey'
+  ::sshkey::fact {$user:}
+
 }

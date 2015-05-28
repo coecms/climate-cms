@@ -1,4 +1,5 @@
-## Copyright 2015 ARC Centre of Excellence for Climate Systems Science
+#!/bin/bash
+#  Copyright 2015 ARC Centre of Excellence for Climate Systems Science
 #
 #  \author  Scott Wales <scott.wales@unimelb.edu.au>
 #
@@ -14,22 +15,26 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-class client::backup {
+set -eu
 
-  $server = query_nodes('Class[server::backup]','hostname')
+# User name and home directory
+TARGET_USER=$1
+TARGET_HOME=$(getent passwd $TARGET_USER | cut -f6 -d:)
 
-  class {'::amanda::client':
-    server => $server[0],
-  }
+# Create the user's ssh key
+SSH_KEY=$TARGET_HOME/.ssh/id_rsa
+if [ ! -f $SSH_KEY ]; then
+    sudo -u $TARGET_USER ssh-keygen -N '' -f $SSH_KEY
+fi
 
-  user {'amandabackup':
-    purge_ssh_keys => true,
-  }
-  sshkey::authorize {'amandabackup':
-    query => 'Class[server::backup]',
-  }
+# Make sure the facts directory exists
+FACTS_DIR=/etc/facter/facts.d
+if [ ! -d $FACTS_DIR ]; then
+    mkdir -p $FACTS_DIR
+fi
 
-  # Backup user and configuration directories
-  client::backup::directory {['/etc','/home']:}
-
-}
+# Save the key as a fact
+PUBLIC_KEY=$(cat ${SSH_KEY}.pub)
+cat > ${FACTS_DIR}/${TARGET_USER}_sshkey.txt << EOF
+${TARGET_USER}_sshkey=$PUBLIC_KEY
+EOF
