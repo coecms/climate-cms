@@ -20,7 +20,7 @@ class server::puppet::reports {
   augeas { 'reports':
     lens    => 'Puppet.lns',
     incl    => '/etc/puppet/puppet.conf',
-    changes => 'set master/reports "logstash, puppetdb"',
+    changes => 'set master/reports "puppetdb"',
     require => File['/etc/puppet/puppet.conf'],
     notify  => Service['puppetserver'],
   }
