@@ -16,7 +16,14 @@
 
 # Backup a directory on this host
 define client::backup::directory (
-  $path = $name,
+  $path     = $name,
+  $configs  = 'daily',
+  $dumptype = 'simple-gnutar-local',
 ) {
-  include client::backup
+
+  amanda::disklist::dle {$path:
+    configs  => $configs,
+    dumptype => $dumptype,
+  }
+
 }

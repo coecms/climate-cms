@@ -22,4 +22,7 @@ class client::backup {
     server => $server[0],
   }
 
+  # Backup user and configuration directories
+  client::backup::directory {['/etc','/home']:}
+
 }
