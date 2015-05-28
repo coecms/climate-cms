@@ -23,15 +23,3 @@ roles::svnmirror::mirrors:
     socrates:
         url:       /svn/socrates
         origin:    https://code.metoffice.gov.uk/svn/socrates
-    # Copy of UM repo on /g/data1/access
-    um-file:
-        repo:      um
-        origin:    file:///var/svn/um 
-        base_path: /g/data1/access/svn
-        user:      ju7_apache
-        group:     access
-        http:      false
-
-site::gdata:
-    access:
-      mode: rw
