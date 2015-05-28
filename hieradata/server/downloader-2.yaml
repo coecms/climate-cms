@@ -2,6 +2,7 @@
 classes:
     - client::scratchdisk
     - site::ldap
+    - server::backup
 
 # NCI project mounts
 site::gdata:
