@@ -19,19 +19,16 @@ define roles::svnmirror::mirror (
   $origin,
   $repo           = $name,
   $url            = "/${name}",
+  $user           = $::roles::svnmirror::user,
+  $group          = $::roles::svnmirror::group,
+  $base_path      = $::roles::svnmirror::home,
   $origin_ip      = $::roles::svnmirror::origin_ip,
   $access_ip      = $::roles::svnmirror::access_ip,
   $update_minutes = $::roles::svnmirror::update_minutes,
 ) {
 
-  # Things we need from the server class
-  $vhost          = $::roles::svnmirror::vhost
-  $home           = $::roles::svnmirror::home
-  $user           = $::roles::svnmirror::user
-  $group          = $::roles::svnmirror::group
-
   # Filesystem location for the repo
-  $path = "${home}/${repo}"
+  $path = "${base_path}/${repo}"
 
   file {$path:
     ensure => directory,
@@ -79,20 +76,23 @@ define roles::svnmirror::mirror (
     require   => Exec["svnsync init ${path}"],
   }
 
-  # The mirror is accessed from here
-  # Also allow access from the local machine's IP address and Jenkins for
-  # testing
-  $jenkins_ip = query_nodes('Class[server::jenkins]','ipaddress_eth0')
-  apacheplus::location {$url:
-    vhost           => $vhost,
-    order           => 'Deny,Allow',
-    allow           => "from ${access_ip} ${::ipaddress_eth0} ${jenkins_ip} localhost",
-    deny            => 'from all',
-    custom_fragment => "
-      DAV                  svn
-      SVNPath              ${path}
-      SVNMasterURI         ${origin}
-    "
+  if $http {
+    # The mirror is accessed from here
+    # Also allow access from the local machine's IP address and Jenkins for
+    # testing
+    $vhost = $::roles::svnmirror::vhost
+    $jenkins_ip = query_nodes('Class[server::jenkins]','ipaddress_eth0')
+    apacheplus::location {$url:
+      vhost           => $vhost,
+      order           => 'Deny,Allow',
+      allow           => "from ${access_ip} ${::ipaddress_eth0} ${jenkins_ip} localhost",
+      deny            => 'from all',
+      custom_fragment => "
+        DAV                  svn
+        SVNPath              ${path}
+        SVNMasterURI         ${origin}
+      "
+    }
   }
 
 }
