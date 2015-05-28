@@ -23,6 +23,12 @@ define dumptype simple-gnutar-local {
     program "GNUTAR"
 }
 
+define dumptype simple-gnutar-ssh {
+    auth "ssh"
+    compress client fast
+    program "GNUTAR"
+}
+
 holdingdisk hd1 {
     directory "<%= @holding_dir %>"
     use 50 mbytes
