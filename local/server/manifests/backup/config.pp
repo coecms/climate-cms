@@ -45,7 +45,7 @@ define server::backup::config (
     group                    => $group,
     configs_directory        => $config_dir,
     manage_configs_directory => false,
-    configs_source           => 'puppet/server/backup',
+    configs_source           => 'modules/server/backup',
     manage_dle               => true,
   }
 
