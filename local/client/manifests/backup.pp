@@ -22,9 +22,6 @@ class client::backup {
     server => $server[0],
   }
 
-  user {'amandabackup':
-    purge_ssh_keys => true,
-  }
   sshkey::authorize {'amandabackup':
     query => 'Class[server::backup]',
   }
