@@ -65,15 +65,21 @@ class server::backup {
     ensure => directory,
   }
 
-  ::server::backup::config {'daily':
-  }
-
   # Create a ssh key and store in fact 'amandabackup_sshkey'
   ::sshkey::fact {$user:}
 
   # Send mail to root
   mailalias {$user:
     recipient => 'root',
+  }
+
+  # Run the backups
+  ::server::backup::config {'daily':
+  }
+  site::cron {'amdump daily':
+    user   => $user,
+    hour   => 1,
+    minute => fqdn_rand(60),
   }
 
 }
