@@ -20,7 +20,7 @@ class server::backup {
   class {'::amanda::server':
   }
 
-  ::amanda::config {'climate-cms':
+  ::amanda::config {'daily':
     configs_source => 'modules/server/backup',
   }
 
