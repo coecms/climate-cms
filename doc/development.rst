@@ -61,3 +61,15 @@ To connect an address on the proxy server to the service::
         port  => '8081',
         allow => 'from all',
     }
+
+Backups
+-------
+
+The climate-cms cloud uses Amanda (http://www.amanda.org/) for backups. Modules
+can request a directory be backed up using::
+
+    client::backup::directory {'/var/www':}
+
+Backups are stored on NCI's `/g/data1` filesystem.
+
+To recover from a backup (TODO)
