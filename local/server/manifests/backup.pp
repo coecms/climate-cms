@@ -20,4 +20,8 @@ class server::backup {
   class {'::amanda::server':
   }
 
+  class {'::amanda::config':
+    configs_source => 'modules/server/backup',
+  }
+
 }
