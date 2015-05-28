@@ -48,6 +48,7 @@ class server::backup {
     ensure  => directory,
     purge   => true,
     recurse => true,
+    force   => true,
   }
   file {[
     $base_dir,
