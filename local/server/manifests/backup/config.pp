@@ -43,7 +43,7 @@ define server::backup::config (
   ::amanda::config {$config:
     owner                    => $user,
     group                    => $group,
-    config_directory         => $config_dir,
+    configs_directory        => $config_dir,
     manage_configs_directory => false,
     configs_source           => 'puppet/server/backup',
     manage_dle               => true,
