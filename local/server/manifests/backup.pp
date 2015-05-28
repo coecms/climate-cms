@@ -71,4 +71,9 @@ class server::backup {
   # Create a ssh key and store in fact 'amandabackup_sshkey'
   ::sshkey::fact {$user:}
 
+  # Send mail to root
+  mailalias {$user:
+    recipient => 'root',
+  }
+
 }
