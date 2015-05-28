@@ -26,11 +26,15 @@ versions)::
 
 Add service monitoring using Icinga client types::
 
-    icinga::client::check_process {$service:
+    client::icinga::check_process {$service:
        user => $user,
     }
 
 Monitor server logs (TODO):
+
+Backup files::
+
+    client::backup::directory {['/var/www','/etc/httpd']:}
 
 Open firewall ports (using puppetlabs-firewall module)::
 
