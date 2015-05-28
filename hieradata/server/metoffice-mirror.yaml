@@ -23,3 +23,7 @@ roles::svnmirror::mirrors:
     socrates:
         url:       /svn/socrates
         origin:    https://code.metoffice.gov.uk/svn/socrates
+
+site::gdata:
+    access:
+      mode: rw
