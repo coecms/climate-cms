@@ -50,3 +50,4 @@ mod 'logstash_reporter',
 mod 'rtyler/jenkins'
 
 mod 'aboe/salt'
+mod 'pdxcat/amanda'

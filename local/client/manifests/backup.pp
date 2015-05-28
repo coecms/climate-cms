@@ -18,4 +18,8 @@ class client::backup {
 
   $server = query_nodes('Class[server::backup]','hostname')
 
+  class {'::amanda::client':
+    server => $server[0],
+  }
+
 }

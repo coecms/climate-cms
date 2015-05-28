@@ -17,4 +17,7 @@
 # Backup Server
 class server::backup {
 
+  class {'::amanda::server':
+  }
+
 }
