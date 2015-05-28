@@ -22,7 +22,7 @@ define sshkey::authorize (
 ) {
 
   $sshkey = query_nodes($query, "${remote_user}_sshkey")
-  $_parts = split($sshkey, ' ')
+  $_parts = split($sshkey[0], ' ')
   $type   = $_parts[0]
   $key    = $_parts[1]
   $host   = $_parts[2]
