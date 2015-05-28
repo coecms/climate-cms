@@ -25,6 +25,7 @@ define roles::svnmirror::mirror (
   $origin_ip      = $::roles::svnmirror::origin_ip,
   $access_ip      = $::roles::svnmirror::access_ip,
   $update_minutes = $::roles::svnmirror::update_minutes,
+  $http           = true,
 ) {
 
   # Filesystem location for the repo

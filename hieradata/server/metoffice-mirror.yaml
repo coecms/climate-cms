@@ -30,6 +30,7 @@ roles::svnmirror::mirrors:
         base_path: /g/data1/access/svn
         user:      ju7_apache
         group:     access
+        http:      false
 
 site::gdata:
     access:
