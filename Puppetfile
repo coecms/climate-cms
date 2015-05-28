@@ -51,3 +51,4 @@ mod 'rtyler/jenkins'
 
 mod 'aboe/salt'
 mod 'pdxcat/amanda'
+mod 'puppetlabs/xinetd'
