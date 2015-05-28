@@ -21,7 +21,7 @@ define sshkey::authorize (
   $remote_user = $name,
 ) {
 
-  $sshkey = query($query, "${remote_user}_sshkey")
+  $sshkey = query_nodes($query, "${remote_user}_sshkey")
   $_parts = split($sshkey, ' ')
   $type   = $_parts[0]
   $key    = $_parts[1]
