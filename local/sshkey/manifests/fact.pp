@@ -16,7 +16,7 @@
 
 # Creates a ssh key for the user, storing the public key in the fact
 # '${user}_sshkey'
-define sshkey (
+define sshkey::fact (
   $user = $name,
 ) {
 
