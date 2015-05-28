@@ -1,0 +1,30 @@
+org        "climate-cms <%= @config %>"
+infofile   "<%= @curinfo_dir %>"
+logdir     "<%= @log_dir %>"
+indexdir   "<%= @index_dir %>"
+dumpuser   "<%= @user %>"
+
+tpchanger "chg-disk:<%= @tape_dir %>"
+labelstr  "<%= @config %>[0-9][0-9]"
+autolabel "<%= @config %>%%" EMPTY VOLUME_ERROR
+tapecycle 4
+dumpcycle 3 days
+amrecover_changer "changer"
+
+tapetype "TEST-TAPE"
+define tapetype TEST-TAPE {
+  length 100 mbytes
+  filemark 4 kbytes
+}
+
+define dumptype simple-gnutar-local {
+    auth "local"
+    compress none
+    program "GNUTAR"
+}
+
+holdingdisk hd1 {
+    directory "<%= @holding_dir %>"
+    use 50 mbytes
+    chunksize 1 mbyte
+}
