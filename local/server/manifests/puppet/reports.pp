@@ -26,6 +26,7 @@ class server::puppet::reports {
   }
 
   class {'logstash_reporter':
+    config_file   => '/etc/puppet/logstash.yaml',
     logstash_port => $report_port,
   }
 
