@@ -14,17 +14,13 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-# Creates a ssh key for the user, storing the public key in the fact
-# '${user}_sshkey'
-define sshkey::fact (
-  $user = $name,
-) {
-  include sshkey
+class sshkey {
 
-  exec {"ssh-keygen ${name}":
-    command => "${sshkey::keygen} ${user}",
-    creates => "/etc/facter/facts.d/${user}_sshkey.txt",
-    require => File[$sshkey::keygen]
+  # Script to generate key and fact
+  $keygen = '/usr/local/bin/puppet_ssh_keygen'
+  file {$keygen:
+    source => 'puppet:///modules/sshkey/puppet_ssh_keygen.sh',
+    mode   => '0500',
   }
 
 }
