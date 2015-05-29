@@ -24,7 +24,7 @@ PASSPHRASE=$(pwgen 40)
 
 mkdir -p ~/.gnupg
 chmod 0700 ~/.gnupg
-head -c 2925 /dev/random | uuencode -m - | head -n 66 | tail -n 65 | gpg --batch --no-tty  --symmetric --passphrase "$PASSPHRASE" -a > ~/.gnupg/am_key.gpg
+head -c 2925 /dev/urandom | uuencode -m - | head -n 66 | tail -n 65 | gpg --batch --no-tty  --symmetric --passphrase "$PASSPHRASE" -a > ~/.gnupg/am_key.gpg
 
 echo $PASSPHRASE > ~/.am_passphrase
 chmod 0700 ~/.am_passphrase
