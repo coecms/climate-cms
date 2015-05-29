@@ -44,3 +44,34 @@ means print changes and don't run in the background)::
     sudo salt '*' puppet.run agent test
     sudo salt '*' service.start puppet
 
+Recover Backups
+---------------
+
+The ``amrecover`` tool is used to recover backups. Full instructions can be
+found on the `Amanda wiki
+<http://wiki.zmanda.com/index.php/GSWA/Recovering_Files>`_.
+
+``amrecover`` must be run as root on the 'downloader' VM, which is where
+backups are stored.
+
+Create an empty directory to put the recovered files in, then start a recovery from
+the daily backups::
+
+    mkdir recover
+    cd recover
+    sudo amrecover daily
+
+This will start a console session for data recovery. Some useful commands are:
+
+ * ``listhost``: List all hosts
+ * ``sethost HOST``: Set the host to restore
+ * ``listdisk``: List backup areas (e.g. ``/home``, ``/etc``)
+ * ``setdisk DISK``: Set the area to restore
+ * ``history``: List backup dates
+ * ``setdate DATE``: Set the date to recover
+ * ``ls``, ``cd``, etc.: Move around the backed-up data
+ * ``add FILE``: Add a file to the restore list
+ * ``extract``: Extract all files in the restore list
+
+The files will be placed in the directory you ran ``amrecover`` from. You can
+then move them into the appropriate place.
