@@ -44,6 +44,9 @@ means print changes and don't run in the background)::
     sudo salt '*' puppet.run agent test
     sudo salt '*' service.start puppet
 
+You can also apply changes to a specific server by replacing the ``'*'`` with a
+hostname.
+
 .. _recoverBackups:
 
 Recover Backups
@@ -77,3 +80,7 @@ This will start a console session for data recovery. Some useful commands are:
 
 The files will be placed in the directory you ran ``amrecover`` from. You can
 then move them into the appropriate place.
+
+The backup data files are stored on the ``/g/data1/ua8`` filesystem in an
+encrypted format. Scott has external backups of the encryption keys in case
+they are lost.

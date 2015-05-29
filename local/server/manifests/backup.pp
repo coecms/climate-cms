@@ -90,7 +90,7 @@ class server::backup {
   }
 
   # Keys
-  package {['pwgen','sharutils']:}
+  package {['pwgen','sharutils','aespipe',]:}
   file {'/usr/sbin/setup_amanda_keys':
     ensure => file,
     mode   => '0500',
