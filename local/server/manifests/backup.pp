@@ -19,6 +19,7 @@ class server::backup {
   include ::amanda::params
 
   $user       = $::amanda::params::user
+  $home       = $::amanda::params::homedir
   $group      = $::amanda::params::group
   $config_dir = $::amanda::params::configs_directory
 
@@ -86,5 +87,32 @@ class server::backup {
   # Setup the recovery config
   file {'/etc/amanda/amanda-client.conf':
     content => template('client/backup/amanda-client.conf.erb'),
+  }
+
+  # Keys
+  file {'/usr/sbin/setup_amanda_keys':
+    ensure => file,
+    mode   => '0500',
+    source => 'puppet:///module/server/backup/setup_encrypt.sh',
+  }
+  exec {'setup keys':
+    command => '/usr/sbin/setup_amanda_keys',
+    user    => $user,
+    creates => "${home}/.am_passphrase",
+    require => File['/usr/sbin/setup_amanda_keys'],
+  }
+  file {"${home}/.gnupg":
+    ensure => directory,
+    mode   => '0700',
+  }
+  file {"${home}/.gnupg/am_key.gpg":
+    ensure  => file,
+    mode    => '0700',
+    require => Exec['setup keys'],
+  }
+  file {"${home}/.am_passphrase":
+    ensure  => file,
+    mode    => '0700',
+    require => Exec['setup keys'],
   }
 }
