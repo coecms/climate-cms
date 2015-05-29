@@ -23,7 +23,8 @@ class client::backup {
   }
 
   sshkey::authorize {'amandabackup':
-    query => 'Class[server::backup]',
+    remote_user => 'v45_apache',
+    query       => 'Class[server::backup]',
   }
 
   # Backup user and configuration directories

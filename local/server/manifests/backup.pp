@@ -15,11 +15,14 @@
 #  limitations under the License.
 
 # Backup Server
-class server::backup {
+class server::backup (
+  $user = 'v45_apache',
+  $home = '/home/157/v45_apache',
+) {
   include ::amanda::params
 
-  $user       = $::amanda::params::user
-  $home       = $::amanda::params::homedir
+  # $user       = $::amanda::params::user
+  # $home       = $::amanda::params::homedir
   $group      = $::amanda::params::group
   $config_dir = $::amanda::params::configs_directory
 
@@ -81,11 +84,11 @@ class server::backup {
     command => '/usr/sbin/amdump daily',
     user    => $user,
     hour    => 1,
-    minute  => fqdn_rand(60),
+    minute  => fqdn_rand(60,'amanda'),
   }
 
   # Setup the recovery config
-  file {'/etc/amanda/amanda-client.conf':
+  file {"${config_dir}/amanda-client.conf":
     content => template('server/backup/amanda-client.conf.erb'),
   }
 
