@@ -93,7 +93,7 @@ class server::backup {
   file {'/usr/sbin/setup_amanda_keys':
     ensure => file,
     mode   => '0500',
-    source => 'puppet:///module/server/backup/setup_encrypt.sh',
+    source => 'puppet:///modules/server/backup/setup_encrypt.sh',
   }
   exec {'setup keys':
     command => '/usr/sbin/setup_amanda_keys',
