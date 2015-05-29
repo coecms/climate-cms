@@ -44,6 +44,8 @@ means print changes and don't run in the background)::
     sudo salt '*' puppet.run agent test
     sudo salt '*' service.start puppet
 
+.. _recoverBackups:
+
 Recover Backups
 ---------------
 

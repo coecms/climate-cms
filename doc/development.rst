@@ -72,4 +72,4 @@ can request a directory be backed up using::
 
 Backups are stored on NCI's `/g/data1` filesystem.
 
-To recover from a backup (TODO)
+:ref:`recoverBackups`
