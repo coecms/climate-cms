@@ -86,7 +86,7 @@ class server::backup {
 
   # Setup the recovery config
   file {'/etc/amanda/amanda-client.conf':
-    content => template('client/backup/amanda-client.conf.erb'),
+    content => template('server/backup/amanda-client.conf.erb'),
   }
 
   # Keys
