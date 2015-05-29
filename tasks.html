@@ -91,6 +91,36 @@ sudo salt &#39;*&#39; service.start puppet
 </pre></div>
 </div>
 </div>
+<div class="section" id="recover-backups">
+<span id="recoverbackups"></span><h2>Recover Backups<a class="headerlink" href="#recover-backups" title="Permalink to this headline">¶</a></h2>
+<p>The <code class="docutils literal"><span class="pre">amrecover</span></code> tool is used to recover backups. Full instructions can be
+found on the <a class="reference external" href="http://wiki.zmanda.com/index.php/GSWA/Recovering_Files">Amanda wiki</a>.</p>
+<p><code class="docutils literal"><span class="pre">amrecover</span></code> must be run as root on the &#8216;downloader&#8217; VM, which is where
+backups are stored.</p>
+<p>Create an empty directory to put the recovered files in, then start a recovery from
+the daily backups:</p>
+<div class="highlight-python"><div class="highlight"><pre>mkdir recover
+cd recover
+sudo amrecover daily
+</pre></div>
+</div>
+<p>This will start a console session for data recovery. Some useful commands are:</p>
+<blockquote>
+<div><ul class="simple">
+<li><code class="docutils literal"><span class="pre">listhost</span></code>: List all hosts</li>
+<li><code class="docutils literal"><span class="pre">sethost</span> <span class="pre">HOST</span></code>: Set the host to restore</li>
+<li><code class="docutils literal"><span class="pre">listdisk</span></code>: List backup areas (e.g. <code class="docutils literal"><span class="pre">/home</span></code>, <code class="docutils literal"><span class="pre">/etc</span></code>)</li>
+<li><code class="docutils literal"><span class="pre">setdisk</span> <span class="pre">DISK</span></code>: Set the area to restore</li>
+<li><code class="docutils literal"><span class="pre">history</span></code>: List backup dates</li>
+<li><code class="docutils literal"><span class="pre">setdate</span> <span class="pre">DATE</span></code>: Set the date to recover</li>
+<li><code class="docutils literal"><span class="pre">ls</span></code>, <code class="docutils literal"><span class="pre">cd</span></code>, etc.: Move around the backed-up data</li>
+<li><code class="docutils literal"><span class="pre">add</span> <span class="pre">FILE</span></code>: Add a file to the restore list</li>
+<li><code class="docutils literal"><span class="pre">extract</span></code>: Extract all files in the restore list</li>
+</ul>
+</div></blockquote>
+<p>The files will be placed in the directory you ran <code class="docutils literal"><span class="pre">amrecover</span></code> from. You can
+then move them into the appropriate place.</p>
+</div>
 </div>
 
 
@@ -105,6 +135,7 @@ sudo salt &#39;*&#39; service.start puppet
 <li><a class="reference internal" href="#add-a-new-admin">Add a new admin</a></li>
 <li><a class="reference internal" href="#ssh-to-a-server">SSH to a Server</a></li>
 <li><a class="reference internal" href="#update-puppet">Update Puppet</a></li>
+<li><a class="reference internal" href="#recover-backups">Recover Backups</a></li>
 </ul>
 </li>
 </ul>

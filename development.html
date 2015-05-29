@@ -73,12 +73,16 @@ versions):</p>
 </pre></div>
 </div>
 <p>Add service monitoring using Icinga client types:</p>
-<div class="highlight-python"><div class="highlight"><pre>icinga::client::check_process {$service:
+<div class="highlight-python"><div class="highlight"><pre>client::icinga::check_process {$service:
    user =&gt; $user,
 }
 </pre></div>
 </div>
 <p>Monitor server logs (TODO):</p>
+<p>Backup files:</p>
+<div class="highlight-python"><div class="highlight"><pre>client::backup::directory {[&#39;/var/www&#39;,&#39;/etc/httpd&#39;]:}
+</pre></div>
+</div>
 <p>Open firewall ports (using puppetlabs-firewall module):</p>
 <div class="highlight-python"><div class="highlight"><pre>firewall {&#39;080 apache httpd&#39;:
    port   =&gt; &#39;80&#39;,
@@ -106,6 +110,16 @@ firewall {&#39;081 connection from client&#39;:
 </pre></div>
 </div>
 </div>
+<div class="section" id="backups">
+<h2>Backups<a class="headerlink" href="#backups" title="Permalink to this headline">¶</a></h2>
+<p>The climate-cms cloud uses Amanda (<a class="reference external" href="http://www.amanda.org/">http://www.amanda.org/</a>) for backups. Modules
+can request a directory be backed up using:</p>
+<div class="highlight-python"><div class="highlight"><pre>client::backup::directory {&#39;/var/www&#39;:}
+</pre></div>
+</div>
+<p>Backups are stored on NCI&#8217;s <cite>/g/data1</cite> filesystem.</p>
+<p><a class="reference internal" href="tasks.html#recoverbackups"><span>Recover Backups</span></a></p>
+</div>
 </div>
 
 
@@ -118,6 +132,7 @@ firewall {&#39;081 connection from client&#39;:
   <ul>
 <li><a class="reference internal" href="#">Development</a><ul>
 <li><a class="reference internal" href="#adding-software">Adding software</a></li>
+<li><a class="reference internal" href="#backups">Backups</a></li>
 </ul>
 </li>
 </ul>

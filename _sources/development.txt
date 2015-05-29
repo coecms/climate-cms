@@ -26,11 +26,15 @@ versions)::
 
 Add service monitoring using Icinga client types::
 
-    icinga::client::check_process {$service:
+    client::icinga::check_process {$service:
        user => $user,
     }
 
 Monitor server logs (TODO):
+
+Backup files::
+
+    client::backup::directory {['/var/www','/etc/httpd']:}
 
 Open firewall ports (using puppetlabs-firewall module)::
 
@@ -57,3 +61,15 @@ To connect an address on the proxy server to the service::
         port  => '8081',
         allow => 'from all',
     }
+
+Backups
+-------
+
+The climate-cms cloud uses Amanda (http://www.amanda.org/) for backups. Modules
+can request a directory be backed up using::
+
+    client::backup::directory {'/var/www':}
+
+Backups are stored on NCI's `/g/data1` filesystem.
+
+:ref:`recoverBackups`
