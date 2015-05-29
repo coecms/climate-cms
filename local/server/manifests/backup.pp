@@ -76,7 +76,7 @@ class server::backup {
   # Run the backups
   ::server::backup::config {'daily':
   }
-  site::cron {'amdump daily':
+  site::cron {'/usr/sbin/amdump daily':
     user   => $user,
     hour   => 1,
     minute => fqdn_rand(60),
