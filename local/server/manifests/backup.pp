@@ -83,4 +83,8 @@ class server::backup {
     minute  => fqdn_rand(60),
   }
 
+  # Setup the recovery config
+  file {'/etc/amanda/amanda-client.conf':
+    content => template('client/backup/amanda-client.conf.erb'),
+  }
 }

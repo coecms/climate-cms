@@ -22,10 +22,6 @@ class client::backup {
     server => $server[0],
   }
 
-  file {'/etc/amanda/amanda-client.conf':
-    content => template('client/backup/amanda-client.conf.erb'),
-  }
-
   sshkey::authorize {'amandabackup':
     query => 'Class[server::backup]',
   }
