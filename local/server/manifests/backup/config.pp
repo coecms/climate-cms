@@ -17,11 +17,10 @@
 define server::backup::config (
   $config = $name,
 ) {
-  include ::amanda::params
 
-  $user       = $::amanda::params::user
-  $group      = $::amanda::params::group
-  $config_dir = $::amanda::params::configs_directory
+  $user        = $server::backup::user
+  $group       = $server::backup::group
+  $config_dir  = $server::backup::config_dir
 
   $tape_dir    = $server::backup::tape_dir
   $holding_dir = $server::backup::holding_dir
