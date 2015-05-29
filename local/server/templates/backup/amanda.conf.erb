@@ -36,7 +36,7 @@ define dumptype encrypt-gnutar-ssh {
     compress client fast
     program "GNUTAR"
     encrypt  server
-    server_encrypt "/usr/local/sbin/amcrypt"
+    server_encrypt "/usr/sbin/amcrypt"
     server_decrypt_option "-d"
 }
 
