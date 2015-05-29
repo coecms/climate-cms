@@ -31,6 +31,15 @@ define dumptype simple-gnutar-ssh {
     program "GNUTAR"
 }
 
+define dumptype encrypt-gnutar-ssh {
+    auth "ssh"
+    compress client fast
+    program "GNUTAR"
+    encrypt  server
+    server_encrypt "/usr/local/sbin/amcrypt"
+    server_decrypt_option "-d"
+}
+
 holdingdisk hd1 {
     directory "<%= @holding_dir %>"
     use 50 mbytes

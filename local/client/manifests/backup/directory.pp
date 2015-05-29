@@ -18,7 +18,7 @@
 define client::backup::directory (
   $path     = $name,
   $configs  = 'daily',
-  $dumptype = 'simple-gnutar-ssh',
+  $dumptype = 'encrypt-gnutar-ssh',
 ) {
 
   amanda::disklist::dle {$path:
