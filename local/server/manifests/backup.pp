@@ -124,13 +124,13 @@ class server::backup (
     ensure => directory,
     owner  => 'amandabackup',
     group  => $group,
-    mode   => '0770',
+    mode   => '2770',
   }
   file {'/var/log/amanda/server':
     ensure => directory,
     owner  => $user,
     group  => $group,
-    mode   => '0700',
+    mode   => '2700',
   }
 
 }
