@@ -17,12 +17,11 @@
 # Backup Server
 class server::backup (
   $user = 'v45_apache',
-  $home = '/home/157/v45_apache',
 ) {
   include ::amanda::params
 
   # $user       = $::amanda::params::user
-  # $home       = $::amanda::params::homedir
+  $home       = $::amanda::params::homedir
   $group      = $::amanda::params::group
   $config_dir = $::amanda::params::configs_directory
 
@@ -119,4 +118,7 @@ class server::backup (
     mode    => '0700',
     require => Exec['setup keys'],
   }
+
+  # Log permissions
+
 }
