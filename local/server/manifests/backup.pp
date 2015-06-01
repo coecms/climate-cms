@@ -26,17 +26,12 @@ class server::backup (
   $config_dir = $::amanda::params::configs_directory
 
   $base_dir    = '/var/amanda'
-  $tape_dir    = "${base_dir}/vtapes"
-  $holding_dir = "${base_dir}/holding"
+  $tape_dir    = '/g/data1/ua8/climate-cms-backups'
+  $holding_dir = '/scratch/holding'
   $state_dir   = "${base_dir}/state"
   $curinfo_dir = "${state_dir}/curinfo"
   $log_dir     = "${state_dir}/log"
   $index_dir   = "${state_dir}/index"
-
-  $slot_dirs   = ["${tape_dir}/slot1",
-                  "${tape_dir}/slot2",
-                  "${tape_dir}/slot3",
-                  "${tape_dir}/slot4"]
 
   class {'::amanda::server':
   }
@@ -55,8 +50,6 @@ class server::backup (
   }
   file {[
     $base_dir,
-    $tape_dir,
-    $holding_dir,
     $state_dir,
     $curinfo_dir,
     $log_dir,
@@ -64,11 +57,12 @@ class server::backup (
   ]:
     ensure => directory,
   }
-  file {$slot_dirs:
-    ensure => directory,
+  file {$holding_dir:
+    ensure  => directory,
+    require => Class['client::scratchdisk'],
   }
 
-  # Create a ssh key and store in fact 'amandabackup_sshkey'
+  # Create a ssh key and store in fact '${user}_sshkey'
   ::sshkey::fact {$user:}
 
   # Send mail to root

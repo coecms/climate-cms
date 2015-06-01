@@ -6,17 +6,20 @@ dumpuser   "<%= @user %>"
 
 mailto    "root"
 
+# Do a full backup this often
+dumpcycle 7 days
+
+# Number of available tapes
+tapecycle 10
+
+# Tape location & labelling
 tpchanger "chg-disk:<%= @tape_dir %>"
 labelstr  "<%= @config %>[0-9][0-9]"
-# autolabel "<%= @config %>%%" EMPTY VOLUME_ERROR
-tapecycle 4
-dumpcycle 3 days
 amrecover_changer "changer"
 
-tapetype "TEST-TAPE"
-define tapetype TEST-TAPE {
-  length 100 mbytes
-  filemark 4 kbytes
+tapetype "GDATA"
+define tapetype GDATA {
+    length 1024 mbytes
 }
 
 define dumptype simple-gnutar-local {
@@ -32,6 +35,7 @@ define dumptype simple-gnutar-ssh {
     program "GNUTAR"
 }
 
+# Encrypt data
 define dumptype encrypt-gnutar-ssh {
     auth "ssh"
     client_username "amandabackup"
@@ -42,8 +46,9 @@ define dumptype encrypt-gnutar-ssh {
     server_decrypt_option "-d"
 }
 
+# Temporary holding area
 holdingdisk hd1 {
     directory "<%= @holding_dir %>"
-    use 50 mbytes
+    use 1024 mbytes
     chunksize 1 mbyte
 }
