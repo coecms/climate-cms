@@ -27,12 +27,14 @@ define dumptype simple-gnutar-local {
 
 define dumptype simple-gnutar-ssh {
     auth "ssh"
+    client_username "amandabackup"
     compress client fast
     program "GNUTAR"
 }
 
 define dumptype encrypt-gnutar-ssh {
     auth "ssh"
+    client_username "amandabackup"
     compress client fast
     program "GNUTAR"
     encrypt  server
