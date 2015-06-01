@@ -22,19 +22,6 @@ define tapetype GDATA {
     length 1024 mbytes
 }
 
-define dumptype simple-gnutar-local {
-    auth "local"
-    compress none
-    program "GNUTAR"
-}
-
-define dumptype simple-gnutar-ssh {
-    auth "ssh"
-    client_username "amandabackup"
-    compress client fast
-    program "GNUTAR"
-}
-
 # Encrypt data
 define dumptype encrypt-gnutar-ssh {
     auth "ssh"
