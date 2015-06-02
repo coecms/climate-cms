@@ -1,0 +1,25 @@
+#!/bin/bash
+#  Copyright 2015 ARC Centre of Excellence for Climate Systems Science
+#
+#  \author  Scott Wales <scott.wales@unimelb.edu.au>
+#
+#  Licensed under the Apache License, Version 2.0 (the "License");
+#  you may not use this file except in compliance with the License.
+#  You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#  Unless required by applicable law or agreed to in writing, software
+#  distributed under the License is distributed on an "AS IS" BASIS,
+#  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#  See the License for the specific language governing permissions and
+#  limitations under the License.
+
+set -eu
+
+# Run backups
+sudo -u "<%= @user %>" amdump daily
+
+# Mirror backups to persistent storage
+sudo -u "<%= @mirror_user %>" rsync -rv "<%= @tape_dir %>/slot*" "<%= @mirror_dir %>/vtapes/"
+sudo -u "<%= @mirror_user %>" rsync -rv "<%= @state_dir %>/"     "<%= @mirror_dir %>/state/"

@@ -31,6 +31,9 @@ class server::backup {
   $log_dir     = '/var/log/amanda'
   $index_dir   = "${state_dir}/index"
 
+  $mirror_user = 'v45_apache'
+  $mirror_dir  = '/g/data1/ua8/climate-cms-backups'
+
   class {'::amanda::server':
   }
 
@@ -72,9 +75,15 @@ class server::backup {
   # Run the backups
   ::server::backup::config {'daily':
   }
-  site::cron {'amdump daily':
-    command => '/usr/sbin/amdump daily',
-    user    => $user,
+  file {'/usr/sbin/backup_and_mirror':
+    ensure  => file,
+    mode    => '0700',
+    owner   => 'root',
+    group   => 'root',
+    content => template('server/backup/backup_and_mirror.sh.erb'),
+  }
+  site::cron {'run_backups':
+    command => '/usr/sbin/backup_and_mirror',
     hour    => 1,
     minute  => fqdn_rand(60,'amanda'),
   }
