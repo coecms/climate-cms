@@ -28,7 +28,7 @@ define site::cron (
   $_name = regsubst($name,'\s+','-','G')
   $status_file = "/tmp/cron-status-${_name}"
 
-  $_command = "${command} 2>1 > ${status_file}; echo 'Exit code:' \$? >> ${status_file}"
+  $_command = "${command} 2>&1 > ${status_file}; echo 'Exit code:' \$? >> ${status_file}"
 
   cron {$name:
     command => $_command,
