@@ -23,7 +23,6 @@ class client::backup {
   }
 
   sshkey::authorize {'amandabackup':
-    remote_user => 'v45_apache',
     query       => 'Class[server::backup]',
   }
 
