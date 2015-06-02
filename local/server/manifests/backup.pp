@@ -112,12 +112,12 @@ class server::backup {
   }
   file {"${home}/.gnupg/am_key.gpg":
     ensure  => file,
-    mode    => '0700',
+    mode    => '0400',
     require => Exec['setup keys'],
   }
   file {"${home}/.am_passphrase":
     ensure  => file,
-    mode    => '0700',
+    mode    => '0400',
     require => Exec['setup keys'],
   }
 
