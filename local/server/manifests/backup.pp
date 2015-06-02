@@ -112,18 +112,4 @@ class server::backup {
     require => Exec['setup keys'],
   }
 
-  # Log directory permissions
-  file {'/var/log/amanda':
-    ensure => directory,
-    owner  => 'amandabackup',
-    group  => $group,
-    mode   => '2770',
-  }
-  file {'/var/log/amanda/server':
-    ensure => directory,
-    owner  => $user,
-    group  => $group,
-    mode   => '2700',
-  }
-
 }
