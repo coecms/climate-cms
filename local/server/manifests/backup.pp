@@ -15,7 +15,7 @@
 #  limitations under the License.
 
 # Backup Server
-class server::backup { 
+class server::backup {
   include ::amanda::params
 
   $user       = $::amanda::params::user
@@ -28,7 +28,7 @@ class server::backup {
   $holding_dir = '/scratch/holding'
   $state_dir   = "${base_dir}/state"
   $curinfo_dir = "${state_dir}/curinfo"
-  $log_dir     = "${state_dir}/log"
+  $log_dir     = '/var/log/amanda'
   $index_dir   = "${state_dir}/index"
 
   class {'::amanda::server':
