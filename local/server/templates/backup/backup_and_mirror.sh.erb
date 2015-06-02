@@ -15,11 +15,17 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
+# MANAGED BY PUPPET
+
 set -eu
 
 # Run backups
 sudo -u "<%= @user %>" amdump daily
 
 # Mirror backups to persistent storage
-sudo -u "<%= @mirror_user %>" rsync -rv "<%= @tape_dir %>/slot*" "<%= @mirror_dir %>/vtapes/"
-sudo -u "<%= @mirror_user %>" rsync -rv "<%= @state_dir %>/"     "<%= @mirror_dir %>/state/"
+# The mirror user should be in the 'disk' group
+chmod -R g+r "<%= @tape_dir %>"
+sudo -u "<%= @mirror_user %>" rsync -rv "<%= @tape_dir %>/"  "<%= @mirror_dir %>/vtapes/"
+
+chmod -R g+r "<%= @state_dir %>"
+sudo -u "<%= @mirror_user %>" rsync -rv "<%= @state_dir %>/" "<%= @mirror_dir %>/state/"
