@@ -3,5 +3,4 @@ classes:
   - server::puppet
   - roles::puppetdb
   - server::salt
-  - client::backup
 

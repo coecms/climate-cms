@@ -6,6 +6,7 @@ classes:
     - client::icinga
     - client::puppet
     - client::salt
+    - client::backup
 
 site::domain: 'climate-cms.nci.org.au'
 
