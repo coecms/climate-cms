@@ -15,18 +15,16 @@
 #  limitations under the License.
 
 # Backup Server
-class server::backup (
-  $user = 'v45_apache',
-) {
+class server::backup { 
   include ::amanda::params
 
-  # $user       = $::amanda::params::user
+  $user       = $::amanda::params::user
   $home       = $::amanda::params::homedir
   $group      = $::amanda::params::group
   $config_dir = $::amanda::params::configs_directory
 
   $base_dir    = '/var/amanda'
-  $tape_dir    = '/g/data1/ua8/climate-cms-backups'
+  $tape_dir    = '/scratch/vtapes'
   $holding_dir = '/scratch/holding'
   $state_dir   = "${base_dir}/state"
   $curinfo_dir = "${state_dir}/curinfo"
@@ -50,6 +48,7 @@ class server::backup (
   }
   file {[
     $base_dir,
+    $tape_dir,
     $state_dir,
     $curinfo_dir,
     $log_dir,
