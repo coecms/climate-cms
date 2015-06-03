@@ -52,7 +52,7 @@ class server::elasticsearch (
     minute  => 0,
   }
   site::cron {'elasticsearch-optimise':
-    command => '/usr/bin/curator optimise indices --older-than 2 --time-unit days --timestring \'\%Y.\%m.\%d\'',
+    command => '/usr/bin/curator optimize indices --older-than 2 --time-unit days --timestring \'\%Y.\%m.\%d\'',
     hour    => 1,
     minute  => 10,
   }
