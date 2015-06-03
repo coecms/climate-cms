@@ -114,6 +114,7 @@ class server::tomcat {
     action  => 'accept',
   }
 
+  # Path to webapp working directory
   $content_path = '/var/lib/tomcat/content'
 
   file {$content_path:
@@ -127,6 +128,9 @@ class server::tomcat {
     ensure  => link,
     target  => $content_path,
     require => Tomcat::Instance['default'],
+  }
+
+  client::backup::path {$content_path:
   }
 
 }
