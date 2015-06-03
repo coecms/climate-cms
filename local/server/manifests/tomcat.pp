@@ -130,7 +130,7 @@ class server::tomcat {
     require => Tomcat::Instance['default'],
   }
 
-  client::backup::path {$content_path:
+  client::backup::directory {$content_path:
   }
 
 }
