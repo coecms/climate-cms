@@ -38,3 +38,8 @@ monitor
 -------
 
 Icinga and ELK server for monitoring the other hosts
+
+stats
+-----
+
+Elasticsearch server for UM run statistics

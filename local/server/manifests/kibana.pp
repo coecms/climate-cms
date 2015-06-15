@@ -14,7 +14,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-class roles::kibana {
+class server::kibana {
 
   $package    = 'kibana-4.1.0-linux-x64'
   $source_url = "https://download.elasticsearch.org/kibana/kibana/${package}.tar.gz"
