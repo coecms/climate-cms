@@ -24,36 +24,4 @@ class server::elasticsearch (
     repo_version => '1.4',
   }
 
-  ::elasticsearch::instance { 'logstash':
-  }
-
-  $logstash_ip = query_nodes('Class[site::logstash]',
-                                ipaddress_eth0)
-
-  elasticsearch::firewall {$logstash_ip: }
-
-  $kibana_ip = query_nodes('Class[roles::kibana]',
-                                ipaddress_eth0)
-  firewall {'920 kibana -> elasticsearch':
-    proto  => 'tcp',
-    port   => '9200',
-    source => $kibana_ip,
-    action => 'accept',
-  }
-
-  package {'elasticsearch-curator':
-    ensure   => present,
-    provider => 'pip',
-  }
-
-  site::cron {'elasticsearch-curator':
-    command => '/usr/bin/curator delete indices --older-than 30 --time-unit days --timestring \'\%Y.\%m.\%d\'',
-    hour    => 1,
-    minute  => 0,
-  }
-  site::cron {'elasticsearch-optimise':
-    command => '/usr/bin/curator optimize indices --older-than 2 --time-unit days --timestring \'\%Y.\%m.\%d\'',
-    hour    => 1,
-    minute  => 10,
-  }
 }

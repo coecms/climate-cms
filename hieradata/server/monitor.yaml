@@ -1,4 +1,4 @@
 ---
 classes:
-  - server::elasticsearch
+  - server::elasticsearch::logstash
   - server::icinga
