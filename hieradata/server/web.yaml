@@ -3,7 +3,7 @@ classes:
   - server::proxy
   - roles::thredds
   - roles::las
-  - roles::kibana
+  - server::kibana
   - server::ramadda
   - server::icingaweb
 
