@@ -16,7 +16,7 @@
 
 class server::ramadda (
   $db_password,
-  $version = '2.0',
+  $version = '2.1b',
 ) {
   include server::tomcat
 
