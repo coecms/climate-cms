@@ -23,6 +23,8 @@ class server::ramadda (
   $source_url = "http://downloads.sourceforge.net/project/ramadda/ramadda${version}"
   $ramadda_home = "${server::tomcat::content_path}/ramadda"
 
+  include server::ramadda::ncl
+
   tomcat::war {'repository.war':
     catalina_base => $server::tomcat::catalina_home,
     war_source    => "${source_url}/repository.war",
