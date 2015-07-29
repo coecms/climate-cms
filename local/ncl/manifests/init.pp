@@ -25,7 +25,8 @@ class ncl (
   }
 
   staging::deploy { 'ncl.tar.gz':
-    source => $source,
-    target => $path,
+    source  => $source,
+    target  => $path,
+    creates => "${path}/bin/ncl",
   }
 }
