@@ -5,6 +5,7 @@ classes:
   - roles::las
   - server::kibana
   - server::ramadda
+  - server::ramadda::ncl
   - server::icingaweb
 
 # NCI project mounts

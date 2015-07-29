@@ -20,7 +20,7 @@ class ncl (
 
   $source = 'https://www.earthsystemgrid.org/download/fileDownload.htm?logicalFileId=e0866847-cd9a-11e4-bb80-00c0f03d5b7c'
 
-  staging::deploy { 'ncl':
+  staging::deploy { 'ncl.tar.gz':
     source => $source,
     target => $path,
   }

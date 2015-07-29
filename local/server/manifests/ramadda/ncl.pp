@@ -17,12 +17,13 @@
 # Setup NCL for Ramadda
 class server::ramadda::ncl {
   include ::ncl
+  include ::server::ramadda
 
   file {"${server::ramadda::ramadda_home}/ncl.properties":
     owner    => $server::tomcat::user,
     group    => $server::tomcat::group,
     notify   => Tomcat::Service['default'],
     content  => "ncl.ncarg_root = ${ncl::path}\n",
-    requrire => File[$server::ramadda::ramdda_home],
+    require => File[$server::ramadda::ramdda_home],
   }
 }
