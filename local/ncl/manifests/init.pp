@@ -18,7 +18,7 @@ class ncl (
   $install_path = '/opt/ncl',
 ) {
 
-  $source = 'https://www.earthsystemgrid.org/download/fileDownload.htm?logicalFileId=e0866847-cd9a-11e4-bb80-00c0f03d5b7c'
+  $source = 'https://www.earthsystemgrid.org/download/fileDownload.htm?logicalFileId=e086dd78-cd9a-11e4-bb80-00c0f03d5b7c'
 
   file {$install_path:
     ensure => directory,
