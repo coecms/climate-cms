@@ -22,7 +22,7 @@ class server::ramadda::ncl {
     owner   => $server::tomcat::user,
     group   => $server::tomcat::group,
     notify  => Tomcat::Service['default'],
-    content => "ncl.ncarg_root = ${ncl::install_path}\n",
+    content => "ncl.ncarg_root = ${::ncl::install_path}\n",
     require => File[$server::ramadda::ramadda_home],
   }
 }
