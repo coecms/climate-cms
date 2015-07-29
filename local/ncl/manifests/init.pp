@@ -15,18 +15,18 @@
 #  limitations under the License.
 
 class ncl (
-  $path = '/opt/ncl',
+  $install_path = '/opt/ncl',
 ) {
 
   $source = 'https://www.earthsystemgrid.org/download/fileDownload.htm?logicalFileId=e0866847-cd9a-11e4-bb80-00c0f03d5b7c'
 
-  file {$path:
+  file {$install_path:
     ensure => directory,
   }
 
   staging::deploy { 'ncl.tar.gz':
     source  => $source,
-    target  => $path,
-    creates => "${path}/bin/ncl",
+    target  => $install_path,
+    creates => "${installpath}/bin/ncl",
   }
 }

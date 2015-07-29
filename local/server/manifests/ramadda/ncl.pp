@@ -19,10 +19,10 @@ class server::ramadda::ncl {
   include ::ncl
 
   file {"${server::ramadda::ramadda_home}/ncl.properties":
-    owner    => $server::tomcat::user,
-    group    => $server::tomcat::group,
-    notify   => Tomcat::Service['default'],
-    content  => "ncl.ncarg_root = ${ncl::path}\n",
+    owner   => $server::tomcat::user,
+    group   => $server::tomcat::group,
+    notify  => Tomcat::Service['default'],
+    content => "ncl.ncarg_root = ${ncl::install_path}\n",
     require => File[$server::ramadda::ramadda_home],
   }
 }
