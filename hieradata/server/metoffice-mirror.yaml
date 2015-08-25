@@ -23,3 +23,9 @@ roles::svnmirror::mirrors:
     socrates:
         url:       /svn/socrates
         origin:    https://code.metoffice.gov.uk/svn/socrates
+    ops:
+        url:       /svn/ops
+        origin:    https://code.metoffice.gov.uk/svn/ops
+    var:
+        url:       /svn/var
+        origin:    https://code.metoffice.gov.uk/svn/var
