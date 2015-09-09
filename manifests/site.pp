@@ -36,5 +36,11 @@ node default {
 
   # Ensure Pip is available before we install packages with it
   ensure_packages('python-pip')
-  Package['python-pip'] -> Package<| provider == pip |>
+  file {'pip-python':
+    ensure  => link,
+    path    => '/usr/bin/pip-python',
+    target  => '/usr/bin/pip',
+    require => Package['python-pip'],
+  }
+  File['pip-python'] -> Package<| provider == pip |>
 }
