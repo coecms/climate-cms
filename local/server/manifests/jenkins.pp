@@ -14,7 +14,10 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-class server::jenkins {
+class server::jenkins (
+  $path = '/jenkins',
+  $port = 8009,
+) {
   include site::java
   include site::ldap
   include ::git
@@ -23,9 +26,6 @@ class server::jenkins {
     ensure   => '1.1.0',
     provider => 'gem',
   }
-
-  $path = '/jenkins'
-  $port = 8009
 
   class {'::jenkins':
     config_hash        => {

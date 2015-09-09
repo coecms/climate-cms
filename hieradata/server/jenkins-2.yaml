@@ -1,0 +1,5 @@
+---
+classes:
+  - server::jenkins
+
+server::jenkins::path: '/jenkins-test'
