@@ -83,10 +83,11 @@ define roles::svnmirror::mirror (
   # testing
   $vhost = $::roles::svnmirror::vhost
   $jenkins_ip = query_nodes('Class[server::jenkins]','ipaddress_eth0')
+  $jenkins_allow = join($jenkins_ip, ' ')
   apacheplus::location {$url:
     vhost           => $vhost,
     order           => 'Deny,Allow',
-    allow           => "from ${access_ip} ${::ipaddress_eth0} ${jenkins_ip} localhost",
+    allow           => "from ${access_ip} ${::ipaddress_eth0} ${jenkins_allow} localhost",
     deny            => 'from all',
     custom_fragment => "
       DAV                  svn
