@@ -21,7 +21,7 @@ class server::elasticsearch (
 
   class {'::elasticsearch':
     manage_repo  => true,
-    repo_version => '1.4',
+    repo_version => '1.7',
   }
 
 }
