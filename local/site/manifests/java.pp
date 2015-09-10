@@ -36,7 +36,6 @@ class site::java (
     target       => $keystore,
     password     => $pass,
     require      => File[$site::ldap::ca_file],
-    notify       => Tomcat::Service['default'],
   }
   java_ks { 'apache-self-signed':
     ensure       => latest,
@@ -45,7 +44,6 @@ class site::java (
     target       => $keystore,
     password     => $pass,
     require      => Class['apache'],
-    notify       => Tomcat::Service['default'],
   }
 
 }
