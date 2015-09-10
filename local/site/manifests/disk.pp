@@ -27,4 +27,9 @@ class site::disk {
     mount      => '/local',
   }
 
+  client::icinga::check_nrpe {'/local':
+    display_name     => '/local',
+    nrpe_plugin      => 'check_disk',
+    nrpe_plugin_args => '-w 10% -c 5% -p /dev/vda2',
+  }
 }
