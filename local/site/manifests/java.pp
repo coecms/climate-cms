@@ -37,13 +37,5 @@ class site::java (
     password     => $pass,
     require      => File[$site::ldap::ca_file],
   }
-  java_ks { 'apache-self-signed':
-    ensure       => latest,
-    certificate  => '/etc/pki/tls/certs/localhost.crt',
-    trustcacerts => true,
-    target       => $keystore,
-    password     => $pass,
-    require      => Class['apache'],
-  }
 
 }
