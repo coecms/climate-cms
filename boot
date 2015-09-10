@@ -19,8 +19,8 @@
 hostname=${1:-'puppet'}
 environment='production'
 
-image='centos-6.6-20150129'
-flavor='m1.small'
+image='centos-6.7-20150816'
+flavor='m1.medium'
 secgroups='ssh'
 
 if [ "$hostname" == 'puppet' ]; then
