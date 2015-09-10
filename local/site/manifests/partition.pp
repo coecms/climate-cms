@@ -52,6 +52,7 @@ define site::partition (
     ensure  => mounted,
     atboot  => true,
     device  => $volume,
+    options => 'defaults',
     fstype  => $filesystem,
     require => [File[$mount],Exec["mkfs ${volume}"]],
   }
