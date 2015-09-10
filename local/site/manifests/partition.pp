@@ -28,7 +28,7 @@ define site::partition (
 
   # Create partition entry ${id}:
   exec {"parted ${volume}":
-    command => "parted -s '${disk}' mkpart '${type}' '${filesystem}' '${start}' '${end}'",
+    command => "/sbin/parted -s '${disk}' mkpart '${type}' '${filesystem}' '${start}' '${end}'",
     creates => $volume,
   }
 
@@ -38,9 +38,9 @@ define site::partition (
 
   # Format
   exec {"mkfs ${volume}":
-    command => "mkfs -t '${filesystem}' '${volume}'",
+    command => "/sbin/mkfs -t '${filesystem}' '${volume}'",
     require => File[$volume],
-    unless  => "blkid '${volume}' | grep 'TYPE=\"${filesystem}\"'",
+    unless  => "/sbin/blkid '${volume}' | /bin/grep 'TYPE=\"${filesystem}\"'",
   }
 
   # Mount point
