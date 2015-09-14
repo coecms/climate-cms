@@ -3,4 +3,4 @@ classes:
   - server::jenkins
   - site::disk
 
-server::jenkins::path: '/jenkins-test'
+server::jenkins::path: '/jenkins'
