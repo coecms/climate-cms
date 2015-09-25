@@ -30,7 +30,8 @@ class server::jenkins (
   class {'::jenkins':
     config_hash        => {
       'JENKINS_ARGS'   => {'value' => "--prefix=${path}"},
-      'AJP_PORT'       => {'value' => "${port}"},},
+      'AJP_PORT'       => {'value' => "${port}"},
+      'HTTP_PORT'      => {'value' => '8080'},},
     install_java       => false,
     configure_firewall => false,
     require            => Class['java'],
