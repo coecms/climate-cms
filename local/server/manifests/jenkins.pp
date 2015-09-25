@@ -42,6 +42,13 @@ class server::jenkins (
     port     => $port,
   }
 
+  firewall {'401 jenkins from climate-cms.nci.org.au':
+    port   => 8080,
+    proto  => 'tcp',
+    source => '130.56.244.112',
+    action => 'accept',
+  }
+
   client::icinga::check_process {'jenkins':
     command  => 'java',
     argument => '-jar /usr/lib/jenkins/jenkins.war',
