@@ -46,7 +46,7 @@ class server::jenkins (
   firewall {'401 jenkins from climate-cms.nci.org.au':
     port   => 8080,
     proto  => 'tcp',
-    source => '10.0.0.68',
+    source => '130.56.244.112',
     action => 'accept',
   }
 
