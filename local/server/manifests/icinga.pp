@@ -140,6 +140,9 @@ class server::icinga (
   icinga2::object::servicegroup {'gdata':
     assign_where => 'service.vars.gdata',
   }
+  icinga2::object::servicegroup {'svnsync':
+    assign_where => 'service.vars.cron == "svnsync"',
+  }
 
   icinga2::object::apply_notification_to_service {'disk-notifications':
     assign_where => 'service.vars.nrpe_plugin == "check_disk"',

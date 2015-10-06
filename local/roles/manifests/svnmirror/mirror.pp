@@ -71,10 +71,13 @@ define roles::svnmirror::mirror (
 
   # Do regular pulls
   site::cron {"svnsync sync ${name}":
-    command   => "cd ${path} && /usr/bin/svnsync sync --non-interactive file://${path}",
-    user      => $user,
-    minute    => "*/${update_minutes}",
-    require   => Exec["svnsync init ${path}"],
+    command     => "cd ${path} && /usr/bin/svnsync sync --non-interactive file://${path}",
+    user        => $user,
+    minute      => "*/${update_minutes}",
+    require     => Exec["svnsync init ${path}"],
+    icinga_vars => {
+      'cron'    => 'svnsync',
+    }
   }
 
   if $http {
