@@ -16,13 +16,13 @@
 
 # Local type for a monitored cron job
 define site::cron (
-  $command             = $name,
-  $user                = undef,
-  $hour                = undef,
-  $minute              = undef,
-  $weekday             = undef,
-  $icinga_vars         = undef,
-  $icinga_check_period = undef,
+  $command               = $name,
+  $user                  = undef,
+  $hour                  = undef,
+  $minute                = undef,
+  $weekday               = undef,
+  $icinga_vars           = undef,
+  $icinga_check_interval = undef,
 ) {
   validate_string($command)
 
