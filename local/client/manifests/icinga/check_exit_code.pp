@@ -17,9 +17,11 @@
 # Check a file for the string 'Exit code: %d' & report if non-zero
 define client::icinga::check_exit_code (
   $logfile,
-  $timeout       = 120, # Report error if not modified in this many minutes
-  $display_name  = undef,
-  $vars          = undef,
+  $timeout        = 120, # Report error if not modified in this many minutes
+  $display_name   = undef,
+  $vars           = undef,
+  $check_interval = undef,
+  $retry_interval = undef,
 ) {
   validate_absolute_path($logfile)
   validate_integer($timeout)
@@ -30,6 +32,8 @@ define client::icinga::check_exit_code (
     display_name     => $display_name,
     nrpe_plugin      => 'check_exit_code',
     nrpe_plugin_args => "-f '${logfile}' -t '${timeout}'",
+    check_interval   => $check_interval,
+    retry_interval   => $retry_interval,
     vars             => $vars,
   }
 

@@ -47,11 +47,12 @@ define site::cron (
   }
 
   client::icinga::check_exit_code {"cron-${_name}":
-    display_name => $name,
-    logfile      => $status_file,
-    timeout      => $timeout,
-    vars         => $icinga_vars,
-    check_period => $icinga_check_period,
+    display_name   => $name,
+    logfile        => $status_file,
+    timeout        => $timeout,
+    vars           => $icinga_vars,
+    check_interval => $icinga_check_interval,
+    retry_interval => $icinga_check_interval,
   }
 
 }
