@@ -21,6 +21,8 @@ define client::icinga::check_nrpe (
   $nrpe_plugin       = undef,
   $nrpe_plugin_args  = '',
   $vars              = {},
+  $check_interval    = undef,
+  $retry_interval    = undef,
 ) {
   # Ensure no white-space for filenames
   validate_re($name,'^\S+$')
@@ -33,11 +35,13 @@ define client::icinga::check_nrpe (
   $_vars = merge($nrpe_vars, $vars)
 
   @@server::icinga::service {"${::fqdn}-${name}":
-    service_name     => $name,
-    display_name     => $display_name,
-    host             => $::fqdn,
-    check_command    => 'check_nrpe',
-    check_vars       => $_vars,
+    service_name   => $name,
+    display_name   => $display_name,
+    host           => $::fqdn,
+    check_command  => 'check_nrpe',
+    check_vars     => $_vars,
+    check_interval => $check_interval,
+    retry_interval => $retry_interval,
   }
 
   icinga2::nrpe::command {$nrpe_command_name:

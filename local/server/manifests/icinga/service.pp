@@ -19,7 +19,9 @@ define server::icinga::service (
   $service_name,
   $check_command,
   $check_vars,
-  $display_name = $service_name,
+  $display_name   = $service_name,
+  $check_interval = undef,
+  $retry_interval = undef,
 ) {
 
   icinga2::object::apply_service_to_host {$name:
@@ -28,6 +30,8 @@ define server::icinga::service (
     assign_where       => "host.name==\"${host}\"",
     check_command      => $check_command,
     vars               => $check_vars,
+    check_interval     => $check_interval,
+    retry_interval     => $retry_interval,
   }
 
 }
