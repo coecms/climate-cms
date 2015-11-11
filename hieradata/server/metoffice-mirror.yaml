@@ -29,3 +29,9 @@ roles::svnmirror::mirrors:
     var:
         url:       /svn/var
         origin:    https://code.metoffice.gov.uk/svn/var
+    ancil:
+        url:       /svn/ancil
+        origin:    https://code.metoffice.gov.uk/svn/ancil
+    moci:
+        url:       /svn/moci
+        origin:    https://code.metoffice.gov.uk/svn/moci
