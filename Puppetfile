@@ -43,6 +43,7 @@ mod 'ajcrowe/supervisord', '0.5.2'
 mod 'icinga2',
     :git    => 'https://github.com/Icinga/puppet-icinga2.git',
     :branch => 'develop'
+    :commit => 'fc8f8a3c76c43c673c887c3b86a500852db6dd18'
 
 mod 'logstash_reporter',
     :git    => 'https://github.com/logstash/puppet-logstash-reporter.git'
