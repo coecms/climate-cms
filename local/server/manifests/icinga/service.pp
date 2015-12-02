@@ -24,7 +24,7 @@ define server::icinga::service (
   $retry_interval = undef,
 ) {
 
-  icinga2::object::apply_service_to_host {$name:
+  icinga2::object::apply_service {$name:
     object_servicename => $service_name,
     display_name       => $display_name,
     assign_where       => "host.name==\"${host}\"",
