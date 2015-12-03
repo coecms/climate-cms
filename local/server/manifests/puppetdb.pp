@@ -17,10 +17,6 @@
 
 class server::puppetdb {
 
-  class {'::puppetdb::globals':
-    version => '2.3.8-1.el6',
-  }
-
   class {'::puppetdb':
     database           => 'embedded',
     ssl_listen_address => $::hostname,
