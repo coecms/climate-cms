@@ -1,6 +1,6 @@
 ---
 classes:
   - server::puppet
-  - roles::puppetdb
+  - server::puppetdb
   - server::salt
 
