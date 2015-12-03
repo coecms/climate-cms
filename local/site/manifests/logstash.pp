@@ -20,8 +20,9 @@ class site::logstash (
 ) {
   include site::java
 
-  $elasticsearch_ip = query_nodes('Class[server::elasticsearch::logstash]',
+  $elasticsearch_ips = query_nodes('Class[server::elasticsearch::logstash]',
                                 ipaddress_eth0)
+  $elasticsearch_ip = $elasticsearch_ips[0]
 
   class {'::logstash':
     install_contrib => true,
