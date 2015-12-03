@@ -42,6 +42,16 @@ class client::puppet (
     notify  => Service['puppet'],
   }
 
+  augeas { 'stringify_facts':
+    lens    => 'Puppet.lns',
+    incl    => '/etc/puppet/puppet.conf',
+    changes => [
+      "set main/stringify_facts false",
+    ],
+    require => File['/etc/puppet/puppet.conf'],
+    notify  => Service['puppet'],
+  }
+
   $certdir       = '/var/lib/puppet/ssl/certs'
   $privatekeydir = '/var/lib/puppet/ssl/private_keys'
 

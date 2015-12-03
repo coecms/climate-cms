@@ -68,6 +68,16 @@ class server::puppet {
     notify  => Service['puppetserver'],
   }
 
+  augeas { 'puppet_parser':
+    lens    => 'Puppet.lns',
+    incl    => '/etc/puppet/puppet.conf',
+    changes => [
+      "set main/parser future",
+    ],
+    require => File['/etc/puppet/puppet.conf'],
+    notify  => Service['puppetserver'],
+  }
+
   include server::puppet::ca
   include server::puppet::reports
   include server::puppet::monitor
