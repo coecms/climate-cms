@@ -31,9 +31,7 @@ mod 'richardc/datacat', '0.6.1'
 
 mod 'elasticsearch/logstash', '0.5.1'
 mod 'elasticsearch/elasticsearch', '0.9.2'
-mod 'file_concat',
-    :git    => 'https://github.com/electrical/puppet-lib-file_concat',
-    :commit => '2834ea51c275fdf884a023225071ca954806be22'
+mod 'electrical/file_concat', '1.0.1'
 mod 'pdxcat/collectd', '3.2.0'
 
 mod 'nodes/php', '0.9.0'
