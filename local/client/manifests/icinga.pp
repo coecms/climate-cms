@@ -47,7 +47,7 @@ class client::icinga {
   firewall {'300 nrpe checks':
     proto  => 'tcp',
     source => $server_ip,
-    port   => '5666',
+    dport  => '5666',
     action => 'accept',
   }
 

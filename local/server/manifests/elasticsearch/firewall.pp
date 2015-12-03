@@ -19,7 +19,7 @@ define server::elasticsearch::firewall {
 
   firewall {"930 elasticsearch from ${name}":
     proto  => 'tcp',
-    port   => '9300-9305',
+    dport  => '9300-9305',
     source => $name,
     action => 'accept',
   }

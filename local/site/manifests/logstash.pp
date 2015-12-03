@@ -60,7 +60,7 @@ class site::logstash (
   # Bidirectional comms required for logstash
   firewall {"931 elasticsearch to ${elasticsearch_ip}":
     proto  => 'tcp',
-    port   => '9300-9305',
+    dport  => '9300-9305',
     source => $elasticsearch_ip,
     action => 'accept',
   }

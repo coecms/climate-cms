@@ -101,7 +101,7 @@ class server::tomcat {
   # Firewall port
   firewall {'808 proxy to tomcat':
     proto   => 'tcp',
-    port    => '8080',
+    dport   => '8080',
     source  => $::site::proxy_ip,
     action  => 'accept',
   }

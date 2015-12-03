@@ -39,7 +39,7 @@ Backup files::
 Open firewall ports (using puppetlabs-firewall module)::
 
     firewall {'080 apache httpd':
-       port   => '80',
+       dport  => '80',
        proto  => 'tcp',
        action => 'accept',
     }
@@ -50,7 +50,7 @@ PuppetDB (note the firewall class only accepts 1 IP at a time)::
     $client_ips = query_nodes('Class[client::apache]','ipaddress_eth0')
     firewall {'081 connection from client':
        source => $client_ips[0],
-       port   => '8080',
+       dport  => '8080',
        proto  => 'tcp',
        action => 'accept',
     }

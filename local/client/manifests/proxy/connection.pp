@@ -33,7 +33,7 @@ define client::proxy::connection (
 
   firewall {"400 proxy connection to ${name}":
     proto  => 'tcp',
-    port   => $port,
+    dport  => $port,
     source => $proxy_ip,
     action => 'accept',
   }

@@ -20,7 +20,7 @@ define roles::postgresql::firewall {
 
   firewall { "300 postgresql from ${name}":
     proto  => 'tcp',
-    port   => $port,
+    dport  => $port,
     source => $name,
     action => 'accept',
   }

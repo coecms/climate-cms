@@ -18,7 +18,7 @@
 class site::firewall::https {
   firewall {'801 https':
     proto  => 'tcp',
-    port   => 443,
+    dport  => 443,
     action => 'accept',
   }
 }

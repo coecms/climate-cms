@@ -20,12 +20,12 @@ class site::firewall::http {
   # Allow http
   firewall { '080 accept http':
     proto  => 'tcp',
-    port   => '80',
+    dport  => '80',
     action => 'accept',
   }
   firewall { '081 accept https':
     proto  => 'tcp',
-    port   => '443',
+    dport  => '443',
     action => 'accept',
   }
 }

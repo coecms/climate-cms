@@ -18,7 +18,7 @@ define server::salt::firewall {
 
   firewall {"450 salt from ${name}":
     proto  => 'tcp',
-    port   => '4505-4506',
+    dport  => '4505-4506',
     source => $name,
     action => 'accept',
   }

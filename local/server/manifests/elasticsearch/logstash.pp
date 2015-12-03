@@ -32,7 +32,7 @@ class server::elasticsearch::logstash {
                                 ipaddress_eth0)
   firewall {'920 kibana -> elasticsearch':
     proto  => 'tcp',
-    port   => '9200',
+    dport  => '9200',
     source => $kibana_ip,
     action => 'accept',
   }
