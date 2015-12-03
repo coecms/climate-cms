@@ -18,6 +18,9 @@ class server::elasticsearch::logstash {
   include server::elasticsearch
 
   ::elasticsearch::instance { 'logstash':
+    config => {
+      'indices.fielddata.cache.size' => '1gb',
+    },
   }
 
   $logstash_ip = query_nodes('Class[site::logstash]',
