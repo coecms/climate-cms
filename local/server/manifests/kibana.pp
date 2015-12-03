@@ -19,8 +19,9 @@ class server::kibana {
   $package    = 'kibana-4.1.0-linux-x64'
   $source_url = "https://download.elasticsearch.org/kibana/kibana/${package}.tar.gz"
 
-  $elasticsearch = query_nodes('Class[server::elasticsearch]',
+  $elasticsearch_ips = query_nodes('Class[server::elasticsearch]',
                                 ipaddress_eth0)
+  $elasticsearch_ip = $elasticsearch_ips[0]
 
   class {'supervisord': }
 
@@ -48,7 +49,7 @@ class server::kibana {
     incl    => '/opt/kibana/config/kibana.yml',
     lens    => 'Cobblersettings.lns',
     context => '/files/opt/kibana/config/kibana.yml',
-    changes => "set elasticsearch_url '\"http://${elasticsearch}:9200\"'",
+    changes => "set elasticsearch_url '\"http://${elasticsearch_ip}:9200\"'",
     require => Staging::Extract["${package}.tar.gz"],
     notify  => File['kibana.yml'],
   }
