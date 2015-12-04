@@ -51,7 +51,7 @@ class client::letsencrypt {
     owner   => 'root',
     group   => 'apache',
     mode    => '0640',
-    require => Exec['letsencrypt domain key']
+    require => Exec['letsencrypt account key']
   }
 
   # Create a public key for $domain
