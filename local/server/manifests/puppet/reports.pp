@@ -19,14 +19,14 @@ class server::puppet::reports {
 
   augeas { 'reports':
     lens    => 'Puppet.lns',
-    incl    => '/etc/puppet/puppet.conf',
+    incl    => '/etc/puppetlabs/puppet/puppet.conf',
     changes => 'set master/reports "puppetdb"',
-    require => File['/etc/puppet/puppet.conf'],
+    require => File['/etc/puppetlabs/puppet/puppet.conf'],
     notify  => Service['puppetserver'],
   }
 
   class {'logstash_reporter':
-    config_file   => '/etc/puppet/logstash.yaml',
+    config_file   => '/etc/puppetlabs/puppet/logstash.yaml',
     config_owner  => 'puppet',
     config_group  => 'puppet',
     logstash_port => $report_port,

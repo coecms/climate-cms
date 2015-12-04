@@ -16,12 +16,12 @@ mod 'puppetlabs/vcsrepo', '1.3.1'
 mod 'puppetlabs/xinetd', '1.5.0'
 
 # Provides functions to query puppetdb
-mod 'dalen/puppetdbquery', '1.5.3'
+mod 'dalen/puppetdbquery', '2.1.0'
 
 # Helps with downloading & unzipping files
 mod 'nanliu/staging', '1.0.3'
 
-mod 'zack/r10k', '2.6.4'
+mod 'zack/r10k', '3.1.1'
 
 mod 'saz/sudo', '3.0.9'
 mod 'saz/ssh', '2.4.0'

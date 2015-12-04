@@ -19,36 +19,42 @@ class client::puppet (
   $master = 'puppet',
 ) {
 
-  package { 'puppet':
+  if versioncmp($::puppetversion, '4.0.0') >= 0 {
+    $package = 'puppet-agent'
+    $config  = '/etc/puppetlabs/puppet/puppet.conf'
+    $codedir = '/etc/puppetlabs/code'
+
+    file {'/usr/bin/puppet':
+      ensure  => link,
+      target  => '/opt/puppetlabs/bin/puppet',
+      require => Package[$package],
+    }
+  } else {
+    $package = 'puppet'
+    $config  = '/etc/puppet/puppet.conf'
+    $codedir = '/etc/puppet'
+  }
+
+  package { $package:
     ensure => present,
   }
 
-  file { '/etc/puppet/puppet.conf':
-    require => Package['puppet'],
+  file { $config:
+    require => Package[$package],
   }
 
   service { 'puppet':
     enable  => true,
-    require => Package['puppet'],
+    require => Package[$config],
   }
 
   augeas { 'puppetmaster':
     lens    => 'Puppet.lns',
-    incl    => '/etc/puppet/puppet.conf',
+    incl    => $config,
     changes => [
       "set agent/server '${master}'",
     ],
-    require => File['/etc/puppet/puppet.conf'],
-    notify  => Service['puppet'],
-  }
-
-  augeas { 'stringify_facts':
-    lens    => 'Puppet.lns',
-    incl    => '/etc/puppet/puppet.conf',
-    changes => [
-      "set main/stringify_facts false",
-    ],
-    require => File['/etc/puppet/puppet.conf'],
+    require => File[$config],
     notify  => Service['puppet'],
   }
 

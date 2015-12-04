@@ -27,14 +27,17 @@ class server::puppet {
     require   => Package['puppetserver'],
   }
 
+  file {'/etc/puppetlabs/r10k':
+    ensure => directory,
+  }
   class {'r10k':
     remote                 => 'https://github.com/coecms/climate-cms',
     manage_ruby_dependency => 'ignore',
   }
 
-  file {'/etc/puppet/hiera.yaml':
+  file {'/etc/puppetlabs/code/hiera.yaml':
     ensure => link,
-    target => '/etc/puppet/environments/production/hiera.yaml',
+    target => '/etc/puppetlabs/code/environments/production/hiera.yaml',
   }
 
   firewall {'140 puppetmaster':
@@ -60,21 +63,11 @@ class server::puppet {
   }
   augeas { 'private fileserver':
     lens    => 'Puppetfileserver.lns',
-    incl    => '/etc/puppet/fileserver.conf',
+    incl    => '/etc/puppetlabs/puppet/fileserver.conf',
     changes => [
       "set private/path '${private_path}'",
       'set private/allow "*"',
     ],
-    notify  => Service['puppetserver'],
-  }
-
-  augeas { 'puppet_parser':
-    lens    => 'Puppet.lns',
-    incl    => '/etc/puppet/puppet.conf',
-    changes => [
-      "set main/parser future",
-    ],
-    require => File['/etc/puppet/puppet.conf'],
     notify  => Service['puppetserver'],
   }
 
