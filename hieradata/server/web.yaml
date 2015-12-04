@@ -6,6 +6,7 @@ classes:
   - server::kibana
   - server::ramadda
   - server::icingaweb
+  - client::letsencrypt
 
 # NCI project mounts
 site::gdata:
