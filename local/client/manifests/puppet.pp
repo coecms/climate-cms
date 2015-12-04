@@ -45,7 +45,7 @@ class client::puppet (
 
   service { 'puppet':
     enable  => true,
-    require => Package[$config],
+    require => Package[$package],
   }
 
   augeas { 'puppetmaster':
