@@ -22,7 +22,7 @@ class client::letsencrypt {
   $domain = 'climate-cms.org'
 
   user {$user:
-    group => 'apache',
+    gid => 'apache',
   }
 
   $install_path = '/opt/letsencrypt'
