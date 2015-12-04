@@ -92,7 +92,6 @@ class client::letsencrypt {
   apacheplus::location {$challengepath:
     vhost           => $domain,
     type            => 'Directory',
-    order           => 90,
     allow           => 'from all',
     deny            => 'from none',
   }
