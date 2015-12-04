@@ -19,7 +19,7 @@ class client::letsencrypt {
   include ::git
 
   $user = 'letsencrypt'
-  $domain = 'climate-cms.org'
+  $domain = 'test.climate-cms.org'
 
   user {$user:
     gid => 'apache',
@@ -81,12 +81,24 @@ class client::letsencrypt {
   }
 
   # Serve challange responses here
-  $challangepath = "/var/www/acme-challanges"
-  file {$challangepath:
+  $challengepath = "/var/www/acme-challanges"
+  file {$challengepath:
     ensure => directory,
     owner  => $user,
     group  => 'apache',
     mode   => '0750',
+  }
+
+  apacheplus::location {$challengepath:
+    vhost           => $domain,
+    type            => 'Directory',
+    order           => 90,
+    allow           => 'from all',
+    deny            => 'from none',
+  }
+  apacheplus::alias {'/.well-known/acme-challenge':
+    vhost  => $domain,
+    target => $challengepath,
   }
 
   #  # Sign the request
