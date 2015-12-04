@@ -24,7 +24,7 @@ define apacheplus::alias (
   include ::apache::mod::alias
 
   concat::fragment {"$name":
-    $target => "${vhost_priority}-${vhost}.conf",
+    target => "${vhost_priority}-${vhost}.conf",
     order   => $location_priority,
     content => "Alias ${url} ${target}\n",
   }
