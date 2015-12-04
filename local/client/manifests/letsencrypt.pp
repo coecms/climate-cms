@@ -43,7 +43,7 @@ class client::letsencrypt {
 
   # Create a key for the account
   exec {'letsencrypt account key':
-    command => "/usr/bin/openssl genrsa 4096 -out ${keypath}/account.key",
+    command => "/usr/bin/openssl genrsa -out ${keypath}/account.keyi 4096",
     creates => "${keypath}/account.key",
     require => File[$keypath],
   }
@@ -56,7 +56,7 @@ class client::letsencrypt {
 
   # Create a public key for $domain
   exec {"letsencrypt key ${domain}":
-    command => "/usr/bin/openssl genrsa 4096 -out ${keypath}/${domain}.key",
+    command => "/usr/bin/openssl genrsa -out ${keypath}/${domain}.key 4096",
     creates => "${keypath}/${domain}.key",
     require => File[$keypath],
   }
