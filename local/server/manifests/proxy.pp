@@ -35,10 +35,14 @@ class server::proxy (
     redirect_status => 'temp',
   }
 
+  $keypath = '/var/lib/letsencrypt'
   apache::vhost { $vhost:
-    port    => '443',
-    docroot => '/var/www/html',
-    ssl     => true,
+    port      => '443',
+    docroot   => '/var/www/html',
+    ssl       => true,
+    ssl_cert  => "${keypath}/${vhost}.crt",
+    ssl_key   => "${keypath}/${vhost}.key",
+    ssl_chain => "${keypath}/intermediate.pem",
   }
 
   # ARCCSS logos
