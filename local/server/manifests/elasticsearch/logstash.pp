@@ -26,7 +26,7 @@ class server::elasticsearch::logstash {
   $logstash_ip = query_nodes('Class[site::logstash]',
                                 ipaddress_eth0)
 
-  elasticsearch::firewall {$logstash_ip: }
+  ::server::elasticsearch::firewall {$logstash_ip: }
 
   $kibana_ip = query_nodes('Class[roles::kibana]',
                                 ipaddress_eth0)
