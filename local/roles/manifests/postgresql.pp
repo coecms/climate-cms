@@ -28,6 +28,6 @@ class roles::postgresql (
   ::Postgresql::Server::Db <<||>>
 
   # Nodes that are using databases
-  $db_clients_ip = query_nodes('@@Postgresql::Server::Db','ipaddress_eth0')
+  $db_clients_ip = query_nodes('@@Postgresql::Server::Db[~".*"]','ipaddress_eth0')
   roles::postgresql::firewall {$db_clients_ip:}
 }
