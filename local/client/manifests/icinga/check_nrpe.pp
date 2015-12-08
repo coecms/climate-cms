@@ -44,8 +44,8 @@ define client::icinga::check_nrpe (
     retry_interval => $retry_interval,
   }
 
-# icinga2::nrpe::command {$nrpe_command_name:
-#   nrpe_plugin_name => $nrpe_plugin,
-#   nrpe_plugin_args => $nrpe_plugin_args,
-# }
+ ::nrpe::command {$nrpe_command_name:
+   ensure  => present,
+   command => "${nrpe_plugin} ${nrpe_plugin_args}",
+ }
 }

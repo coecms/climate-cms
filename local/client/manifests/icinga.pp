@@ -20,9 +20,11 @@ class client::icinga {
   $server_ip = query_nodes('Class[server::icinga]','ipaddress_eth0')
   $allowed_hosts = ['127.0.0.1',$server_ip]
 
-# class {'icinga2::nrpe':
-#   nrpe_allowed_hosts => $allowed_hosts,
-# }
+  class {'::nrpe':
+    allowed_hosts => $allowed_hosts,
+    purge         => true,
+    recurse       => true,
+  }
 
   client::icinga::check_process {'nrpe':
     user => 'nrpe',

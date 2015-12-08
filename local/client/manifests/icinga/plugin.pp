@@ -17,8 +17,8 @@
 define client::icinga::plugin (
   $source = "puppet:///modules/client/icinga/${name}"
 ) {
-# icinga2::checkplugin {$name:
-#   checkplugin_file_distribution_method => 'source',
-#   checkplugin_source_file              => $source,
-# }
+  ::nrpe::plugin {$name:
+    ensure => present,
+    source => $source,
+  }
 }
