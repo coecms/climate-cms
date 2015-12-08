@@ -153,23 +153,31 @@ class server::icinga (
 
   # External hosts
   ::icinga2::object::hostgroup {'raijin':}
-  ::icinga2::object::host {[
-    'raijin1.nci.org.au',
+  [ 'raijin1.nci.org.au',
     'raijin2.nci.org.au',
     'raijin3.nci.org.au',
     'raijin4.nci.org.au',
     'raijin5.nci.org.au',
-    'raijin6.nci.org.au']:
-    groups         => ['raijin'],
-    check_interval => 600,
+    'raijin6.nci.org.au'].each | String $name | {
+    ::icinga2::object::host { $name:
+      display_name     => $name,
+      ipv4_address     => $name,
+      target_file_name => "${name}.conf"
+      groups           => ['raijin'],
+      check_interval   => 600,
+    }
   }
 
   ::icinga2::object::hostgroup {'access':}
-  ::icinga2::object::host {[
-    'accessdev.nci.org.au',
-    'access-svn.nci.org.au']:
-    groups         => ['access'],
-    check_interval => 600,
+  [ 'accessdev.nci.org.au',
+    'access-svn.nci.org.au'].each | String $name | {
+    ::icinga2::object::host { $name:
+      display_name     => $name,
+      ipv4_address     => $name,
+      target_file_name => "${name}.conf"
+      groups           => ['raijin'],
+      check_interval   => 600,
+    }
   }
 
 # ::icinga2::object::hostgroup {'meto':}
