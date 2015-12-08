@@ -77,7 +77,7 @@ class server::puppet {
 
   client::icinga::check_process {'puppetserver':
     command  => 'java',
-    argument => '/usr/share/puppetserver/puppet-server-release.jar',
+    argument => '/opt/puppetlabs/server/apps/puppetserver/puppet-server-release.jar',
     user     => 'puppet',
   }
 
