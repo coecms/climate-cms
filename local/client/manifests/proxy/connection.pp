@@ -27,6 +27,7 @@ define client::proxy::connection (
   $allow      = undef,
   $deny       = undef,
   $chain_auth = undef,
+  $check_auth = undef,
 ) {
 
   $proxy_ip = query_nodes('Class[server::proxy]','ipaddress_eth0')
@@ -45,5 +46,6 @@ define client::proxy::connection (
     allow      => $allow,
     deny       => $deny,
     chain_auth => $chain_auth,
+    check_auth => $check_auth,
   }
 }

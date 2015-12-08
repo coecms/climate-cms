@@ -94,6 +94,7 @@ class server::icingaweb (
   client::proxy::connection {$path:
     port       => $www_port,
     chain_auth => true,
+    check_auth => true,
   }
 
   # Database abstraction

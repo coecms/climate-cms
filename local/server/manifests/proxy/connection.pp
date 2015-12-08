@@ -21,6 +21,7 @@ define server::proxy::connection (
   $allow      = undef,
   $deny       = undef,
   $chain_auth = false,
+  $check_auth = false,
 ) {
   include server::proxy
 
@@ -32,12 +33,18 @@ define server::proxy::connection (
     $_auth_env = ''
   }
 
+  if $check_auth {
+    $expect = '--expect=401'
+  } else {
+    $expect = ''
+  }
+
   # Escape slashes
   $escaped_name = regsubst($name, '/', '-', 'G')
   client::icinga::check_nrpe {"https-${escaped_name}":
     display_name     => "https://${vhost}${name}",
     nrpe_plugin      => 'check_http',
-    nrpe_plugin_args => "-H '${vhost}' -u '${name}' --ssl -f follow -w 2 -c 10",
+    nrpe_plugin_args => "-H '${vhost}' -u '${name}' --ssl -f follow -w 2 -c 10 ${expect}",
   }
 
   apacheplus::location {$name:

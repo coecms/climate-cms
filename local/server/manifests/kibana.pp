@@ -75,5 +75,6 @@ class server::kibana {
   client::proxy::connection {'/admin/kibana':
     target_path => '',
     port        => '5601',
+    check_auth  => true,
   }
 }
