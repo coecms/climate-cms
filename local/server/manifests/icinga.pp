@@ -54,13 +54,6 @@ class server::icinga (
     user             => $db_user,
     password         => $db_password,
     database         => $db_name,
-    categories       => [
-      'DbCatConfig',
-      'DbCatState',
-      'DbCatAcknowledgement',
-      'DbCatComment',
-      'DbCatDowntime',
-      'DbCatEventHandler' ],
   }
 
   icinga2::object::checkcommand {'check_nrpe':
