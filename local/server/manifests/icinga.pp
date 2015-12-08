@@ -162,7 +162,7 @@ class server::icinga (
     ::icinga2::object::host { $name:
       display_name     => $name,
       ipv4_address     => $name,
-      target_file_name => "${name}.conf"
+      target_file_name => "${name}.conf",
       groups           => ['raijin'],
       check_interval   => 600,
     }
@@ -174,7 +174,7 @@ class server::icinga (
     ::icinga2::object::host { $name:
       display_name     => $name,
       ipv4_address     => $name,
-      target_file_name => "${name}.conf"
+      target_file_name => "${name}.conf",
       groups           => ['raijin'],
       check_interval   => 600,
     }
