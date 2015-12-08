@@ -153,12 +153,21 @@ class server::icinga (
 
   # External hosts
   ::icinga2::object::hostgroup {'raijin':}
-  [ 'raijin1.nci.org.au',
+  [ 
+    'raijin1.nci.org.au',
     'raijin2.nci.org.au',
     'raijin3.nci.org.au',
     'raijin4.nci.org.au',
     'raijin5.nci.org.au',
-    'raijin6.nci.org.au'].each | String $name | {
+    'raijin6.nci.org.au',
+    'raijin7.nci.org.au',
+    'r-dm1.nci.org.au',
+    'r-dm2.nci.org.au',
+    'r-dm3.nci.org.au',
+    'r-dm4.nci.org.au',
+    'r-dm5.nci.org.au',
+    'r-dm6.nci.org.au',
+  ].each | String $name | {
     ::icinga2::object::host { $name:
       display_name     => $name,
       ipv4_address     => $name,
