@@ -151,6 +151,33 @@ class server::icinga (
     interval     => '0',
   }
 
+  # External hosts
+  ::icinga2::object::hostgroup {'raijin':}
+  ::icinga2::object::host {[
+    'raijin1.nci.org.au',
+    'raijin2.nci.org.au',
+    'raijin3.nci.org.au',
+    'raijin4.nci.org.au',
+    'raijin5.nci.org.au',
+    'raijin6.nci.org.au']:
+    groups         => ['raijin'],
+    check_interval => 600,
+  }
+
+  ::icinga2::object::hostgroup {'access':}
+  ::icinga2::object::host {[
+    'accessdev.nci.org.au',
+    'access-svn.nci.org.au']:
+    groups         => ['access'],
+    check_interval => 600,
+  }
+
+# ::icinga2::object::hostgroup {'meto':}
+# ::icinga2::object::host {[
+#   'code.metoffice.gov.uk']:
+#   groups         => ['meto'],
+#   check_interval => 1800,
+# }
 
   $cmd_user = 'icingacmd'
   $cmd_group = 'icingacmd'
