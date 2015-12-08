@@ -169,13 +169,12 @@ class server::icinga (
   }
 
   ::icinga2::object::hostgroup {'access':}
-  [ 'accessdev.nci.org.au',
-    'access-svn.nci.org.au'].each | String $name | {
+  [ 'accessdev.nci.org.au'].each | String $name | {
     ::icinga2::object::host { $name:
       display_name     => $name,
       ipv4_address     => $name,
       target_file_name => "${name}.conf",
-      groups           => ['raijin'],
+      groups           => ['access'],
       check_interval   => 600,
     }
   }
