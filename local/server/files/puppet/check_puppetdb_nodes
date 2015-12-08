@@ -111,7 +111,7 @@ my %parameters = ();
 if ( defined( $np->opts->node ) ) {
     %parameters = ( 'query' => '["=","name","' . $np->opts->node . '"]' );
 }
-my $uri = URI->new( $url . 'v3/nodes' );
+my $uri = URI->new( $url . 'pdb/query/v4/nodes' );
 $uri->query_form(%parameters);
 my $response = $ua->get($uri);
 
