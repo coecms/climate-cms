@@ -26,9 +26,8 @@ class server::puppet::monitor {
     require => Class['epel'],
   }
 
-  icinga2::checkplugin {'check_puppetdb_nodes':
-    checkplugin_file_distribution_method => 'source',
-    checkplugin_source_file              => $plugin,
+  client::icinga::plugin {'check_puppetdb_nodes':
+    source => $plugin,
   }
 
   # Collect agents to monitor
