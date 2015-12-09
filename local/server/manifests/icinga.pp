@@ -138,7 +138,7 @@ class server::icinga (
   }
 
   icinga2::object::apply_notification_to_service {'disk-notifications':
-    assign_where => 'service.vars.nrpe_plugin == "check_disk"',
+    assign_where => 'service.vars.gdata',
     users        => ['pxp581'],
     period       => '9to5',
     interval     => '0',
