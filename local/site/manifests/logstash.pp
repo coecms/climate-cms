@@ -32,6 +32,7 @@ class site::logstash (
 
   # Collect generic system resource usage
   class {'::collectd':
+    interval     => 30,
     purge        => true,
     recurse      => true,
     purge_config => true,
