@@ -1,2 +1,4 @@
 ---
+classes:
+    - server::hubot
 client::puppet::environment: testing

@@ -14,6 +14,7 @@ mod 'puppetlabs/java_ks', '1.3.1'
 mod 'puppetlabs/git', '0.4.0'
 mod 'puppetlabs/vcsrepo', '1.3.1'
 mod 'puppetlabs/xinetd', '1.5.0'
+mod 'puppetlabs/nodejs', '0.8.0'
 
 # Provides functions to query puppetdb
 mod 'dalen/puppetdbquery', '2.1.0'
