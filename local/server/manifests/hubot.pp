@@ -18,12 +18,8 @@
 class server::hubot {
 
   class {'::nodejs':
-    repo_url_suffix => 'node_0.12',
-  }
-
-  package {'npm':
-    ensure   => 'latest',
-    provider => 'npm',
+    repo_url_suffix    => 'node_0.12',
+    npm_package_ensure => 'latest',
   }
 
 }
