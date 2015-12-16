@@ -16,7 +16,8 @@
 #  limitations under the License.
 
 class client::puppet (
-  $master = 'puppet',
+  $master      = 'puppet',
+  $environment = 'production',
 ) {
 
   if versioncmp($::puppetversion, '4.0.0') >= 0 {
@@ -53,6 +54,16 @@ class client::puppet (
     incl    => $config,
     changes => [
       "set agent/server '${master}'",
+    ],
+    require => File[$config],
+    notify  => Service['puppet'],
+  }
+
+  augeas { 'puppet environment':
+    lens    => 'Puppet.lns',
+    incl    => $config,
+    changes => [
+      "set agent/environment '${environment}'",
     ],
     require => File[$config],
     notify  => Service['puppet'],
