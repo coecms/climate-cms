@@ -21,4 +21,9 @@ class server::hubot {
     repo_url_suffix => 'node_0.12',
   }
 
+  package {'npm':
+    ensure   => 'latest',
+    provider => 'npm',
+  }
+
 }
