@@ -27,4 +27,15 @@ class server::hubot {
     provider => 'npm',
   }
 
+  package {'coffee-script':
+    ensure   => present,
+    provider => 'npm',
+  }
+
+  vcsrepo {$install_path:
+    ensure   => latest,
+    provider => 'git',
+    source   => 'https://github.com/ScottWales/hubot',
+  }
+
 }
