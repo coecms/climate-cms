@@ -35,6 +35,9 @@ class server::hubot {
     shell  => '/bin/false',
   }
 
+  group {$group:
+  }
+
   vcsrepo {$install_path:
     ensure   => latest,
     provider => 'git',
