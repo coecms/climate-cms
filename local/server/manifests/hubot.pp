@@ -16,6 +16,8 @@
 
 # Hubot is a chat bot, used on the slack room
 class server::hubot {
+  $user         = 'hubot'
+  $group        = 'hubot'
   $install_path = '/opt/hubot'
 
   class {'::nodejs':
@@ -27,10 +29,22 @@ class server::hubot {
     provider => 'npm',
   }
 
+  user {$user:
+    gid    => $group,
+    system => true,
+    shell  => '/bin/false',
+  }
+
   vcsrepo {$install_path:
     ensure   => latest,
     provider => 'git',
     source   => 'https://github.com/ScottWales/hubot',
+  }
+
+  file {"${install_path}/node_modules":
+    ensure  => directory,
+    owner   => $user,
+    require => Vcsrepo[$install_path],
   }
 
 }
