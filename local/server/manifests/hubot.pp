@@ -36,6 +36,7 @@ class server::hubot {
   }
 
   group {$group:
+    ensure => present,
   }
 
   vcsrepo {$install_path:
