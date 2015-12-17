@@ -63,7 +63,7 @@ class server::hubot (
     user                  => $user,
     program_environment   => {
       'HUBOT_SLACK_TOKEN' => $slack_token,
-    }
+    },
     require               => File["${install_path}/node_modules"],
   }
 
