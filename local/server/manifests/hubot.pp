@@ -23,7 +23,7 @@ class server::hubot {
 
   package {'npm-npm':
     name     => 'npm',
-    ensure   => 'latest-2',
+    ensure   => '2.14.14',
     provider => 'npm',
   }
 
