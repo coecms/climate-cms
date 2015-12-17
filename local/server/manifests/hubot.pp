@@ -30,9 +30,11 @@ class server::hubot {
   }
 
   user {$user:
-    gid    => $group,
-    system => true,
-    shell  => '/bin/false',
+    ensure     => present,
+    gid        => $group,
+    system     => true,
+    shell      => '/bin/false',
+    managehome => true,
   }
 
   group {$group:
