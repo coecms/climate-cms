@@ -18,7 +18,7 @@
 class server::hubot {
 
   class {'::nodejs':
-    repo_url_suffix  => 'node_0.12',
+    repo_url_suffix  => '0.12',
   }
 
   package {'npm-npm':
