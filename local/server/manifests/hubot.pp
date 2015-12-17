@@ -61,6 +61,7 @@ class server::hubot (
   supervisord::program {'hubot':
     command               => "${install_path}/bin/hubot --adapter slack",
     user                  => $user,
+    directory             => $install_path,
     program_environment   => {
       'HUBOT_SLACK_TOKEN' => $slack_token,
     },
