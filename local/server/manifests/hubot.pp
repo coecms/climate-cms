@@ -22,12 +22,6 @@ class server::hubot {
     repo_url_suffix  => '0.12',
   }
 
-  package {'npm-npm':
-    name     => 'npm',
-    ensure   => '2.14.14',
-    provider => 'npm',
-  }
-
   package {'coffee-script':
     ensure   => present,
     provider => 'npm',
