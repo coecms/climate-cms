@@ -42,7 +42,7 @@ mod 'puppet/collectd', '4.2.0'
 
 mod 'nodes/php', '0.9.0'
 
-mod 'ajcrowe/supervisord', '0.5.2'
+mod 'ajcrowe/supervisord', '0.6.0'
 
 mod 'icinga2',
     :git    => 'https://github.com/Icinga/puppet-icinga2.git',
