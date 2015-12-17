@@ -15,15 +15,17 @@
 #  limitations under the License.
 
 # Hubot is a chat bot, used on the slack room
-class server::hubot {
+class server::hubot (
+  $slack_token,
+) {
   $user         = 'hubot'
   $group        = 'hubot'
   $install_path = '/opt/hubot'
 
+  # Install node.js
   class {'::nodejs':
     repo_url_suffix  => '0.12',
   }
-
   package {'coffee-script':
     ensure   => present,
     provider => 'npm',
@@ -36,7 +38,6 @@ class server::hubot {
     shell      => '/bin/false',
     managehome => true,
   }
-
   group {$group:
     ensure => present,
   }
@@ -45,12 +46,25 @@ class server::hubot {
     ensure   => latest,
     provider => 'git',
     source   => 'https://github.com/ScottWales/hubot',
+    notify   => Supervisord::Program['hubot'],
   }
 
+  # $user needs to install node packages here
   file {"${install_path}/node_modules":
     ensure  => directory,
     owner   => $user,
     require => Vcsrepo[$install_path],
+  }
+
+  # Keep the bot running with supervisord
+  include ::supervisord
+  supervisord::program {'hubot':
+    command               => "${install_path}/bin/hubot --adapter slack",
+    user                  => $user,
+    program_environment   => {
+      'HUBOT_SLACK_TOKEN' => $slack_token,
+    }
+    require               => File["${install_path}/node_modules"],
   }
 
 }
