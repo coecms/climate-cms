@@ -16,6 +16,7 @@
 
 # Hubot is a chat bot, used on the slack room
 class server::hubot {
+  $install_path = '/opt/hubot'
 
   class {'::nodejs':
     repo_url_suffix  => '0.12',
