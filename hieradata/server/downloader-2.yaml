@@ -8,9 +8,7 @@ classes:
 site::gdata:
     ua8:
       mode: rw
-    rr4:
+    rr7:
       mode: rw
-      cluster: data3
-      server: 192.43.239.66
 #   ua6:
 #     mode: rw
