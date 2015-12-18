@@ -63,7 +63,7 @@ class site (
   }
 
   package {'nfs-utils':}
-  file {['/g','/g/data1','/g/data2']:
+  file {['/g','/g/data1','/g/data2','/g/data3']:
     ensure => directory,
   }
   create_resources('site::gdata',$gdata)
