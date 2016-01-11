@@ -35,3 +35,6 @@ roles::svnmirror::mirrors:
     moci:
         url:       /svn/moci
         origin:    https://code.metoffice.gov.uk/svn/moci
+    surf:
+        url:       /svn/surf
+        origin:    https://code.metoffice.gov.uk/svn/surf
