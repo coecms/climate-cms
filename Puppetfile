@@ -14,6 +14,10 @@ mod 'puppetlabs/java_ks', '1.3.1'
 mod 'puppetlabs/git', '0.4.0'
 mod 'puppetlabs/vcsrepo', '1.3.1'
 mod 'puppetlabs/xinetd', '1.5.0'
+mod 'puppet/nodejs',
+    :git    => 'https://github.com/puppet-community/puppet-nodejs',
+    :commit => '9f2dfbffe0b25a075d81a717e644cb542777e6e4'
+mod 'treydock/gpg_key', '0.0.3'
 
 # Provides functions to query puppetdb
 mod 'dalen/puppetdbquery', '2.1.0'
@@ -38,7 +42,7 @@ mod 'puppet/collectd', '4.2.0'
 
 mod 'nodes/php', '0.9.0'
 
-mod 'ajcrowe/supervisord', '0.5.2'
+mod 'ajcrowe/supervisord', '0.6.0'
 
 mod 'icinga2',
     :git    => 'https://github.com/Icinga/puppet-icinga2.git',
