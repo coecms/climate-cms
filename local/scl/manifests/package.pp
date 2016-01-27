@@ -19,11 +19,9 @@ define scl::package (
   $ensure = none,
 ) {
   
-  $name.each |$package| {
-    package {"${scl}-${package}":
-      ensure  => $ensure,
-      require => Package[$scl],
-    }
+  package {"${scl}-${name}":
+    ensure  => $ensure,
+    require => Package[$scl],
   }
 
 }
