@@ -26,7 +26,8 @@ define scl::exec (
   $root = "/opt/rh/${scl}/root"
   $librarypath = "LD_LIBRARY_PATH=${root}/usr/lib64"
 
-  $sclpath = concat($path, "${root}/usr/bin")
+  $apath   = any2array($path)
+  $sclpath = concat($apath, "${root}/usr/bin")
  
   exec {$name:
     command     => $command,
