@@ -14,12 +14,12 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-class site::python {
+class scl::install {
 
-  $scl = 'rh-python34'
-  scl {$scl:} ->
-  package {"${scl}-python":}
+  package {'scl-utils':
+  }
 
-  $prefix = "/opt/rh/${scl}/root/usr/bin"
+  package {'centos-release-scl-rh':
+  }
 
 }

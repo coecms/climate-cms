@@ -14,12 +14,14 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-class site::python {
+define scl (
+) {
 
-  $scl = 'rh-python34'
-  scl {$scl:} ->
-  package {"${scl}-python":}
+  include scl::install
 
-  $prefix = "/opt/rh/${scl}/root/usr/bin"
+  # Centos has all packages available in 'centos-release-scl-rh'
+  #  package {"rhscl-${name}":
+  #    name => "rhscl-${name}-epel-6.noarch",
+  #  }
 
 }
