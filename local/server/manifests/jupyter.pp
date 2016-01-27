@@ -77,7 +77,7 @@ class server::jupyter (
 
   sudo::conf {'jupyter':
     content => "
-      Runas_Alias JUPYTER_USERS = saw562
+      Runas_Alias JUPYTER_USERS = %w35
       Cmnd_Alias  JUPYTER_CMD   = ${venv}/bin/sudospawner-scl
       ${user} ALL=(JUPYTER_USERS) NOPASSWD:JUPYTER_CMD
       "
@@ -94,6 +94,7 @@ class server::jupyter (
 c.JupyterHub.base_url = '${url}'
 c.Spawner.env_keep = ['PATH', 'PYTHONPATH', 'LD_LIBRARY_PATH', 'VIRTUAL_ENV', 'LANG', 'LC_ALL']
 c.JupyterHub.spawner_class = 'sudospawner.SudoSpawner'
+c.SudoSpawner.sudospawner_path = '${venv}/bin/sudospawner-scl'
     "
   }
 }
