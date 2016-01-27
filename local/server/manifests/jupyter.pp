@@ -14,8 +14,11 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-class server::jupyter {
+class server::jupyter (
+  $port = '8000', 
+) {
 
+  include ::python
   include site::nodejs
 
   realize Package['gcc']
@@ -40,5 +43,10 @@ class server::jupyter {
   package {'configurable-http-proxy':
     ensure   => present,
     provider => 'npm',
+  }
+
+  client::proxy::connection {'/jupyter':
+    port  => $port,
+    allow => 'from all',
   }
 }
