@@ -26,6 +26,7 @@ define python::pip (
 
   scl::exec {"${pip} install ${url}":
     unless  => "${pip} list | /bin/grep -w ${name}",
+    path    => ['/bin','/usr/bin'],
     scl     => $python::scl,
     require => Python::Virtualenv[$virtualenv],
   }
