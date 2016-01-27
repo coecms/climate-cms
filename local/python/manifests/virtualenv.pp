@@ -20,11 +20,11 @@ define python::virtualenv (
 
   include ::python
 
-  $path = $name,
+  $path = $name
 
   scl::exec {"virtualenv ${path}":
     creates => "${path}/bin/activate",
-    scl     => $python::scl
+    scl     => $python::scl,
   }
 
 }

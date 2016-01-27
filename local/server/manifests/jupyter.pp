@@ -17,8 +17,10 @@
 class server::jupyter {
 
   realize Package['gcc']
+
+  $venv = '/opt/jupyter'
   
-  python::virtualenv {'/opt/jupyter':
+  python::virtualenv {$venv:
   }
 
   python::pip {'jupyter':
