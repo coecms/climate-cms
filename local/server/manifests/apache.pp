@@ -27,6 +27,7 @@ class server::apache {
     default_mods  => false,
     apache_name   => $package,
     service_name  => $service,
+    httpd_dir     => "/opt/rh/${scl}/etc/httpd",
   }
 
   client::icinga::check_process {$service:
