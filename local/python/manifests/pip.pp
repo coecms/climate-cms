@@ -23,7 +23,7 @@ define python::pip (
   $pip = "${virtualenv}/bin/pip"
 
   scl::exec {"${pip} install ${name}":
-    unless  => "${pip} list | grep ${name}",
+    unless  => "${pip} list | /bin/grep ${name}",
     scl     => $python::scl,
     require => Python::Virtualenv[$virtualenv],
   }
