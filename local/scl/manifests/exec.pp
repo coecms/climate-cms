@@ -21,6 +21,7 @@ define scl::exec (
   $user    = undef,
   $creates = undef,
   $onlyif  = undef,
+  $unless  = undef,
 ) {
 
   $root = "/opt/rh/${scl}/root"
@@ -33,6 +34,7 @@ define scl::exec (
     command     => $command,
     creates     => $creates,
     onlyif      => $onlyif,
+    unless      => $unless,
     path        => $sclpath,
     environment => $librarypath,
     user        => $user,
