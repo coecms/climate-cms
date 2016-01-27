@@ -55,4 +55,3 @@ mod 'aboe/salt', '0.1.2'
 mod 'pdxcat/amanda', '1.0.2'
 mod 'pdxcat/nrpe', '2.0.0'
 
-mod 'stankevich/python', '1.10.0'
