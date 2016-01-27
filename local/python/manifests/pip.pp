@@ -16,14 +16,16 @@
 
 define python::pip (
   $virtualenv,
+  # URL for when installing from github
+  $url = $name,
 ) {
 
   include ::python
 
   $pip = "${virtualenv}/bin/pip"
 
-  scl::exec {"${pip} install ${name}":
-    unless  => "${pip} list | /bin/grep ${name}",
+  scl::exec {"${pip} install ${url}":
+    unless  => "${pip} list | /bin/grep -w ${name}",
     scl     => $python::scl,
     require => Python::Virtualenv[$virtualenv],
   }

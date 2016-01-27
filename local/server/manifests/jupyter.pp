@@ -15,6 +15,7 @@
 #  limitations under the License.
 
 class server::jupyter (
+  $user = 'jupyter',
   $port = '8000', 
 ) {
 
@@ -48,5 +49,32 @@ class server::jupyter (
   client::proxy::connection {'/jupyter':
     port  => $port,
     allow => 'from all',
+  }
+
+  user {$user:
+    shell  => '/bin/false',
+    system => true,
+  }
+
+  python::pip {'sudospawner':
+    virtualenv => $venv,
+    url        => 'git+https://github.com/jupyter/sudospawner',
+  }
+
+  # Wrapper to enable the SCL variables
+  file {"${venv}/bin/sudospawner-scl":
+    ensure  => file,
+    mode    => '0755',
+    content => "#!/bin/bash
+      scl enable '${::python::scl}' \"${venv}/bin/sudospawner $*\"
+    "
+  }
+
+  sudo::conf {'jupyter':
+    content => "
+      Runas_Alias JUPYTER_USERS = saw562
+      Cmnd_Alias  JUPYTER_CMD   = ${venv}/bin/sudospawner-scl
+      ${user} ALL=JUPYTER_USERS NOPASS:JUPYTER_CMD
+      "
   }
 }
