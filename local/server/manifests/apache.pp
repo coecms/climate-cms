@@ -16,12 +16,20 @@
 
 class server::apache {
 
+  # Use apache24 from SCL
+  $scl = 'httpd24'
+  $package = "${scl}-httpd"
+  $service = $package
+  scl {$scl:}
+
   class {'::apache':
     default_vhost => false,
     default_mods  => false,
+    apache_name   => $package,
+    service_name  => $service,
   }
 
-  client::icinga::check_process {'httpd':
+  client::icinga::check_process {$service:
     display_name => 'apache',
     user         => 'apache',
   }
