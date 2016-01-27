@@ -1,4 +1,5 @@
 ---
 classes:
     - server::hubot
+    - server::jupyter
 client::puppet::environment: testing
