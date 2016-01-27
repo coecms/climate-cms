@@ -16,7 +16,9 @@
 
 class server::jupyter (
   $user = 'jupyter',
+  $url  = '/jupyter',
   $port = '8000', 
+  $work = '/var/jupyter',
 ) {
 
   include ::git
@@ -47,13 +49,14 @@ class server::jupyter (
     provider => 'npm',
   }
 
-  client::proxy::connection {'/jupyter':
+  client::proxy::connection {$url:
     port  => $port,
     allow => 'from all',
   }
 
   user {$user:
     shell  => '/bin/false',
+    home   => $work,
     system => true,
   }
 
@@ -78,5 +81,19 @@ class server::jupyter (
       Cmnd_Alias  JUPYTER_CMD   = ${venv}/bin/sudospawner-scl
       ${user} ALL=(JUPYTER_USERS) NOPASSWD:JUPYTER_CMD
       "
+  }
+
+  file {$work:
+    ensure => directory,
+    owner  => $user,
+  }
+
+  file {"${work}/jupyterhub_config.py":
+    ensure  => file,
+    content => "
+      c.JupyterHub.base_url = '${url}'
+      c.Spawner.env_keep = ['PATH', 'PYTHONPATH', 'LD_LIBRARY_PATH', 'VIRTUAL_ENV', 'LANG', 'LC_ALL']
+      c.JupyterHub.spawner_class = 'sudospawner.SudoSpawner'
+    "
   }
 }
