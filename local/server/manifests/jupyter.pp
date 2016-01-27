@@ -60,6 +60,7 @@ class server::jupyter (
   python::pip {'sudospawner':
     virtualenv => $venv,
     url        => 'git+https://github.com/jupyter/sudospawner',
+    require    => Class['::git'],
   }
 
   # Wrapper to enable the SCL variables
