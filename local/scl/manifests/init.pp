@@ -15,7 +15,7 @@
 #  limitations under the License.
 
 define scl (
-  $ensure = none,
+  $ensure = undef,
 ) {
 
   include scl::install

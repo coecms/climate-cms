@@ -16,7 +16,7 @@
 
 define scl::package (
   $scl,
-  $ensure = none,
+  $ensure = undef,
 ) {
   
   package {"${scl}-${name}":
