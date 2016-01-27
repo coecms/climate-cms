@@ -17,9 +17,13 @@
 class site::python {
 
   $scl = 'rh-python34'
-  scl {$scl:} ->
-  package {"${scl}-python":}
-
   $prefix = "/opt/rh/${scl}/root/usr/bin"
+
+
+  scl {$scl:}
+
+  scl::package {'python':
+    scl => $scl,
+  }
 
 }

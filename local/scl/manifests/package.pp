@@ -14,19 +14,16 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-define scl (
+define scl::package (
+  $scl,
   $ensure = none,
 ) {
-
-  include scl::install
-
-  # Centos has all packages available in 'centos-release-scl-rh'
-  #  package {"rhscl-${name}":
-  #    name => "rhscl-${name}-epel-6.noarch",
-  #  }
-
-  package {$name:
-    ensure => $ensure,
+  
+  $name.each |$package| {
+    package {"${scl}-${package}":
+      ensure  => $ensure,
+      require => Package[$scl],
+    }
   }
 
 }
