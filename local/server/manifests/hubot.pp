@@ -22,14 +22,7 @@ class server::hubot (
   $group        = 'hubot'
   $install_path = '/opt/hubot'
 
-  # Install node.js
-  class {'::nodejs':
-    repo_url_suffix  => '0.12',
-  }
-  package {'coffee-script':
-    ensure   => present,
-    provider => 'npm',
-  }
+  include ::site::nodejs
 
   user {$user:
     ensure     => present,

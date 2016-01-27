@@ -14,31 +14,15 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-class server::jupyter {
+class site::nodejs {
 
-  include site::nodejs
-
-  realize Package['gcc']
-
-  $venv = '/opt/jupyter'
-  
-  python::virtualenv {$venv:
+  # Install node.js
+  class {'::nodejs':
+    repo_url_suffix  => '0.12',
   }
-
-  package {'zeromq3-devel':
-  }
-  python::pip {'pyzmq':
-    virtualenv => $venv,
-    require    => Package['gcc','zeromq3-devel'],
-  }
-
-  python::pip {'jupyterhub':
-    virtualenv => $venv,
-    require    => Python::Pip['pyzmq'],
-  }
-
-  package {'configurable-http-proxy':
+  package {'coffee-script':
     ensure   => present,
     provider => 'npm',
   }
+
 }
