@@ -91,9 +91,9 @@ class server::jupyter (
   file {"${work}/jupyterhub_config.py":
     ensure  => file,
     content => "
-      c.JupyterHub.base_url = '${url}'
-      c.Spawner.env_keep = ['PATH', 'PYTHONPATH', 'LD_LIBRARY_PATH', 'VIRTUAL_ENV', 'LANG', 'LC_ALL']
-      c.JupyterHub.spawner_class = 'sudospawner.SudoSpawner'
+c.JupyterHub.base_url = '${url}'
+c.Spawner.env_keep = ['PATH', 'PYTHONPATH', 'LD_LIBRARY_PATH', 'VIRTUAL_ENV', 'LANG', 'LC_ALL']
+c.JupyterHub.spawner_class = 'sudospawner.SudoSpawner'
     "
   }
 }
