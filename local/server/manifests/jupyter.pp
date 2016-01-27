@@ -23,9 +23,12 @@ class server::jupyter {
   python::virtualenv {$venv:
   }
 
+  package {'zeromq-devel':
+  }
+
   python::pip {'jupyter':
     virtualenv => $venv,
-    require    => Package['gcc'],
+    require    => Package['gcc','zeromq-devel'],
   }
 
 }
