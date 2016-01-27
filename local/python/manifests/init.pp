@@ -14,7 +14,7 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-class site::python {
+class python {
 
   $scl = 'rh-python34'
   $prefix = "/opt/rh/${scl}/root/usr/bin"
