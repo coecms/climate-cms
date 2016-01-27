@@ -76,7 +76,7 @@ class server::jupyter (
     content => "
       Runas_Alias JUPYTER_USERS = saw562
       Cmnd_Alias  JUPYTER_CMD   = ${venv}/bin/sudospawner-scl
-      ${user} ALL=JUPYTER_USERS NOPASSWD:JUPYTER_CMD
+      ${user} ALL=(JUPYTER_USERS) NOPASSWD:JUPYTER_CMD
       "
   }
 }
