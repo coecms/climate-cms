@@ -17,6 +17,7 @@
 define server::proxy::connection (
   $target_url,
   $path       = $name,
+  $type       = undef,
   $order      = undef,
   $allow      = undef,
   $deny       = undef,
@@ -49,6 +50,7 @@ define server::proxy::connection (
 
   apacheplus::location {$name:
     vhost           => $vhost,
+    type            => $type,
     order           => $order,
     allow           => $allow,
     deny            => $deny,

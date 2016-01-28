@@ -23,6 +23,7 @@ define client::proxy::connection (
   $port        = 8080,
   $target_path = $name,
 
+  $type       = undef,
   $order      = undef,
   $allow      = undef,
   $deny       = undef,

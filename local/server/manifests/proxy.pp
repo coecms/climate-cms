@@ -25,6 +25,7 @@ class server::proxy (
   include ::apache::mod::proxy
   include ::apache::mod::proxy_http
   include ::apache::mod::proxy_ajp
+  ::apache::mod {'proxy_wstunnel':}
 
   # Ensure HTTPS is used
   apache::vhost { "${vhost}_redirect":
