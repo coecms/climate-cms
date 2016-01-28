@@ -16,12 +16,38 @@
 
 class server::apache {
 
-  class {'::apache':
-    default_vhost => false,
-    default_mods  => false,
+  # Use apache24 from SCL
+  $scl     = 'httpd24'
+  $package = "${scl}-httpd"
+  $service = $package
+
+  scl {$scl:}
+
+  # Override paths to use the SCL
+  $etc_dir   = "/opt/rh/${scl}/root/etc/httpd"
+  $conf_dir  = "${etc_dir}/conf"
+  $confd_dir = "${etc_dir}/conf.d"
+
+  file {'/var/www':
+    ensure => directory,
   }
 
-  client::icinga::check_process {'httpd':
+  class {'::apache':
+    default_vhost  => false,
+    default_mods   => false,
+    apache_version => '2.4',
+    apache_name    => $package,
+    service_name   => $service,
+    httpd_dir      => $etc_dir,
+    server_root    => $etc_dir,
+    conf_dir       => $conf_dir,
+    mod_dir        => $confd_dir,
+    confd_dir      => $confd_dir,
+    vhost_dir      => $confd_dir,
+    ports_file     => "${conf_dir}/ports.conf",
+  }
+
+  client::icinga::check_process {$service:
     display_name => 'apache',
     user         => 'apache',
   }

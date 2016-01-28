@@ -67,4 +67,10 @@ class site (
     ensure => directory,
   }
   create_resources('site::gdata',$gdata)
+
+  # Misc system packages
+  @package {[
+    'gcc',
+  ]:
+  }
 }

@@ -54,3 +54,6 @@ mod 'rtyler/jenkins', '1.3.0'
 mod 'aboe/salt', '0.1.2'
 mod 'pdxcat/amanda', '1.0.2'
 mod 'pdxcat/nrpe', '2.0.0'
+
+mod 'herculesteam/augeasproviders_core', '2.1.2'
+mod 'herculesteam/augeasproviders_pam', '2.1.0'
