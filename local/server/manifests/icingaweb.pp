@@ -60,7 +60,6 @@ class server::icingaweb (
   $web_root = "${install_path}/public"
   $www_port = 8090
   include ::apache::mod::rewrite
-  include ::apache::mod::php
   ::apache::mod {'env': }
   ::apache::vhost {'icingaweb':
     port                => $www_port,

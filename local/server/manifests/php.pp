@@ -17,6 +17,7 @@
 class server::php {
 
   include ::php
+  # include ::apache::mod::php
 
   # Set timezone
   ::php::config {'php date.timezone':
