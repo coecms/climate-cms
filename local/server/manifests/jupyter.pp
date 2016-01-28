@@ -83,6 +83,9 @@ class server::jupyter (
       "
   }
 
+  # Create home directories for users
+  include ::site::pam_mkhomedir
+
   file {$work:
     ensure => directory,
     owner  => $user,
