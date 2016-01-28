@@ -23,7 +23,7 @@ class site::pam_mkhomedir {
     type      => 'session',
     control   => 'required',
     module    => 'pam_mkhomedir.so',
-    arguments => 'skel=/etc/skel/ umask=0022'
+    arguments => ['skel=/etc/skel/','umask=0022'],
   }
 
 }
