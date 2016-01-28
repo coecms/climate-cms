@@ -2,5 +2,4 @@
 classes:
     - server::hubot
     - server::jupyter
-    - server::apache
 client::puppet::environment: testing
