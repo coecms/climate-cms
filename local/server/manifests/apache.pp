@@ -58,4 +58,6 @@ class server::apache {
     user         => 'apache',
   }
 
+  ::apache::mod {'access_compat':}
+
 }
