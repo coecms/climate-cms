@@ -22,6 +22,9 @@ class server::apache {
   $service = $package
 
   scl {$scl:}
+  scl::package {'mod_ldap':
+    scl => $scl,
+  }
 
   # Override paths to use the SCL
   $etc_dir   = "/opt/rh/${scl}/root/etc/httpd"
