@@ -42,6 +42,7 @@ define client::proxy::connection (
 
   @@server::proxy::connection {$name:
     path       => $proxy_path,
+    type       => $type,
     target_url => "${protocol}://${target_host}:${port}${target_path}",
     order      => $order,
     allow      => $allow,
