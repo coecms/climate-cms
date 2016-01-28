@@ -48,7 +48,7 @@ define server::proxy::connection (
     nrpe_plugin_args => "-H '${vhost}' -u '${name}' --ssl -f follow -w 2 -c 10 ${expect}",
   }
 
-  apacheplus::location {$name:
+  apacheplus::location {$path:
     vhost           => $vhost,
     type            => $type,
     order           => $order,

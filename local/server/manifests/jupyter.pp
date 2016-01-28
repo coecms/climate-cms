@@ -54,10 +54,10 @@ class server::jupyter (
     allow => 'from all',
   }
 
-  client::proxy::connection {"$url-websockets":
+  client::proxy::connection {"$url/user/test/terminals/websocket":
     type        => 'LocationMatch',
     proxy_path  => "${url}/(user/[^/]*)/(api/kernels/[^/]+/channels|terminals/websocket)/?",
-    target_path => "/${url}/\$1/\$2\$3",
+    target_path => "${url}/\$1/\$2\$3",
     protocol    => 'ws',
     port        => $port,
     allow       => 'from all',
