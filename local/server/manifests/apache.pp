@@ -59,5 +59,6 @@ class server::apache {
   }
 
   ::apache::mod {'access_compat':}
+  ::apache::mod {'authn_core':}
 
 }
