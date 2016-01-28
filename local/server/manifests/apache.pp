@@ -22,7 +22,10 @@ class server::apache {
   $service = $package
 
   scl {$scl:}
-  scl::package {'mod_ldap':
+  scl::package {[
+    'mod_ldap',
+    'mod_ssl',
+  ]:
     scl => $scl,
   }
 
