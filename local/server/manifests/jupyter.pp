@@ -63,19 +63,10 @@ class server::jupyter (
     require    => Class['::git'],
   }
 
-  # Wrapper to enable the SCL variables
-  file {"${venv}/bin/sudospawner-scl":
-    ensure  => file,
-    mode    => '0755',
-    content => "#!/bin/bash
-      scl enable '${::python::scl}' \"${venv}/bin/sudospawner $*\"
-    "
-  }
-
   sudo::conf {'jupyter':
     content => "
       Runas_Alias JUPYTER_USERS = %w35
-      Cmnd_Alias  JUPYTER_CMD   = ${venv}/bin/sudospawner-scl
+      Cmnd_Alias  JUPYTER_CMD   = ${venv}/bin/sudospawner
       ${user} ALL=(JUPYTER_USERS) NOPASSWD:JUPYTER_CMD
       "
   }
@@ -92,19 +83,18 @@ class server::jupyter (
     ensure  => file,
     content => "
 c.JupyterHub.base_url = '${url}'
-c.Spawner.env_keep = ['PATH', 'PYTHONPATH', 'LD_LIBRARY_PATH', 'VIRTUAL_ENV', 'LANG', 'LC_ALL']
 c.JupyterHub.spawner_class = 'sudospawner.SudoSpawner'
-c.SudoSpawner.sudospawner_path = '${venv}/bin/sudospawner-scl'
+c.SudoSpawner.sudospawner_path = '${venv}/bin/sudospawner'
 c.Spawner.args = ['--NotebookApp.allow_origin=https://test.climate-cms.org']
     "
   }
 
   include ::supervisord
   supervisord::program {'jupyterhub':
-    command   => 'scl enable rh-python34 /opt/jupyter/bin/jupyterhub',
+    command   => "${venv}/bin/jupyterhub",
     user      => $user,
     directory => $work,
-    require   => Python::Pip['jupyterhub','sudospawner'],
+    require   => Anaconda::Pip['jupyterhub','sudospawner'],
   }
 
   File["${work}/jupyterhub_config.py"] ~> Supervisord::Program['jupyterhub']
