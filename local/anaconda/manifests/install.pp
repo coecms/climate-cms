@@ -21,7 +21,7 @@ class anaconda::install {
   $source_url   = 'https://repo.continuum.io/archive/Anaconda3-2.4.1-Linux-x86_64.sh'
   $checksum     = '45249376f914fdc9fd920ff419a62263'
 
-  user {$user:
+  user {$::anaconda::user:
     shell  => '/bin/false',
     home   => $install_path,
     system => true,
