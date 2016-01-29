@@ -21,11 +21,12 @@ define anaconda::pip (
   include ::anaconda
 
   $pip = "${::anaconda::bin}/pip"
+  $conda = "${::anaconda::bin}/conda"
   $_version = ''
 
   exec {"anaconda pip install ${name}":
     command => "${pip} install ${_version} ${package}",
-    unless  => "${pip} list | /bin/grep -w '^${package}'",
+    unless  => "${conda} list | /bin/grep -w '^${name}'",
     require => Class['::anaconda::install'],
   }
 
