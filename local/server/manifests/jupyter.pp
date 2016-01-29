@@ -50,17 +50,20 @@ class server::jupyter (
   }
 
   client::proxy::connection {$url:
-    port  => $port,
-    allow => 'from all',
+    port              => $port,
+    allow             => 'from all',
+    location_priority => '40',
   }
 
   client::proxy::connection {"$url/user/test/terminals/websocket":
-    type        => 'LocationMatch',
-    proxy_path  => "${url}/(user/[^/]*)/(api/kernels/[^/]+/channels|terminals/websocket)/?",
-    target_path => "${url}/\$1/\$2\$3",
-    protocol    => 'ws',
-    port        => $port,
-    allow       => 'from all',
+    type              => 'LocationMatch',
+    proxy_path        => "${url}/(user/[^/]*)/(api/kernels/[^/]+/channels|terminals/websocket)(.*)",
+    target_path       => "${url}/\$1/\$2\$3",
+    protocol          => 'ws',
+    port              => $port,
+    allow             => 'from all',
+    # Must come after proxy for $url in order to override paths
+    location_priority => '50',
   }
 
   user {$user:
@@ -107,6 +110,7 @@ c.JupyterHub.base_url = '${url}'
 c.Spawner.env_keep = ['PATH', 'PYTHONPATH', 'LD_LIBRARY_PATH', 'VIRTUAL_ENV', 'LANG', 'LC_ALL']
 c.JupyterHub.spawner_class = 'sudospawner.SudoSpawner'
 c.SudoSpawner.sudospawner_path = '${venv}/bin/sudospawner-scl'
+c.Spawner.args = ['--NotebookApp.allow_origin=https://test.climate-cms.org']
     "
   }
 }

@@ -16,13 +16,14 @@
 
 define server::proxy::connection (
   $target_url,
-  $path       = $name,
-  $type       = undef,
-  $order      = undef,
-  $allow      = undef,
-  $deny       = undef,
-  $chain_auth = false,
-  $check_auth = false,
+  $path             = $name,
+  $type             = undef,
+  $order            = undef,
+  $allow            = undef,
+  $deny             = undef,
+  $chain_auth       = false,
+  $check_auth       = false,
+  location_priority = undef,
 ) {
   include server::proxy
 
@@ -49,12 +50,13 @@ define server::proxy::connection (
   }
 
   apacheplus::location {$path:
-    vhost           => $vhost,
-    type            => $type,
-    order           => $order,
-    allow           => $allow,
-    deny            => $deny,
-    custom_fragment => "
+    vhost             => $vhost,
+    type              => $type,
+    order             => $order,
+    allow             => $allow,
+    deny              => $deny,
+    location_priority => $location_priority,
+    custom_fragment   => "
       ${_auth_env}
       ProxyPass        ${target_url}
       ProxyPassReverse ${target_url}

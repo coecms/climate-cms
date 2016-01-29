@@ -16,19 +16,20 @@
 
 # Connect a path on the local machine to the proxy server
 define client::proxy::connection (
-  $proxy_path  = $name,
+  $proxy_path       = $name,
 
-  $protocol    = 'http',
-  $target_host = $::ipaddress_eth0,
-  $port        = 8080,
-  $target_path = $name,
+  $protocol         = 'http',
+  $target_host      = $::ipaddress_eth0,
+  $port             = 8080,
+  $target_path      = $name,
 
-  $type       = undef,
-  $order      = undef,
-  $allow      = undef,
-  $deny       = undef,
-  $chain_auth = undef,
-  $check_auth = undef,
+  $type             = undef,
+  $order            = undef,
+  $allow            = undef,
+  $deny             = undef,
+  $chain_auth       = undef,
+  $check_auth       = undef,
+  location_priority = undef,
 ) {
 
   $proxy_ip = query_nodes('Class[server::proxy]','ipaddress_eth0')
@@ -41,13 +42,14 @@ define client::proxy::connection (
   }
 
   @@server::proxy::connection {$name:
-    path       => $proxy_path,
-    type       => $type,
-    target_url => "${protocol}://${target_host}:${port}${target_path}",
-    order      => $order,
-    allow      => $allow,
-    deny       => $deny,
-    chain_auth => $chain_auth,
-    check_auth => $check_auth,
+    path              => $proxy_path,
+    type              => $type,
+    target_url        => "${protocol}://${target_host}:${port}${target_path}",
+    order             => $order,
+    allow             => $allow,
+    deny              => $deny,
+    chain_auth        => $chain_auth,
+    check_auth        => $check_auth,
+    location_priority => $location_priority,
   }
 }
