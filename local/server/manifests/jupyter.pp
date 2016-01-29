@@ -113,4 +113,14 @@ c.SudoSpawner.sudospawner_path = '${venv}/bin/sudospawner-scl'
 c.Spawner.args = ['--NotebookApp.allow_origin=https://test.climate-cms.org']
     "
   }
+
+  include ::supervisord
+  supervisord::program {'jupyterhub':
+    command   => 'scl enable rh-python34 /opt/jupyter/bin/jupyterhub',
+    user      => $user,
+    directory => $work,
+    require   => Python::Pip['jupyterhub','sudospawner'],
+  }
+
+  File["${work}/jupyterhub_config.py"] ~> Supervisord::Program['jupyterhub']
 }
