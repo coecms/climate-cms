@@ -22,26 +22,12 @@ class server::jupyter (
 ) {
 
   include ::git
-  include ::python
+  include ::anaconda
   include site::nodejs
 
-  realize Package['gcc']
+  $venv = $::anaconda::install_path
 
-  $venv = '/opt/jupyter'
-  
-  python::virtualenv {$venv:
-  }
-
-  package {'zeromq3-devel':
-  }
-  python::pip {'pyzmq':
-    virtualenv => $venv,
-    require    => Package['gcc','zeromq3-devel'],
-  }
-
-  python::pip {'jupyterhub':
-    virtualenv => $venv,
-    require    => Python::Pip['pyzmq'],
+  anaconda::pip {'jupyterhub':
   }
 
   package {'configurable-http-proxy':
@@ -72,9 +58,8 @@ class server::jupyter (
     system => true,
   }
 
-  python::pip {'sudospawner':
-    virtualenv => $venv,
-    url        => 'git+https://github.com/jupyter/sudospawner',
+  anaconda::pip {'sudospawner':
+    package    => 'git+https://github.com/jupyter/sudospawner',
     require    => Class['::git'],
   }
 
