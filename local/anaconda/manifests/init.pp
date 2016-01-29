@@ -21,4 +21,14 @@ class anaconda {
 
   class {'::anaconda::install':}
 
+
+  # Config file
+  file {"${install_path}/.condarc":
+    ensure   => file,
+    contents => "
+envs_dirs:
+    - ~/envs
+    - /opt/anaconda/envs
+",
+  }
 }
