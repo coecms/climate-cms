@@ -24,8 +24,8 @@ class anaconda {
 
   # Config file
   file {"${install_path}/.condarc":
-    ensure   => file,
-    contents => "
+    ensure  => file,
+    content => "
 envs_dirs:
     - ~/envs
     - /opt/anaconda/envs
