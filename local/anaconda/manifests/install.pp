@@ -38,6 +38,7 @@ class anaconda::install {
 
   file {$::anaconda::install_path:
     ensure => directory,
+    owner  => $::anaconda::user,
   }
 
   exec {'Install anaconda':

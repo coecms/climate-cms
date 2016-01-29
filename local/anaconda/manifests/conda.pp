@@ -26,6 +26,7 @@ define anaconda::conda (
   exec {"anaconda conda install ${name}":
     command => "${conda} install ${_version} ${package}",
     unless  => "${conda} list | /bin/grep -w '^${package}'"
+    require => Class['::anaconda::install'],
   }
 
 }
