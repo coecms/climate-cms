@@ -16,14 +16,14 @@
 
 define server::proxy::connection (
   $target_url,
-  $path             = $name,
-  $type             = undef,
-  $order            = undef,
-  $allow            = undef,
-  $deny             = undef,
-  $chain_auth       = false,
-  $check_auth       = false,
-  location_priority = undef,
+  $path              = $name,
+  $type              = undef,
+  $order             = undef,
+  $allow             = undef,
+  $deny              = undef,
+  $chain_auth        = false,
+  $check_auth        = false,
+  $location_priority = undef,
 ) {
   include server::proxy
 
