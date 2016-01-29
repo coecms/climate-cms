@@ -42,6 +42,7 @@ class anaconda::install {
 
   exec {'Install anaconda':
     command   => "echo '${checksum}  ${installer}' | md5sum -c && /bin/bash '${installer}' -b -p '${::anaconda::install_path}'",
+    path      => ['/usr/bin','/bin'],
     user      => $::anaconda::user,
     creates   => "${::anaconda::bin}/conda",
     require   => File[$::anaconda::install_path],
