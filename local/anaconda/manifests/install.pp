@@ -50,4 +50,10 @@ class anaconda::install {
     subscribe => File[$installer],
   }
 
+  file {'Anaconda path':
+    ensure  => file,
+    path    => '/etc/profile.d/anaconda.sh',
+    content => "export PATH=${::anaconda::bin}:\$PATH\n",
+  }
+
 }
