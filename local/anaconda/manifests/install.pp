@@ -36,7 +36,7 @@ class anaconda::install {
     subscribe => Exec['Download anaconda'],
   }
 
-  file {$anaconda::install_path:
+  file {$::anaconda::install_path:
     ensure => directory,
   }
 
@@ -44,7 +44,7 @@ class anaconda::install {
     command   => "echo '${checksum}  ${installer}' | md5sum -c && /bin/bash '${installer}' -b -p '${::anaconda::install_path}'",
     user      => $::anaconda::user,
     creates   => "${::anaconda::bin}/conda",
-    require   => File[$anaconda::install_path],
+    require   => File[$::anaconda::install_path],
     subscribe => File[$installer],
   }
 
