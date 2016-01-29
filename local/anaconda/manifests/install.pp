@@ -36,7 +36,7 @@ class anaconda::install {
     subscribe => Exec['Download anaconda'],
   }
 
-  file {$install_path:
+  file {$anaconda::install_path:
     ensure => directory,
   }
 
