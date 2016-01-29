@@ -25,7 +25,7 @@ define anaconda::pip (
 
   exec {"anaconda pip install ${name}":
     command => "${pip} install ${_version} ${package}",
-    unless  => "${pip} list | /bin/grep -w '^${package}'"
+    unless  => "${pip} list | /bin/grep -w '^${package}'",
     require => Class['::anaconda::install'],
   }
 
