@@ -16,14 +16,17 @@
 
 define server::proxy::connection (
   $target_url,
-  $path              = $name,
-  $type              = undef,
-  $order             = undef,
-  $allow             = undef,
-  $deny              = undef,
-  $chain_auth        = false,
-  $check_auth        = false,
-  $location_priority = undef,
+  $path                  = $name,
+  $type                  = undef,
+  $order                 = undef,
+  $allow                 = undef,
+  $deny                  = undef,
+  $chain_auth            = false,
+  $check_auth            = false,
+  $location_priority     = undef,
+
+  $nocanon               = false,
+  $allow_encoded_slashes = undef,
 ) {
   include server::proxy
 
@@ -39,6 +42,17 @@ define server::proxy::connection (
     $expect = '--expect=401'
   } else {
     $expect = ''
+  }
+
+  validate_bool($nocanon)
+  if $nocanon == true {
+    $_nocanon = ' nocanon'
+  else {
+    $_nocanon = ''
+  }
+
+  if $allow_encoded_slashes {
+    $_allowslash = "AllowEncodedSlashes ${allow_encoded_slashes}"
   }
 
   # Escape slashes
@@ -58,8 +72,9 @@ define server::proxy::connection (
     location_priority => $location_priority,
     custom_fragment   => "
       ${_auth_env}
-      ProxyPass        ${target_url}
+      ProxyPass        ${target_url}${_nocanon}
       ProxyPassReverse ${target_url}
+      ${_allowslash}
     ",
   }
 
