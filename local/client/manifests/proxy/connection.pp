@@ -32,7 +32,6 @@ define client::proxy::connection (
   $location_priority     = undef,
 
   $nocanon               = undef,
-  $allow_encoded_slashes = undef,
 ) {
 
   $proxy_ip = query_nodes('Class[server::proxy]','ipaddress_eth0')
@@ -55,6 +54,5 @@ define client::proxy::connection (
     check_auth            => $check_auth,
     location_priority     => $location_priority,
     nocanon               => $nocanon,
-    allow_encoded_slashes => $allow_encoded_slashes,
   }
 }

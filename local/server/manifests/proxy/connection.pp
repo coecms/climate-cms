@@ -26,7 +26,6 @@ define server::proxy::connection (
   $location_priority     = undef,
 
   $nocanon               = false,
-  $allow_encoded_slashes = undef,
 ) {
   include server::proxy
 
@@ -51,10 +50,6 @@ define server::proxy::connection (
     $_nocanon = ''
   }
 
-  if $allow_encoded_slashes {
-    $_allowslash = "AllowEncodedSlashes ${allow_encoded_slashes}"
-  }
-
   # Escape slashes
   $escaped_name = regsubst($name, '/', '-', 'G')
   client::icinga::check_nrpe {"https-${escaped_name}":
@@ -74,7 +69,6 @@ define server::proxy::connection (
       ${_auth_env}
       ProxyPass        ${target_url}${_nocanon}
       ProxyPassReverse ${target_url}
-      ${_allowslash}
     ",
   }
 
