@@ -26,7 +26,8 @@ define scl (
   #  }
 
   package {$name:
-    ensure => $ensure,
+    ensure  => $ensure,
+    require => Class['scl::install'],
   }
 
 }
