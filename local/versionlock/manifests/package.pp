@@ -16,7 +16,7 @@
 
 class versionlock::package {
 
-  package {'yum-versionlock':
+  package {'yum-plugin-versionlock':
   }
 
 }
