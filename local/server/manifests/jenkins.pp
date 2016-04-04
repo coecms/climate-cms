@@ -38,11 +38,10 @@ class server::jenkins (
   }
 
   client::proxy::connection {$path:
-    allow                 => 'from all',
-    protocol              => 'ajp',
-    port                  => $port,
-    nocanon               => true,
-    allow_encoded_slashes => 'NoDecode',
+    allow    => 'from all',
+    protocol => 'ajp',
+    port     => $port,
+    nocanon  => true,
   }
 
   firewall {'401 jenkins from climate-cms.nci.org.au':

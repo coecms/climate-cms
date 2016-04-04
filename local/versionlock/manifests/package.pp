@@ -1,7 +1,6 @@
-## \file    puppetdb.pp
-#  \author  Scott Wales <scott.wales@unimelb.edu.au>
+## Copyright 2016 ARC Centre of Excellence for Climate Systems Science
 #
-#  Copyright 2015 ARC Centre of Excellence for Climate Systems Science
+#  \author  Scott Wales <scott.wales@unimelb.edu.au>
 #
 #  Licensed under the Apache License, Version 2.0 (the "License");
 #  you may not use this file except in compliance with the License.
@@ -15,14 +14,9 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-class server::puppetdb {
+class versionlock::package {
 
-  class {'::puppetdb':
-    database           => 'embedded',
-    ssl_listen_address => $::hostname,
-  }
-
-  versionlock {'puppetdb':
+  package {'yum-plugin-versionlock':
   }
 
 }

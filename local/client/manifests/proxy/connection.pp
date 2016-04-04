@@ -32,7 +32,6 @@ define client::proxy::connection (
   $location_priority     = undef,
 
   $nocanon               = undef,
-  $allow_encoded_slashes = undef,
 ) {
 
   $proxy_ip = query_nodes('Class[server::proxy]','ipaddress_eth0')
@@ -45,14 +44,15 @@ define client::proxy::connection (
   }
 
   @@server::proxy::connection {$name:
-    path              => $proxy_path,
-    type              => $type,
-    target_url        => "${protocol}://${target_host}:${port}${target_path}",
-    order             => $order,
-    allow             => $allow,
-    deny              => $deny,
-    chain_auth        => $chain_auth,
-    check_auth        => $check_auth,
-    location_priority => $location_priority,
+    path                  => $proxy_path,
+    type                  => $type,
+    target_url            => "${protocol}://${target_host}:${port}${target_path}",
+    order                 => $order,
+    allow                 => $allow,
+    deny                  => $deny,
+    chain_auth            => $chain_auth,
+    check_auth            => $check_auth,
+    location_priority     => $location_priority,
+    nocanon               => $nocanon,
   }
 }

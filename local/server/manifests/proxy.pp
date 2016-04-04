@@ -38,12 +38,15 @@ class server::proxy (
 
   $keypath = '/var/lib/letsencrypt'
   apache::vhost { $vhost:
-    port      => '443',
-    docroot   => '/var/www/html',
-    ssl       => true,
-    ssl_cert  => "${keypath}/${vhost}.crt",
-    ssl_key   => "${keypath}/${vhost}.key",
-    ssl_chain => "${keypath}/intermediate.pem",
+    port            => '443',
+    docroot         => '/var/www/html',
+    ssl             => true,
+    ssl_cert        => "${keypath}/${vhost}.crt",
+    ssl_key         => "${keypath}/${vhost}.key",
+    ssl_chain       => "${keypath}/intermediate.pem",
+    custom_fragment => "
+      AllowEncodedSlashes NoDecode
+    "
   }
 
   # ARCCSS logos
