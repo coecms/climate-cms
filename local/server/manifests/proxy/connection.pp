@@ -47,7 +47,7 @@ define server::proxy::connection (
   validate_bool($nocanon)
   if $nocanon == true {
     $_nocanon = ' nocanon'
-  else {
+  } else {
     $_nocanon = ''
   }
 

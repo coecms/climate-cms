@@ -14,30 +14,16 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-class rpmforge {
-  if $::osfamily == 'RedHat' {
+define rpmforge::package (
+  
+) {
 
-    $pubkey_path = '/tmp/rpmforge.key'
-
-    file {$pubkey_path:
-      ensure => file,
-      source => "puppet:///modules/rpmforge/RPM-GPG-KEY.dag.txt",
+  include rpmforge
+ 
+  package {$name:
+    install_options  => {
+      '--enablerepo' => 'rpmforge-extras',
     }
-    
-    exec {'Import RpmForge Key':
-      command => "/bin/rpm --import ${pubkey_path}",
-      require => File[$pubkey_path],
-    }
-
-    $version = '0.5.3-1'
-    $maj     = $::operatingsystemmajrelease
-    $arch    = $::architecture
-
-    package {'rmpforge':
-      provider => 'rpm',
-      source   => "http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-${version}.el${maj}.rf.${arch}.rpm",
-      require  => Exec['Import RpmForge Key'],
-    }
-
+    require          => Package['rpmforge'],
   }
 }
