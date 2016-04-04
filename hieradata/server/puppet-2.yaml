@@ -4,4 +4,4 @@ classes:
   - server::puppetdb
   - server::salt
 
-puppetdb::globals::version: '3.2.4-1'
+puppetdb::globals::version: '3.2.4-1.el6'
