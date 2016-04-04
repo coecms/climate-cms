@@ -26,16 +26,19 @@ class rpmforge {
     
     exec {'Import RpmForge Key':
       command => "/bin/rpm --import ${pubkey_path}",
+      creates => '/etc/pki/rpm-gpg/RPM-GPG-KEY-rpmforge-dag',
       require => File[$pubkey_path],
     }
 
     $version = '0.5.3-1'
     $maj     = $::operatingsystemmajrelease
     $arch    = $::architecture
+    $rpm     = "rpmforge-release-${version}.el${maj}.rf.${arch}"
 
-    package {'rmpforge':
+    package {'rpmforge':
       provider => 'rpm',
-      source   => "http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-${version}.el${maj}.rf.${arch}.rpm",
+      name     => $rpm,
+      source   => "http://pkgs.repoforge.org/rpmforge-release/${rpm}.rpm",
       require  => Exec['Import RpmForge Key'],
     }
 

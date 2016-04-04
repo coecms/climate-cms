@@ -23,7 +23,7 @@ define rpmforge::package (
   package {$name:
     install_options  => {
       '--enablerepo' => 'rpmforge-extras',
-    }
+    },
     require          => Package['rpmforge'],
   }
 }

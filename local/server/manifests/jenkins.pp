@@ -57,4 +57,7 @@ class server::jenkins (
     argument => '-jar /usr/lib/jenkins/jenkins.war',
     user     => 'jenkins',
   }
+
+  scl {'git19':
+  }
 }
