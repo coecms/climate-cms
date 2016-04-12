@@ -56,7 +56,8 @@ class server::hubot (
     user                  => $user,
     directory             => $install_path,
     program_environment   => {
-      'HUBOT_SLACK_TOKEN' => $slack_token,
+      'HUBOT_SLACK_TOKEN'              => $slack_token,
+      'HUBOT_SLACK_EXIT_ON_DISCONNECT' => 'true',
     },
     require               => File["${install_path}/node_modules"],
   }
