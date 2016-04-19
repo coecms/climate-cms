@@ -21,52 +21,16 @@ define site::admin (
   $mail    = undef,
   $pubkeys = [],
 ) {
-  validate_re($name, '^[a-z]{3}[0-9]{3}$')
-  $institute_code = regsubst($name,'^([a-z]{3})([0-9]{3})$','\2')
-  $home = "/home/${institute_code}/${name}"
 
-  ensure_resource(
-    'file',
-    "/home/${institute_code}",
-    {'ensure' => 'directory'})
-
-  # Users come from LDAP
-  include site::ldap
-  include site::nfsh
-  user {$name:
-    ensure         => absent,
-    forcelocal     => true,
-  }
-
-  file {$home:
-    ensure  => directory,
-    owner   => $name,
-    require => User[$name],
-  }
-
-  file {"${home}/.bashrc":
-    ensure => present,
-    owner  => $name,
-    source => '/etc/skel/.bashrc',
-  }
-  file {"${home}/.bash_profile":
-    ensure => present,
-    owner  => $name,
-    source => '/etc/skel/.bash_profile',
-  }
-  file {"${home}/.bash_logout":
-    ensure => present,
-    owner  => $name,
-    source => '/etc/skel/.bash_logout',
-  }
-
-  site::admin::pubkey {$pubkeys:
-    user => $name,
+  site::user {$name:
+    mail    => $mail,
+    pubkeys => $pubkeys,
   }
 
   include sudo
   sudo::conf {$name:
     content => "${name} ALL=(ALL) NOPASSWD:ALL",
+    require => User[$name],
   }
 
   if $mail {

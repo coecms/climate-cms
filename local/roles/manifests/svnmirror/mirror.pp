@@ -18,7 +18,7 @@
 define roles::svnmirror::mirror (
   $origin,
   $repo           = $name,
-  $url            = "/${name}",
+  $url            = "/svn/${name}",
   $user           = $::roles::svnmirror::user,
   $group          = $::roles::svnmirror::group,
   $base_path      = $::roles::svnmirror::home,

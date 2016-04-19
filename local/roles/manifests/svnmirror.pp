@@ -44,6 +44,7 @@ class roles::svnmirror (
   $access_ip      = '127.0.0.1',
   $update_minutes = 10,
   $vhost          = $::fqdn,
+  $admins         = [],
 ) {
   $mirrors        = hiera_hash('roles::svnmirror::mirrors',{})
 
@@ -113,6 +114,14 @@ class roles::svnmirror (
     ensure => directory,
     owner  => $user,
     mode   => '0700',
+  }
+
+  # Allow admins to sudo as ${user}
+  $admins.each |String $admin| {
+    sudo::conf {"${admin}-as-${user}":
+      content => "${admin} ALL=(${user}) ALL",
+      require => User[$admin],
+    }
   }
 
   # Create mirrors listed in hiera

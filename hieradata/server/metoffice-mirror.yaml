@@ -9,32 +9,30 @@ roles::svnmirror::access_ip: '130.56.244.72/29 130.56.244.112/30'
 # List of servers to mirror
 roles::svnmirror::mirrors:
     um:
-        url:       /svn/um
         origin:    https://code.metoffice.gov.uk/svn/um
     gcom:
-        url:       /svn/gcom
         origin:    https://code.metoffice.gov.uk/svn/gcom
     jules:
-        url:       /svn/jules
         origin:    https://code.metoffice.gov.uk/svn/jules
     roses-u:
-        url:       /svn/roses-u
         origin:    https://code.metoffice.gov.uk/svn/roses-u
     socrates:
-        url:       /svn/socrates
         origin:    https://code.metoffice.gov.uk/svn/socrates
     ops:
-        url:       /svn/ops
         origin:    https://code.metoffice.gov.uk/svn/ops
     var:
-        url:       /svn/var
         origin:    https://code.metoffice.gov.uk/svn/var
     ancil:
-        url:       /svn/ancil
         origin:    https://code.metoffice.gov.uk/svn/ancil
     moci:
-        url:       /svn/moci
         origin:    https://code.metoffice.gov.uk/svn/moci
     surf:
-        url:       /svn/surf
         origin:    https://code.metoffice.gov.uk/svn/surf
+    nemo:
+        origin:    https://forge.ipsl.jussieu.fr/nemo/svn
+
+roles::svnmirror::admins:
+    - axs599
+
+site::users:
+    axs599: {}

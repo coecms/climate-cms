@@ -21,6 +21,7 @@ class site (
   $domain      = $::domain,
   $secure      = false,
   $gdata       = {},
+  $users       = {},
   $admins      = {},
   $proxy_ip    = '10.0.0.4',
   $proxy_fqdn  = 'test.climate-cms.org',
@@ -38,6 +39,7 @@ class site (
     content  => 'Defaults !requiretty',
   }
 
+  create_resources('site::user',$users)
   create_resources('site::admin',$admins)
 
   # Send root mail to admins
