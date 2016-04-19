@@ -81,6 +81,8 @@ class roles::svnmirror (
     ssl_proxyengine => true,
     port            => 443,
     docroot         => '/var/www/null',
+    ssl_cert        => '/etc/pki/tls/certs/metoffice-mirror.crt',
+    ssl_key         => '/etc/pki/tls/private/metoffice-mirror.key',
     custom_fragment => '
       KeepAlive            On
       MaxKeepAliveRequests 1000
