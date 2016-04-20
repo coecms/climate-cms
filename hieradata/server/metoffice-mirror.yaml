@@ -32,7 +32,9 @@ roles::svnmirror::mirrors:
         origin:    https://forge.ipsl.jussieu.fr/nemo/svn
 
 roles::svnmirror::admins:
-    - axs599
+    - hxy599
 
 site::users:
-    axs599: {}
+    hxy599: 
+        pubkeys:
+            - ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA1vqtfoCR+ONPbdNPatOXUbysfXxr/qMV3rgAxImtG/IWWHIsqP5J4jtkOTXImNkDez0f5yoqSYtrVgckAxaN4bfPPQJEg4S7IGmw/Xahf8dn8e5PCdIfU0mYR2gHQJdhMbsF8UYfc2a0xTWrxAJUo+3PuotNKYb9F2XdqVa52FwCeL87C8gJi6pnMQ6wK+78PyV1nlrHw2D3eT1XbjuRxPLiob7030xcb0ZbnlVtkEl4pa8uMA8li1srV1k7qD2Hehl6pqGJ/lz+lsH5iLzPH9cqTVkmpFXqhmdmkcc1RVQEBxDiz4tOkl8oh6sUzLESlVua39gVl5Wdchozu/ftSw== hxy599@accessdev.nci.org.au
