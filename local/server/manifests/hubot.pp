@@ -23,6 +23,7 @@ class server::hubot (
   $install_path = '/opt/hubot'
 
   include ::site::nodejs
+  include ::server::redis
 
   user {$user:
     ensure     => present,
@@ -52,12 +53,13 @@ class server::hubot (
   # Keep the bot running with supervisord
   include ::supervisord
   supervisord::program {'hubot':
-    command               => "${install_path}/bin/hubot --adapter slack",
-    user                  => $user,
-    directory             => $install_path,
-    program_environment   => {
+    command                            => "${install_path}/bin/hubot --adapter slack",
+    user                               => $user,
+    directory                          => $install_path,
+    program_environment                => {
       'HUBOT_SLACK_TOKEN'              => $slack_token,
       'HUBOT_SLACK_EXIT_ON_DISCONNECT' => 'true',
+      'REDIS_URL'                      => "redis://${::redis::bind}:${::redis::port}/hubot"
     },
     require               => File["${install_path}/node_modules"],
   }

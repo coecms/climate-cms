@@ -57,3 +57,5 @@ mod 'pdxcat/nrpe', '2.0.0'
 
 mod 'herculesteam/augeasproviders_core', '2.1.2'
 mod 'herculesteam/augeasproviders_pam', '2.1.0'
+
+mod 'arioch/redis', '1.2.2'
