@@ -17,8 +17,19 @@
 # Redis is a database used by Hubot
 class server::redis {
 
+  yumrepo {'powerstack':
+    baseurl  => 'http://download.powerstack.org/$releasever/$basearch',
+    gpgkey   => 'https://raw.githubusercontent.com/santisaez/powerstack/master/RPM-GPG-KEY-powerstack',
+    enabled  => False,
+    gpgcheck => True,
+  }
+
+  package {'redis':
+    ensure          => present,
+    install_options => ['--enablerpo="powerstack"'],
+  }
+
   class {'::redis':
-    manage_repo => true,
   }
 
 }
