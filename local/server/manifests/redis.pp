@@ -18,6 +18,7 @@
 class server::redis {
 
   class {'::redis':
+    manage_repo => true,
   }
 
 }
